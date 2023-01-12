@@ -26,6 +26,19 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const GITHUB_ID: string;
+	export const GITHUB_SECRET: string;
+	export const AUTH_SECRET: string;
+	export const AUTH0_CLIENT_ID: string;
+	export const AUTH0_CLIENT_SECRET: string;
+	export const AUTH0_DOMAIN: string;
+	export const AUTH0_BASE_URL: string;
+	export const AUTH0_ISSUER_BASE_URL: string;
+	export const TWITTER_KEY: string;
+	export const TWITTER_ID: string;
+	export const TWITTER_SECRET: string;
+	export const GPT3_API_KEY: string;
+	export const DATABASE_URL: string;
 	export const TERM_PROGRAM: string;
 	export const NODE: string;
 	export const INIT_CWD: string;
@@ -37,22 +50,21 @@ declare module '$env/static/private' {
 	export const CONDA_SHLVL: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const CONDA_PROMPT_MODIFIER: string;
-	export const npm_package_optional: string;
+	export const MallocNanoZone: string;
+	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const COLOR: string;
-	export const TERM_SESSION_ID: string;
 	export const npm_config_noproxy: string;
 	export const npm_config_registry: string;
 	export const npm_config_local_prefix: string;
 	export const USER: string;
+	export const COMMAND_MODE: string;
 	export const OPENAI_API_KEY: string;
 	export const npm_config_globalconfig: string;
 	export const HOMEBREW_NO_ANALYTICS: string;
 	export const CONDA_EXE: string;
-	export const npm_package_peer: string;
 	export const SSH_AUTH_SOCK: string;
 	export const __CF_USER_TEXT_ENCODING: string;
 	export const npm_execpath: string;
-	export const npm_package_integrity: string;
 	export const MAVEN_OPTS: string;
 	export const _CE_CONDA: string;
 	export const PATH: string;
@@ -69,20 +81,14 @@ declare module '$env/static/private' {
 	export const JAVA_HOME: string;
 	export const npm_lifecycle_event: string;
 	export const EDITOR: string;
-	export const npm_package_name: string;
 	export const LANG: string;
 	export const XPC_FLAGS: string;
-	export const npm_package_engines_node: string;
 	export const npm_config_node_gyp: string;
-	export const npm_package_dev: string;
-	export const npm_package_version: string;
 	export const XPC_SERVICE_NAME: string;
 	export const _CE_M: string;
-	export const npm_package_resolved: string;
-	export const SHLVL: string;
 	export const HOME: string;
+	export const SHLVL: string;
 	export const npm_config_strict_ssl: string;
-	export const npm_package_dev_optional: string;
 	export const npm_config_cache: string;
 	export const LOGNAME: string;
 	export const CONDA_PYTHON_EXE: string;
@@ -93,6 +99,8 @@ declare module '$env/static/private' {
 	export const SECURITYSESSIONID: string;
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
+	export const COLORTERM: string;
+	export const NODE_ENV: string;
 }
 
 /**
@@ -122,6 +130,19 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		GITHUB_ID: string;
+		GITHUB_SECRET: string;
+		AUTH_SECRET: string;
+		AUTH0_CLIENT_ID: string;
+		AUTH0_CLIENT_SECRET: string;
+		AUTH0_DOMAIN: string;
+		AUTH0_BASE_URL: string;
+		AUTH0_ISSUER_BASE_URL: string;
+		TWITTER_KEY: string;
+		TWITTER_ID: string;
+		TWITTER_SECRET: string;
+		GPT3_API_KEY: string;
+		DATABASE_URL: string;
 		TERM_PROGRAM: string;
 		NODE: string;
 		INIT_CWD: string;
@@ -133,22 +154,21 @@ declare module '$env/dynamic/private' {
 		CONDA_SHLVL: string;
 		TERM_PROGRAM_VERSION: string;
 		CONDA_PROMPT_MODIFIER: string;
-		npm_package_optional: string;
+		MallocNanoZone: string;
+		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		COLOR: string;
-		TERM_SESSION_ID: string;
 		npm_config_noproxy: string;
 		npm_config_registry: string;
 		npm_config_local_prefix: string;
 		USER: string;
+		COMMAND_MODE: string;
 		OPENAI_API_KEY: string;
 		npm_config_globalconfig: string;
 		HOMEBREW_NO_ANALYTICS: string;
 		CONDA_EXE: string;
-		npm_package_peer: string;
 		SSH_AUTH_SOCK: string;
 		__CF_USER_TEXT_ENCODING: string;
 		npm_execpath: string;
-		npm_package_integrity: string;
 		MAVEN_OPTS: string;
 		_CE_CONDA: string;
 		PATH: string;
@@ -165,20 +185,14 @@ declare module '$env/dynamic/private' {
 		JAVA_HOME: string;
 		npm_lifecycle_event: string;
 		EDITOR: string;
-		npm_package_name: string;
 		LANG: string;
 		XPC_FLAGS: string;
-		npm_package_engines_node: string;
 		npm_config_node_gyp: string;
-		npm_package_dev: string;
-		npm_package_version: string;
 		XPC_SERVICE_NAME: string;
 		_CE_M: string;
-		npm_package_resolved: string;
-		SHLVL: string;
 		HOME: string;
+		SHLVL: string;
 		npm_config_strict_ssl: string;
-		npm_package_dev_optional: string;
 		npm_config_cache: string;
 		LOGNAME: string;
 		CONDA_PYTHON_EXE: string;
@@ -189,6 +203,8 @@ declare module '$env/dynamic/private' {
 		SECURITYSESSIONID: string;
 		npm_node_execpath: string;
 		npm_config_prefix: string;
+		COLORTERM: string;
+		NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: string]: string | undefined;
 	}
