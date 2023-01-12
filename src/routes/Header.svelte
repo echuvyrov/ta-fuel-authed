@@ -51,10 +51,10 @@
 				</svg>
 				<ul>
 					<li class:active={$page.url.pathname === '/foodlog'}>
-						<a href="/foodlog/{todayString}">Log •</a>
+						<a href="/foodlog/{todayString}">Log</a>
 					</li>
 					<li class:active={$page.url.pathname === '/reference'}>
-						<a href="/reference">Reference •</a>
+						<a href="/reference">Reference</a>
 					</li>
 					<li class:active={$page.url.pathname === ('/experience')}>
 						<a href="/experience">Experience</a>
