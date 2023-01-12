@@ -93,6 +93,9 @@
 			// alert('wtf ' + JSON.stringify(params.data));
 			updateRecord(params.data);
   		},
+		onGridReady: function(params) {
+        	params.api.sizeColumnsToFit();
+    	}
 	};
 
 	// let the Totals grid know which columns and what data to use
