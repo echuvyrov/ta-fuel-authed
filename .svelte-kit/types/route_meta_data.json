@@ -1,0 +1,34 @@
+{
+	"/": [
+		"src/routes/+layout.server.js",
+		"src/routes/+layout.server.js"
+	],
+	"/about": [
+		"src/routes/about/+page.js",
+		"src/routes/+layout.server.js"
+	],
+	"/experience": [
+		"src/routes/experience/+page.server.js",
+		"src/routes/+layout.server.js"
+	],
+	"/experience/updaterecord": [
+		"src/routes/experience/updaterecord/+server.js"
+	],
+	"/foodlog/[date]": [
+		"src/routes/foodlog/[date]/+page.server.js",
+		"src/routes/+layout.server.js"
+	],
+	"/foodlog/[date]/updaterecord": [
+		"src/routes/foodlog/[date]/updaterecord/+server.js"
+	],
+	"/protected": [
+		"src/routes/+layout.server.js"
+	],
+	"/reference": [
+		"src/routes/reference/+page.server.js",
+		"src/routes/+layout.server.js"
+	],
+	"/reference/updaterecord": [
+		"src/routes/reference/updaterecord/+server.js"
+	]
+}
