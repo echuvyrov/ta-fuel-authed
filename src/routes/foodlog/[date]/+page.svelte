@@ -158,7 +158,7 @@
 				columnsToShow.push('Carbs');
 				columnsToShow.push('Protein');
 
-				columnsToHide.push('Qty');
+				columnsToHide.push('Empty');
 				columnsToHide.push('Kcals');
 
 				// show/hide columns based on current grid width
