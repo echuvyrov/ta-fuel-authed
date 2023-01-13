@@ -47,12 +47,12 @@
 	}
 
 	let columnDefs = [
-		{headerName: "Food", field: "food_name", editable: true, colId: 'Food'},
-		{headerName: "Qty", field: "food_qty", editable: true, colId: 'Qty'},
-		{headerName: "Fat, g", field: "fat_grams", editable: true, colId: 'Fat'},
-		{headerName: "Carbs, g", field: "carbs_grams", editable: true, colId: 'Carbs'},
-		{headerName: "Protein, g", field: "protein_grams", editable: true, colId: 'Protein'},
-		{headerName: "Kcals", field: "kkcals", colId: 'Kcals'},
+		{headerName: "Food", field: "food_name", editable: true, colId: 'Food', minWidth: 250},
+		{headerName: "Qty", field: "food_qty", editable: true, colId: 'Qty', minWidth: 100},
+		{headerName: "Fat, g", field: "fat_grams", editable: true, colId: 'Fat', minWidth: 100},
+		{headerName: "Carbs, g", field: "carbs_grams", editable: true, colId: 'Carbs', minWidth: 100},
+		{headerName: "Protein, g", field: "protein_grams", editable: true, colId: 'Protein', minWidth: 100},
+		{headerName: "Kcals", field: "kkcals", colId: 'Kcals', minWidth: 120},
 	];
 
 	let totalsColumnDefs = [
@@ -88,6 +88,7 @@
 	function onGridSizeChanged(params) {
         // get the current grids width
         var gridWidth = document.getElementById('foodLog').offsetWidth;
+		console.log('gridWidth: ' + gridWidth);
 
         // keep track of which columns to hide/show
         var columnsToShow = [];
@@ -97,11 +98,14 @@
 		//  determine if we'll need to hide columns
 		//   that will be the case if we can't fit them in
         var totalColsWidth = 0;
-        var allColumns = params.columnApi.getAllColumns();
+        var allColumns = params.columnApi.getColumns();
         for (var i = 0; i < allColumns.length; i++) {
             let column = allColumns[i];
             totalColsWidth += column.getMinWidth();
-            if (totalColsWidth > gridWidth) {
+			console.log('totalColsWidth: ' + totalColsWidth);
+
+			if (totalColsWidth > gridWidth) {
+				console.log('totalColsWidth: ' + totalColsWidth);
 				// add multiple elements to columnsToShow array
 				//  to ensure they are shown in the order we want
 				columnsToShow.push('Food');
@@ -112,16 +116,19 @@
 				columnsToHide.push('Qty');
 				columnsToHide.push('Kcals');
 
+				// show/hide columns based on current grid width
+				params.columnApi.setColumnsVisible(columnsToShow, true);
+    	    	params.columnApi.setColumnsVisible(columnsToHide, false);
+
+        		// fill out any available space to ensure there are no gaps
+        		params.api.sizeColumnsToFit();
+
 				break;
             }
-        }
+		}
 
-        // show/hide columns based on current grid width
-        params.columnApi.setColumnsVisible(columnsToShow, true);
-        params.columnApi.setColumnsVisible(columnsToHide, false);
+		params.api.sizeColumnsToFit();
 
-        // fill out any available space to ensure there are no gaps
-        params.api.sizeColumnsToFit();
 	}
 
 	// let the grid know which columns and what data to use
@@ -132,9 +139,7 @@
 		onCellValueChanged: function(params)  {
 			updateRecord(params.data);
   		},
-		onGridReady: function(params) {
-        	params.api.sizeColumnsToFit();
-    	}
+		onGridSizeChanged: onGridSizeChanged
 	};
 
 	// let the Totals grid know which columns and what data to use
