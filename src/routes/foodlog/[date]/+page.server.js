@@ -54,19 +54,12 @@ async function loadData(date) {
 
 	/* to avoid 413 (payload too large) error, we need to limit the amount of data we send to the client */
 	/* this is for Vercel only atm, but perhaps a rethink on image data is needed - storage instead of base64 in db */
-	/*
-	allFoods = await prisma.foodReference.findMany({
-		select: {
-			food_name: true,
-			food_qty: true,
-		  },
-	});
-	*/
 
 	allFoods = await prisma.foodReference.findMany({
 		where: {
 			user_id: user.name,
-		}
+		},
+		take: 20
 	});
 
 	targetTotals = await prisma.targetTotals.findFirst({
@@ -114,7 +107,8 @@ export const actions = {
 		// check whether the food exists in the foodReference table
 		const foodReferenceEntry = await prisma.foodReference.findFirst({
 			where: {
-				food_name: food
+				food_name: food,
+				user_id: user.name
 			}
 		})
 
@@ -153,7 +147,19 @@ export const actions = {
 			},
 		})
 
-		dbData = await prisma.foodLog.findMany();
-		allFoods = await prisma.foodReference.findMany();
+		// reload the data
+		dbData = await prisma.foodLog.findMany({
+			where: {
+				feeding_date: forDate,
+				user_id: user.name
+			}
+		});
+	
+		allFoods = await prisma.foodReference.findMany({
+			where: {
+				user_id: user.name,
+			},
+			take: 20
+		});
 	}
 };

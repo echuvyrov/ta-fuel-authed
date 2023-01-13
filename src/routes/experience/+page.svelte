@@ -5,7 +5,7 @@
 	/* sveltekit fetch method to update the record */
 	async function updateRecord(data) {
 		const jsonData = JSON.stringify(data);
-		const res = await fetch('/food/updaterecord', {
+		const res = await fetch('/foodlog/updaterecord', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

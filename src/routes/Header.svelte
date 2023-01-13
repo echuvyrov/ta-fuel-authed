@@ -3,7 +3,8 @@
 	import { user, isAuthenticated } from '$lib/stores/stores.js';
 	import logo from '$lib/images/ta-logo.png';
 	const today = new Date();
-	const todayString = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + ("0" + today.getDate()).slice(-2);
+	// get month with leading zero
+	const todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
 </script>
 
 <header>

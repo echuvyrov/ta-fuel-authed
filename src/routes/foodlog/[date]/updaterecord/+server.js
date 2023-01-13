@@ -8,6 +8,7 @@ const prisma = new PrismaClient()
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
   const record = await request.json();
+
   const updateFood = await prisma.foodLog.update({
     where: {
       id: record.id,

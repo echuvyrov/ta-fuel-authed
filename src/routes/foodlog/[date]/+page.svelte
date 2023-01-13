@@ -21,6 +21,8 @@
     var gridTotals;
 
 	const today = data.today;
+	const todayString = new Date(today).toISOString().split('T')[0];;
+
 	// get tomorrow from today + 1 day without time zone
 
 	// tomorrow is today + 1 day
@@ -101,10 +103,8 @@
         for (var i = 0; i < allColumns.length; i++) {
             let column = allColumns[i];
             totalColsWidth += column.getMinWidth();
-			console.log('totalColsWidth: ' + totalColsWidth);
 
 			if (totalColsWidth > gridWidth) {
-				console.log('totalColsWidth: ' + totalColsWidth);
 				// add multiple elements to columnsToShow array
 				//  to ensure they are shown in the order we want
 				columnsToShow.push('Food');
@@ -147,10 +147,8 @@
         for (var i = 0; i < allColumns.length; i++) {
             let column = allColumns[i];
             totalColsWidth += column.getMinWidth();
-			console.log('Total totalColsWidth: ' + totalColsWidth);
 
 			if (totalColsWidth > gridWidth) {
-				console.log('Total totalColsWidth: ' + totalColsWidth);
 				// add multiple elements to columnsToShow array
 				//  to ensure they are shown in the order we want
 				columnsToShow.push('Totals');
@@ -197,7 +195,7 @@
 	/* sveltekit fetch method to update the record */
 	async function updateRecord(data) {
 		const jsonData = JSON.stringify(data);
-		const res = await fetch('/foodlog/updaterecord', {
+		const res = await fetch('/foodlog/[date]/updaterecord', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -206,7 +204,7 @@
 		});
 		const json = await res.json();
 		if (!res.ok) {
-			throw Error(json.message);
+			console.log(json);
 		}
 		return json;
 	}
@@ -257,7 +255,7 @@
 	<center>
 		<a data-sveltekit-reload href="/foodlog/{yesterdayString}"><i class="fa fa-arrow-circle-left" style="font-size:36px; color:blue; padding:10px"></i></a>
 
-		<div class="foodheader">Food Log for {today}
+		<div class="foodheader">Food Log for {todayString}
 		</div>
 		
 		<a data-sveltekit-reload href="/foodlog/{tomorrowString}"><i class="fa fa-arrow-circle-right" style="font-size:36px; color:blue; padding:10px"></i></a>
@@ -276,8 +274,8 @@
 
 				<input type="hidden" value={foodReference.food_name} name="food">
 				<!-- image from base64 string -->
-				<button>
-					<img src="data:image/png;base64, {foodReference.imageBase64}" style="max-height: 62px; max-width: 62px;" />
+				<button title = "{foodReference.food_name}">
+					<img src="data:image/png;base64, {foodReference.imageBase64}" style="max-height: 62px; max-width: 62px;" alt="{foodReference.food_name}" />
 				</button>
 				</form>
 		{/each}

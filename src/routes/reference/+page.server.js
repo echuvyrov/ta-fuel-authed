@@ -40,7 +40,8 @@ export const actions = {
 		// check whether the food exists in the foodReference table
 		const foodReferenceEntry = await prisma.foodReference.findFirst({
 			where: {
-				food_name: food
+				food_name: food, 
+				user_id: user.name
 			}
 		})
 
@@ -51,6 +52,7 @@ export const actions = {
 			var imageBase64 = await NutritionSmartAIThingie.generateImage(food);
 			const newFoodReferenceEntry = await prisma.foodReference.create({
 				data: {
+					user_id: user.name,
 					food_name: nutritionData.food_name,
 					food_qty: nutritionData.food_qty,
 					fat_grams: nutritionData.fat_grams,
@@ -62,6 +64,10 @@ export const actions = {
 			})
 		}
 
-		allFoods = await prisma.foodReference.findMany();
+		allFoods = await prisma.foodReference.findMany({
+			where: {
+				user_id: user.name
+			}
+		});
 	}
 };

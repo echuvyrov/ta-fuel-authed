@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { get } from 'svelte/store';
-import {currentDate} from '$lib/stores/stores.js';
+import {currentDate, user} from '$lib/stores/stores.js';
 
 const prisma = new PrismaClient()
 var foodNutrition = "wait for it...";
@@ -27,8 +27,19 @@ export const load = async ({ cookies }) => {
 };
 
 async function loadData() {
-	dbData = await prisma.foodLog.findMany();
-	allFoods = await prisma.foodReference.findMany();
+	// filter for specific user
+
+	dbData = await prisma.foodLog.findMany({
+		where: {
+			user_id: user.name
+		}
+	});
+
+	allFoods = await prisma.foodReference.findMany({
+		where: {
+			user_id: user.name
+		}
+	});
 }
 
 /** @type {import('./$types').Actions} */
@@ -49,6 +60,7 @@ export const actions = {
 			// add the food to the database
 			const newFoodLogEntry = await prisma.foodLog.create({
 				data: {
+					user_id: user.name,
 					food_name: nutritionData.food_name,
 					food_qty: nutritionData.food_qty,
 					fat_grams: nutritionData.fat_grams,
