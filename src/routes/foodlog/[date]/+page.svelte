@@ -47,11 +47,11 @@
 	}
 
 	let columnDefs = [
-		{headerName: "Food", field: "food_name", editable: true, colId: 'Food', minWidth: 250},
+		{headerName: "Food", field: "food_name", editable: true, colId: 'Food', minWidth: 150},
 		{headerName: "Qty", field: "food_qty", editable: true, colId: 'Qty', minWidth: 100},
-		{headerName: "Fat, g", field: "fat_grams", editable: true, colId: 'Fat', minWidth: 100},
-		{headerName: "Carbs, g", field: "carbs_grams", editable: true, colId: 'Carbs', minWidth: 100},
-		{headerName: "Protein, g", field: "protein_grams", editable: true, colId: 'Protein', minWidth: 100},
+		{headerName: "Fat, g", field: "fat_grams", editable: true, colId: 'Fat', minWidth: 50},
+		{headerName: "Carbs, g", field: "carbs_grams", editable: true, colId: 'Carbs', minWidth: 50},
+		{headerName: "Protein, g", field: "protein_grams", editable: true, colId: 'Protein', minWidth: 50},
 		{headerName: "Kcals", field: "kkcals", colId: 'Kcals', minWidth: 120},
 	];
 
