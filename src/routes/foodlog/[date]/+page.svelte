@@ -47,16 +47,16 @@
 	}
 
 	let columnDefs = [
-		{headerName: "Food", field: "food_name", editable: true},
-		{headerName: "Qty", field: "food_qty", editable: true},
-		{headerName: "Fat, g", field: "fat_grams", editable: true},
-		{headerName: "Carbs, g", field: "carbs_grams", editable: true},
-		{headerName: "Protein, g", field: "protein_grams", editable: true},
-		{headerName: "Kcals", field: "kkcals"}
+		{headerName: "Food", field: "food_name", editable: true, colId: 'Food'},
+		{headerName: "Qty", field: "food_qty", editable: true, colId: 'Qty'},
+		{headerName: "Fat, g", field: "fat_grams", editable: true, colId: 'Fat'},
+		{headerName: "Carbs, g", field: "carbs_grams", editable: true, colId: 'Carbs'},
+		{headerName: "Protein, g", field: "protein_grams", editable: true, colId: 'Protein'},
+		{headerName: "Kcals", field: "kkcals", colId: 'Kcals'},
 	];
 
 	let totalsColumnDefs = [
-		{headerName: "Totals", field: "label", editable: false,
+		{headerName: "Totals", field: "label", editable: false, colId: 'Totals',
 			cellStyle: params => {
 					if (params.value === 'Target Totals') {
 						//mark police cells as red
@@ -70,11 +70,11 @@
 					return null;
 				},
 		}, 
-		{headerName: "", field: "", editable: false},
-		{headerName: "Fat, g", field: "fat_grams", editable: false},
-		{headerName: "Carbs, g", field: "carbs_grams", editable: false},
-		{headerName: "Protein, g", field: "protein_grams", editable: false},
-		{headerName: "Kcals", field: "kkcals", editable: false}
+		{headerName: "", field: "", editable: false, colId: 'Empty'},
+		{headerName: "Fat, g", field: "fat_grams", editable: false, colId: 'Fat'},
+		{headerName: "Carbs, g", field: "carbs_grams", editable: false, colId: 'Carbs'},
+		{headerName: "Protein, g", field: "protein_grams", editable: false, colId: 'Protein'},
+		{headerName: "Kcals", field: "kkcals", editable: false, colId: 'Kcals'}
 	];
 
 	// create data for AgGrid totalsColumnDefs
@@ -84,13 +84,52 @@
 		data.differenceTotals
 	];
 
+	// resize/hide columns based on grid width
+	function onGridSizeChanged(params) {
+        // get the current grids width
+        var gridWidth = document.getElementById('foodLog').offsetWidth;
+
+        // keep track of which columns to hide/show
+        var columnsToShow = [];
+        var columnsToHide = [];
+
+        // iterate over all columns (visible or not) and
+		//  determine if we'll need to hide columns
+		//   that will be the case if we can't fit them in
+        var totalColsWidth = 0;
+        var allColumns = params.columnApi.getAllColumns();
+        for (var i = 0; i < allColumns.length; i++) {
+            let column = allColumns[i];
+            totalColsWidth += column.getMinWidth();
+            if (totalColsWidth > gridWidth) {
+				// add multiple elements to columnsToShow array
+				//  to ensure they are shown in the order we want
+				columnsToShow.push('Food');
+				columnsToShow.push('Fat');
+				columnsToShow.push('Carbs');
+				columnsToShow.push('Protein');
+
+				columnsToHide.push('Qty');
+				columnsToHide.push('Kcals');
+
+				break;
+            }
+        }
+
+        // show/hide columns based on current grid width
+        params.columnApi.setColumnsVisible(columnsToShow, true);
+        params.columnApi.setColumnsVisible(columnsToHide, false);
+
+        // fill out any available space to ensure there are no gaps
+        params.api.sizeColumnsToFit();
+	}
+
 	// let the grid know which columns and what data to use
 	let options = {
 		columnDefs: columnDefs,
 		rowData: data.rowData,
 		rowSelection: 'single',
 		onCellValueChanged: function(params)  {
-			// alert('wtf ' + JSON.stringify(params.data));
 			updateRecord(params.data);
   		},
 		onGridReady: function(params) {
@@ -179,7 +218,7 @@
 		</div>
 	{/if}
 
-	<div class="grid">
+	<div class="grid" id="foodLog">
 		<!-- iterate over all items in data.foodReferences -->
 		{#each data.foodReferences as foodReference}
 			<form action="?/addfood" method = "POST">
