@@ -47,7 +47,7 @@
 	}
 
 	let columnDefs = [
-		{headerName: "Food", field: "food_name", editable: true, colId: 'Food', minWidth: 150},
+		{headerName: "Food", field: "food_name", editable: true, colId: 'Food', minWidth: 100},
 		{headerName: "Qty", field: "food_qty", editable: true, colId: 'Qty', minWidth: 100},
 		{headerName: "Fat, g", field: "fat_grams", editable: true, colId: 'Fat', minWidth: 70},
 		{headerName: "Carbs, g", field: "carbs_grams", editable: true, colId: 'Carbs', minWidth: 70},
@@ -56,7 +56,7 @@
 	];
 
 	let totalsColumnDefs = [
-		{headerName: "Totals", field: "label", editable: false, colId: 'Totals', minWidth: 150, 
+		{headerName: "Totals", field: "label", editable: false, colId: 'Totals', minWidth: 100, 
 			cellStyle: params => {
 					if (params.value === 'Target Totals') {
 						//mark police cells as red
