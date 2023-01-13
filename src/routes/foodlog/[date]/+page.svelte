@@ -49,14 +49,14 @@
 	let columnDefs = [
 		{headerName: "Food", field: "food_name", editable: true, colId: 'Food', minWidth: 150},
 		{headerName: "Qty", field: "food_qty", editable: true, colId: 'Qty', minWidth: 100},
-		{headerName: "Fat, g", field: "fat_grams", editable: true, colId: 'Fat', minWidth: 50},
-		{headerName: "Carbs, g", field: "carbs_grams", editable: true, colId: 'Carbs', minWidth: 50},
-		{headerName: "Protein, g", field: "protein_grams", editable: true, colId: 'Protein', minWidth: 50},
+		{headerName: "Fat, g", field: "fat_grams", editable: true, colId: 'Fat', minWidth: 70},
+		{headerName: "Carbs, g", field: "carbs_grams", editable: true, colId: 'Carbs', minWidth: 70},
+		{headerName: "Protein, g", field: "protein_grams", editable: true, colId: 'Protein', minWidth: 70},
 		{headerName: "Kcals", field: "kkcals", colId: 'Kcals', minWidth: 120},
 	];
 
 	let totalsColumnDefs = [
-		{headerName: "Totals", field: "label", editable: false, colId: 'Totals',
+		{headerName: "Totals", field: "label", editable: false, colId: 'Totals', minWidth: 150, 
 			cellStyle: params => {
 					if (params.value === 'Target Totals') {
 						//mark police cells as red
@@ -70,11 +70,11 @@
 					return null;
 				},
 		}, 
-		{headerName: "", field: "", editable: false, colId: 'Empty'},
-		{headerName: "Fat, g", field: "fat_grams", editable: false, colId: 'Fat'},
-		{headerName: "Carbs, g", field: "carbs_grams", editable: false, colId: 'Carbs'},
-		{headerName: "Protein, g", field: "protein_grams", editable: false, colId: 'Protein'},
-		{headerName: "Kcals", field: "kkcals", editable: false, colId: 'Kcals'}
+		{headerName: "", field: "", editable: false, colId: 'Empty', minWidth: 100},
+		{headerName: "Fat, g", field: "fat_grams", editable: false, colId: 'Fat', minWidth: 70},
+		{headerName: "Carbs, g", field: "carbs_grams", editable: false, colId: 'Carbs', minWidth: 70},
+		{headerName: "Protein, g", field: "protein_grams", editable: false, colId: 'Protein', minWidth: 70},
+		{headerName: "Kcals", field: "kkcals", editable: false, colId: 'Kcals', minWidth: 120}
 	];
 
 	// create data for AgGrid totalsColumnDefs
@@ -88,7 +88,6 @@
 	function onGridSizeChanged(params) {
         // get the current grids width
         var gridWidth = document.getElementById('foodLog').offsetWidth;
-		console.log('gridWidth: ' + gridWidth);
 
         // keep track of which columns to hide/show
         var columnsToShow = [];
@@ -131,6 +130,52 @@
 
 	}
 
+	// resize/hide columns based on grid width
+	function onTotalsGridSizeChanged(params) {
+        // get the current grids width
+        var gridWidth = document.getElementById('totals').offsetWidth;
+
+        // keep track of which columns to hide/show
+        var columnsToShow = [];
+        var columnsToHide = [];
+
+        // iterate over all columns (visible or not) and
+		//  determine if we'll need to hide columns
+		//   that will be the case if we can't fit them in
+        var totalColsWidth = 0;
+        var allColumns = params.columnApi.getColumns();
+        for (var i = 0; i < allColumns.length; i++) {
+            let column = allColumns[i];
+            totalColsWidth += column.getMinWidth();
+			console.log('Total totalColsWidth: ' + totalColsWidth);
+
+			if (totalColsWidth > gridWidth) {
+				console.log('Total totalColsWidth: ' + totalColsWidth);
+				// add multiple elements to columnsToShow array
+				//  to ensure they are shown in the order we want
+				columnsToShow.push('Totals');
+				columnsToShow.push('Fat');
+				columnsToShow.push('Carbs');
+				columnsToShow.push('Protein');
+
+				columnsToHide.push('Qty');
+				columnsToHide.push('Kcals');
+
+				// show/hide columns based on current grid width
+				params.columnApi.setColumnsVisible(columnsToShow, true);
+    	    	params.columnApi.setColumnsVisible(columnsToHide, false);
+
+        		// fill out any available space to ensure there are no gaps
+        		params.api.sizeColumnsToFit();
+
+				break;
+            }
+		}
+
+		params.api.sizeColumnsToFit();
+
+	}
+
 	// let the grid know which columns and what data to use
 	let options = {
 		columnDefs: columnDefs,
@@ -145,7 +190,8 @@
 	// let the Totals grid know which columns and what data to use
 	let totalsOptions = {
 		columnDefs: totalsColumnDefs,
-		rowData: totalsData
+		rowData: totalsData,
+		onGridSizeChanged: onTotalsGridSizeChanged
 	};
 
 	/* sveltekit fetch method to update the record */
