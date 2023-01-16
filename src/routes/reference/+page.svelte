@@ -2,12 +2,14 @@
     export let data;	
 	import { onDestroy, onMount } from 'svelte';
 	import { Grid } from 'ag-grid-community';
+	import { Chasing } from 'svelte-loading-spinners';
 
 	import 'ag-grid-community/styles//ag-grid.css';
 	import 'ag-grid-community/styles//ag-theme-alpine.css';
 
 	var domNode;
     var grid;
+	var isLoading = true;
 
 	const today = new Date();
 
@@ -49,6 +51,7 @@
 
 	onMount(() => {
         grid = new Grid(domNode, options);
+		isLoading = false;
     });
 
     onDestroy(() => {
@@ -57,17 +60,29 @@
         }
     });
 
-</script>
+	const submitFood = (e) => {
+		if (e.key == 'Enter') {
+			isLoading = true;
+		}
+	}
 
-<h1>Hello food!</h1>
+</script>
 
 <form action="?/addfood" method = "POST">
 <input
 name="food"
 value='Add food to the reference list'
 on:focus={(evt) => evt.target.select()}
+on:keydown={submitFood}
 />
 </form>
+
+{#if isLoading}
+<!-- align in the middle of the screen and on top-->
+<div style="display: flex; justify-content: center; padding: 10px;">
+	<Chasing size="60" color="#FF3E00" unit="px" duration="1s" />
+</div>
+{/if}
 
 <center><h3>Food Reference List</h3></center>
 
