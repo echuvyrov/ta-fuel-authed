@@ -174,13 +174,30 @@
 
 	}
 
+	function deleteKeyListener(e) {
+	// delete the rows 
+	// keyCode 8 is Backspace
+	// keyCode 46 is Delete
+		if(e.keyCode === 8 || e.keyCode === 46) {
+			const sel = options.api.getSelectedRows();
+			options.api.applyTransaction({remove: sel});
+		}
+	}
+
 	// let the grid know which columns and what data to use
 	let options = {
 		columnDefs: columnDefs,
 		rowData: data.rowData,
 		rowSelection: 'single',
+		onGridReady: (params) => {
+    		document.addEventListener('keydown', deleteKeyListener);
+	    },
 		onCellValueChanged: function(params)  {
-			updateRecord(params.data);
+			if(params.colDef.colId === 'Kcals') {
+				return;
+			} else {
+				updateRecord(params.node, params.data);
+			}
   		},
 		onGridSizeChanged: onGridSizeChanged
 	};
@@ -193,7 +210,17 @@
 	};
 
 	/* sveltekit fetch method to update the record */
-	async function updateRecord(data) {
+	async function updateRecord(row, data) {
+		// recalc Kcals first by taking integer values of Protein, Carbs, and Fat
+		//  and multiplying by 4, 4, and 9 respectively
+		const protein = parseInt(data.protein_grams);
+		const carbs = parseInt(data.carbs_grams);
+		const fat = parseInt(data.fat_grams);
+		const kcals = (protein * 4) + (carbs * 4) + (fat * 9);
+		data.Kcals = kcals;
+		console.log("pro, c, g, k ", protein, carbs, fat, kcals)
+		row.setDataValue('Kcals', data.Kcals);
+
 		const jsonData = JSON.stringify(data);
 		const res = await fetch('/foodlog/[date]/updaterecord', {
 			method: 'POST',
