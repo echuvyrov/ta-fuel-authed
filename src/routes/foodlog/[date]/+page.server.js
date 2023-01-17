@@ -51,7 +51,7 @@ async function loadData(date) {
 			user_id: user.name
 		},
 		orderBy: {
-			feeding_time: 'asc'
+			createdAt: 'asc'
 		}
 	});
 
@@ -165,7 +165,7 @@ export const actions = {
 				user_id: user.name
 			},
 			orderBy: {
-				feeding_time: 'asc'
+				createdAt: 'asc'
 			}
 		});
 	
