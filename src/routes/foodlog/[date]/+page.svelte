@@ -76,7 +76,7 @@
 		{headerName: "Fat, g", field: "fat_grams", editable: false, colId: 'Fat', minWidth: 70},
 		{headerName: "Carbs, g", field: "carbs_grams", editable: false, colId: 'Carbs', minWidth: 70},
 		{headerName: "Protein, g", field: "protein_grams", editable: false, colId: 'Protein', minWidth: 70},
-		{headerName: "Kcals", field: "kkcals", editable: false, colId: 'Kcals', minWidth: 120}
+		{headerName: "Kcals", field: "kcals", editable: false, colId: 'Kcals', minWidth: 120}
 	];
 
 	// create data for AgGrid totalsColumnDefs
