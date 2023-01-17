@@ -56,10 +56,18 @@ async function loadData(date) {
 	/* this is for Vercel only atm, but perhaps a rethink on image data is needed - storage instead of base64 in db */
 
 	allFoods = await prisma.foodReference.findMany({
+		// select everything except the image
+		select: {
+			food_name: true,
+			food_qty: true,
+			fat_grams: true,
+			carbs_grams: true,
+			protein_grams: true,
+			kkcals: true
+		},
 		where: {
 			user_id: user.name,
-		},
-		take: 20
+		}
 	});
 
 	targetTotals = await prisma.targetTotals.findFirst({
@@ -156,10 +164,18 @@ export const actions = {
 		});
 	
 		allFoods = await prisma.foodReference.findMany({
+			// select everything except the image
+			select: {
+				food_name: true,
+				food_qty: true,
+				fat_grams: true,
+				carbs_grams: true,
+				protein_grams: true,
+				kkcals: true
+			},
 			where: {
 				user_id: user.name,
-			},
-			take: 5
+			}
 		});
 	}
 };
