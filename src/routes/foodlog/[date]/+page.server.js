@@ -159,7 +159,7 @@ export const actions = {
 			where: {
 				user_id: user.name,
 			},
-			take: 20
+			take: 5
 		});
 	}
 };
