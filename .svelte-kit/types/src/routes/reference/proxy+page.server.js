@@ -21,8 +21,17 @@ export const load = async ({ params })  => {
 
 async function loadData() {
 	allFoods = await prisma.foodReference.findMany({
+		// select everything except the image
+		select: {
+			food_name: true,
+			food_qty: true,
+			fat_grams: true,
+			carbs_grams: true,
+			protein_grams: true,
+			kkcals: true
+		},
 		where: {
-			user_id: user.name
+			user_id: user.name,
 		}
 	});
 }
@@ -66,8 +75,17 @@ export const actions = {
 		}
 
 		allFoods = await prisma.foodReference.findMany({
+			// select everything except the image
+			select: {
+				food_name: true,
+				food_qty: true,
+				fat_grams: true,
+				carbs_grams: true,
+				protein_grams: true,
+				kkcals: true
+			},
 			where: {
-				user_id: user.name
+				user_id: user.name,
 			}
 		});
 	}

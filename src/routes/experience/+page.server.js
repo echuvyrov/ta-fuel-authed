@@ -38,7 +38,8 @@ async function loadData() {
 	allFoods = await prisma.foodReference.findMany({
 		where: {
 			user_id: user.name
-		}
+		},
+		take: 10
 	});
 }
 
@@ -52,7 +53,7 @@ export const actions = {
 
 		const data = await request.formData();		
 		const nutritionData = JSON.parse(data.get('food'));
-
+		
 		/* check if the object is empty */
 		if (Object.keys(nutritionData).length === 0) {
 			// do nothing
