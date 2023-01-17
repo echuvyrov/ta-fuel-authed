@@ -49,6 +49,9 @@ async function loadData(date) {
 		where: {
 			feeding_date: date,
 			user_id: user.name
+		},
+		orderBy: {
+			feeding_time: 'asc'
 		}
 	});
 
@@ -160,6 +163,9 @@ export const actions = {
 			where: {
 				feeding_date: forDate,
 				user_id: user.name
+			},
+			orderBy: {
+				feeding_time: 'asc'
 			}
 		});
 	
