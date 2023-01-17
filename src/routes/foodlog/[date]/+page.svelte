@@ -294,10 +294,12 @@
 		</div>
 	{/if}
 
+	<div class="grid" id="foodLog">
+
 <!-- hitting serverless functions limits of 4.5 mb per payload on vercel, commenting out this coolest part of the app -->
 <!-- due to that limiation -->
 <!--
-	<div class="grid" id="foodLog">
+
 		{#each data.foodReferences as foodReference}
 			<form action="?/addfood" method = "POST">
 
@@ -307,8 +309,9 @@
 				</button>
 				</form>
 		{/each}
-	</div>
 -->
+
+	</div>
 
 	<!-- add AgGrid component with grid options -->
 	<div style="display: flex; justify-content: center; align-items: center;">
