@@ -294,19 +294,21 @@
 		</div>
 	{/if}
 
+<!-- hitting serverless functions limits of 4.5 mb per payload on vercel, commenting out this coolest part of the app -->
+<!-- due to that limiation -->
+<!--
 	<div class="grid" id="foodLog">
-		<!-- iterate over all items in data.foodReferences -->
 		{#each data.foodReferences as foodReference}
 			<form action="?/addfood" method = "POST">
 
 				<input type="hidden" value={foodReference.food_name} name="food">
-				<!-- image from base64 string -->
 				<button title = "{foodReference.food_name}">
 					<img src="data:image/png;base64, {foodReference.imageBase64}" style="max-height: 62px; max-width: 62px;" alt="{foodReference.food_name}" />
 				</button>
 				</form>
 		{/each}
 	</div>
+-->
 
 	<!-- add AgGrid component with grid options -->
 	<div style="display: flex; justify-content: center; align-items: center;">
