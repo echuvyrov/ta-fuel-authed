@@ -176,9 +176,8 @@
 
 	function deleteKeyListener(e) {
 	// delete the rows 
-	// keyCode 8 is Backspace
 	// keyCode 46 is Delete
-		if(e.keyCode === 8 || e.keyCode === 46) {
+		if(e.keyCode === 46) {
 			const sel = options.api.getSelectedRows();
 			options.api.applyTransaction({remove: sel});
 		}
