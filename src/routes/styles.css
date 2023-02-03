@@ -272,7 +272,6 @@ input {
 		justify-content: center;
 		text-align: center;
 		box-sizing: border-box;
-		text-transform: lowercase;
 		border: none;
 		font-size: calc(0.08 * var(--width));
 		border-radius: 2px;

@@ -45,7 +45,7 @@
 			document.forms["foodForm"].elements["food"].value = foodEntered;
 			document.forms["foodForm"].submit();
 			isLoading = true;
-		}	
+		}
 	}
 
 	let columnDefs = [
@@ -217,7 +217,6 @@
 		const fat = parseInt(data.fat_grams);
 		const kcals = (protein * 4) + (carbs * 4) + (fat * 9);
 		data.Kcals = kcals;
-		console.log("pro, c, g, k ", protein, carbs, fat, kcals)
 		row.setDataValue('Kcals', data.Kcals);
 
 		const jsonData = JSON.stringify(data);

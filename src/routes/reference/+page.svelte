@@ -14,12 +14,12 @@
 	const today = new Date();
 
 	let columnDefs = [
-		{headerName: "Food", field: "food_name", editable: true},
-		{headerName: "Qty", field: "food_qty", editable: true},
-		{headerName: "Fat, g", field: "fat_grams", editable: true},
-		{headerName: "Carbs, g", field: "carbs_grams", editable: true},
-		{headerName: "Protein, g", field: "protein_grams", editable: true},
-		{headerName: "Kcals", field: "kkcals"}
+		{headerName: "Food", field: "food_name", editable: true, minWidth: 100},
+		{headerName: "Qty", field: "food_qty", editable: true, minWidth: 70},
+		{headerName: "Fat, g", field: "fat_grams", editable: true, minWidth: 70},
+		{headerName: "Carbs, g", field: "carbs_grams", editable: true, minWidth: 70},
+		{headerName: "Protein, g", field: "protein_grams", editable: true, minWidth: 70},
+		{headerName: "Kcals", field: "kkcals", editable: true, minWidth: 120}
 	];
     
 	// let the grid know which columns and what data to use
@@ -28,12 +28,22 @@
 		rowData: data.rowData,
 		onCellValueChanged: function(params)  {
 			// alert('wtf ' + JSON.stringify(params.data));
-			updateRecord(params.data);
+			updateRecord(params.node, params.data);
   		},
 	};
 
 	/* sveltekit fetch method to update the record */
-	async function updateRecord(data) {
+	async function updateRecord(row, data) {
+		// recalc Kcals first by taking integer values of Protein, Carbs, and Fat
+		//  and multiplying by 4, 4, and 9 respectively
+		const protein = parseInt(data.protein_grams);
+		const carbs = parseInt(data.carbs_grams);
+		const fat = parseInt(data.fat_grams);
+		const kcals = (protein * 4) + (carbs * 4) + (fat * 9);
+		console.log("protein " + protein + " fat " + fat + " carbs " + carbs + "Kcals: " + kcals)
+		data.kkcals = kcals;
+		row.setDataValue('kkcals', data.kkcals);
+
 		const jsonData = JSON.stringify(data);
 		const res = await fetch('/reference/updaterecord', {
 			method: 'POST',
@@ -42,11 +52,9 @@
 			},
 			body: jsonData
 		});
-		const json = await res.json();
 		if (!res.ok) {
 			throw Error(json.message);
 		}
-		return json;
 	}
 
 	onMount(() => {
@@ -106,7 +114,6 @@ input {
 		justify-content: center;
 		text-align: center;
 		box-sizing: border-box;
-		text-transform: lowercase;
 		border: none;
 		font-size: calc(0.08 * var(--width));
 		border-radius: 2px;

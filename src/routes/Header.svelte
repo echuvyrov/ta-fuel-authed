@@ -43,16 +43,19 @@
 				{/if}
 			</p>
 		</div>
-		{#if $page.data.session}
-		{#if $page.data.session.user?.name}
+		<!-- {#if $page.data.session} -->
+		<!--{#if $page.data.session.user?.name} -->
 
 			<nav>
 				<svg viewBox="0 0 2 3" aria-hidden="true">
 					<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
 				</svg>
 				<ul>
-					<li class:active={$page.url.pathname === '/foodlog'}>
-						<a href="/foodlog/{todayString}">Log</a>
+					<li class:active={$page.url.pathname.includes('traininglog')}>
+						<a href="/traininglog/{todayString}">Train</a>
+					</li>
+					<li class:active={$page.url.pathname.includes('foodlog')}>
+						<a href="/foodlog/{todayString}">Fuel</a>
 					</li>
 					<li class:active={$page.url.pathname === '/reference'}>
 						<a href="/reference">Reference</a>
@@ -68,8 +71,8 @@
 				<div class="corner">
 				</div>
 			</nav>
-		{/if}
-	{/if}
+		<!-- {/if} -->
+	<!-- {/if} -->
 </header>
 
 <style>

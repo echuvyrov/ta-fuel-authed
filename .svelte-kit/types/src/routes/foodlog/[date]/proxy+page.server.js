@@ -109,8 +109,7 @@ async function loadData(date) {
 /** */
 export const actions = {
 	/**
-	 * Modify game state in reaction to a keypress. If client-side JavaScript
-	 * is available, this will happen in the browser instead of here
+	 * add new food to the log, whether a lookup from a reference list or a result of calling GPT-3
 	 */
 	addfood:/** @param {import('./$types').RequestEvent} event */  async ({ request, cookies }) => {
 

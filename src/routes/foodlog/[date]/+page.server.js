@@ -108,8 +108,7 @@ async function loadData(date) {
 /** @type {import('../../../.svelte-kit/types/src/routes/foodlog/$types').Actions} */
 export const actions = {
 	/**
-	 * Modify game state in reaction to a keypress. If client-side JavaScript
-	 * is available, this will happen in the browser instead of here
+	 * add new food to the log, whether a lookup from a reference list or a result of calling GPT-3
 	 */
 	addfood: async ({ request, cookies }) => {
 

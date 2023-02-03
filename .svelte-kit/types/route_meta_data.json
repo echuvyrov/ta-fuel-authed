@@ -30,5 +30,12 @@
 	],
 	"/reference/updaterecord": [
 		"src/routes/reference/updaterecord/+server.js"
+	],
+	"/traininglog/[date]": [
+		"src/routes/traininglog/[date]/+page.server.js",
+		"src/routes/+layout.server.js"
+	],
+	"/traininglog/[date]/updaterecord": [
+		"src/routes/traininglog/[date]/updaterecord/+server.js"
 	]
 }

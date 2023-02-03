@@ -27,7 +27,9 @@ async function loadData() {
 			fat_grams: true,
 			carbs_grams: true,
 			protein_grams: true,
-			kkcals: true
+			kkcals: true,
+			user_id: true,
+			id: true
 		},
 		where: {
 			user_id: user.name,
