@@ -145,5 +145,87 @@ export class NutritionSmartAIThingie extends SmartAIThingie {
 
         return nutritionData;
     }
+}
+
+/* create a Training-specific class for generating GPT-3 prompts and evaluating them */
+export class TrainingSmartAIThingie extends SmartAIThingie {
+
+    static async ask(prompt) {
+        // not sure if there is/will be anything else to add to the training-specific ask function
+        //  but if there's a need to add something, it can be done here
+        var trainingPrompt = prompt;
+        return await super.ask(trainingPrompt);
+    }
+
+    static async askForTrainingProgramJSON(prompt) {
+        var trainingProgramPrompt = "Create a training prgram from " + prompt + " and return it in the format: Day:  Exercises";
+        var rawResponse = await super.askForJSON(trainingProgramPrompt);
+        var parsedResponse = await this.parseResponse(rawResponse);
+        var nutritionData = await this.parseTraining(parsedResponse);
+
+        return nutritionData;
+    }
+
+    /* a function to create a JSON object from a string with line breaks as separators for different elements */
+    static async parseResponse(rawResponse) {
+        console.log("rawResponse: " + JSON.stringify(rawResponse));
+        var parsedResponse = {};
+        var lines = rawResponse.choices[0].text.split("\n");
+        for (var i = 0; i < lines.length; i++) {
+            var line = lines[i];
+            if (line.indexOf(":") > -1) {
+                var key = line.substring(0, line.indexOf(":"));
+                var value = line.substring(line.indexOf(":") + 1);
+                parsedResponse[key] = value;
+            } else if (line.indexOf("-") > -1) {
+                var key = line.substring(0, line.indexOf("-"));
+                var value = line.substring(line.indexOf("-") + 1);
+                parsedResponse[key] = value;
+            }
+
+        }
+        return parsedResponse;
+    }
+
+    static parseTraining(parsedResponse) {
+        var nutritionData = {};
+        nutritionData.food_name = this.food_name;
+        /* check if JSON element exists */
+        if (parsedResponse["Calories"]) {
+            //remove all non-numeric characters from the string but keep the decimal point
+            nutritionData["kkcals"] = parseFloat(parsedResponse["Calories"].replace(/[^0-9.]/g, ''));
+        } else {
+            nutritionData["kkcals"] = 0
+        }
+        if (parsedResponse["Quantity"]) {
+            //remove all non-numeric characters from the string but keep the decimal point
+            nutritionData["food_qty"] = parseFloat(parsedResponse["Quantity"].replace(/[^0-9.]/g, ''));
+        } else {
+            nutritionData["food_qty"] = 0
+        }
+        if (parsedResponse["Calories"]) {
+            //remove all non-numeric characters from the string but keep the decimal point
+            nutritionData["kkcals"] = parseFloat(parsedResponse["Calories"].replace(/[^0-9.]/g, ''));
+        } else {
+            nutritionData["kkcals"] = 0
+        }
+        if (parsedResponse["Protein"]) {
+            nutritionData["protein_grams"] = parseFloat(parsedResponse["Protein"].replace(/[^0-9.]/g, ''));
+        } else {
+            nutritionData["protein_grams"] = 0
+        }
+        if (parsedResponse["Fat"]) {
+            nutritionData["fat_grams"] = parseFloat(parsedResponse["Fat"].replace(/[^0-9.]/g, ''));
+        } else {
+            nutritionData["fat_grams"] = 0
+        }
+        if (parsedResponse["Carbs"]) {
+            nutritionData["carbs_grams"] = parseFloat(parsedResponse["Carbs"].replace(/[^0-9.]/g, ''));
+        } else {
+            nutritionData["carbs_grams"] = 0
+        }
+
+        return nutritionData;
+    }
 
 }

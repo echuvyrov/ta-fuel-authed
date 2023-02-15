@@ -45,3 +45,52 @@ model TargetTotals {
   carbs_grams   Float
   protein_grams Float
 }
+
+model TrainingProgram {
+  id            String   @id @default(uuid())
+  user_id       String   @default("")
+  program_name  String
+  start_date    DateTime @default(now())
+  end_date      DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+  training_days TrainingProgramDay[]
+}
+
+model TrainingProgramDay {
+  id            String   @id @default(uuid())
+  user_id       String   @default("")
+  program_name  String
+  start_date    DateTime @default(now())
+  end_date      DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+  program       TrainingProgram @relation(fields: [program_id], references: [id])
+  program_id    String  // relation field (used in the `@relation` attribute above)
+  exercises     TrainingProgramDayExercise[]
+  log           TrainingProgramDayLog[]
+}
+
+model TrainingProgramDayExercise {
+  id            String   @id @default(uuid())
+  user_id       String   @default("")
+  program_name  String
+  start_date    DateTime @default(now())
+  end_date      DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+  program_day   TrainingProgramDay @relation(fields: [program_day_id], references: [id])
+  program_day_id String // relation field (used in the `@relation` attribute above)
+}
+
+model TrainingProgramDayLog {
+  id            String   @id @default(uuid())
+  user_id       String   @default("")
+  program_name  String
+  start_date    DateTime @default(now())
+  end_date      DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+  program_day   TrainingProgramDay @relation(fields: [program_day_id], references: [id])
+  program_day_id String // relation field (used in the `@relation` attribute above)
+}

@@ -51,6 +51,9 @@
 					<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
 				</svg>
 				<ul>
+					<li class:active={$page.url.pathname === ('/experience')}>
+						<a href="/experience">Experience</a>
+					</li>
 					<li class:active={$page.url.pathname.includes('traininglog')}>
 						<a href="/traininglog/{todayString}">Train</a>
 					</li>
@@ -59,9 +62,6 @@
 					</li>
 					<li class:active={$page.url.pathname === '/reference'}>
 						<a href="/reference">Reference</a>
-					</li>
-					<li class:active={$page.url.pathname === ('/experience')}>
-						<a href="/experience">Experience</a>
 					</li>
 				</ul>
 				<svg viewBox="0 0 2 3" aria-hidden="true">

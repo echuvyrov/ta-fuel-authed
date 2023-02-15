@@ -231,6 +231,14 @@ button:focus:not(:focus-visible) {
 	color: white;
 }
 
+.experienceheader {
+	margin: 25px;
+	display: inline;
+	font-size: 17px;
+	color: white;
+	padding-bottom: 20px;
+}
+
 .col1 {
 	float: left;
 	width: 80%;

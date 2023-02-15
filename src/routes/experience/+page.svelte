@@ -20,6 +20,10 @@
 	}
 
 </script>
+<center>
+	<div class="experienceheader">Log foods by simply clicking the images custom created for your foods</div>
+</center>
+
 
 <!-- create a 5-column flex box and add foodReference items to each column -->
 <div class="grid">
@@ -29,7 +33,7 @@
 			<div class="grid-item">
 				<input type="hidden" value={JSON.stringify(foodReference)} name="food">
 				<!-- image from base64 string -->
-				<button>
+				<button title = "{foodReference.food_name}">
 					<img src="data:image/png;base64, {foodReference.imageBase64}" />
 				</button>			
 			</div>

@@ -1,7 +1,6 @@
 // @ts-nocheck
-import {NutritionSmartAIThingie, SmartAIThingie} from '../../SmartAIThingie.js';
+import {NutritionSmartAIThingie} from '../../SmartAIThingie.js';
 import { PrismaClient } from '@prisma/client'
-import { session } from '$app/stores';
 import { currentDate, user, isAuthenticated } from '$lib/stores/stores';
 
 const prisma = new PrismaClient()

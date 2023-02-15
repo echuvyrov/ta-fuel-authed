@@ -17,13 +17,19 @@ name="trainingprogram"
 value='Create a training program by writing out on what day to train what 
 For example:
 
-Monday: Chest, Back, Shoulders 
-Tuesday: Legs, Abs 
-Wednesday: Rest
-Thursday: Chest, Back, Shoulders
-Friday: Legs, Abs 
-Saturday: Rest
-Sunday: Rest'
+Day 1: Squats
+
+Day 2: Bench Press
+
+Day 3: 30-45 mins cardio, light Olympic lifts
+
+Day 4: OFF
+
+Day 5: Deadlifts
+Day 6: Shoulders, Arms
+Day 7: 30-45 mins cardio, calisthenics
+Day 8: OFF'
+
 on:focus={(evt) => evt.target.select()}
 />
 </form>

@@ -39,7 +39,7 @@ async function loadData() {
 		where: {
 			user_id: user.name
 		},
-		take: 10
+		take: 50
 	});
 }
 
