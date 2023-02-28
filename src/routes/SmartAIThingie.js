@@ -158,19 +158,20 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
     }
 
     static async askForTrainingProgramJSON(prompt) {
-        var trainingProgramPrompt = "Create a training prgram from " + prompt + " and return it in the format: Day:  Exercises";
+        var trainingProgramPrompt = "A JSON representation of the following exercise program, removing all non-JSON characters: " + prompt;
         var rawResponse = await super.askForJSON(trainingProgramPrompt);
         var parsedResponse = await this.parseResponse(rawResponse);
-        var nutritionData = await this.parseTraining(parsedResponse);
+        var trainingData = await this.parseTraining(parsedResponse);
 
-        return nutritionData;
+        return trainingData;
     }
 
     /* a function to create a JSON object from a string with line breaks as separators for different elements */
     static async parseResponse(rawResponse) {
         console.log("rawResponse: " + JSON.stringify(rawResponse));
         var parsedResponse = {};
-        var lines = rawResponse.choices[0].text.split("\n");
+
+        var lines = rawResponse.choices[0].text.split("\r\n");
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
             if (line.indexOf(":") > -1) {
@@ -188,44 +189,19 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
     }
 
     static parseTraining(parsedResponse) {
-        var nutritionData = {};
-        nutritionData.food_name = this.food_name;
-        /* check if JSON element exists */
-        if (parsedResponse["Calories"]) {
-            //remove all non-numeric characters from the string but keep the decimal point
-            nutritionData["kkcals"] = parseFloat(parsedResponse["Calories"].replace(/[^0-9.]/g, ''));
-        } else {
-            nutritionData["kkcals"] = 0
-        }
-        if (parsedResponse["Quantity"]) {
-            //remove all non-numeric characters from the string but keep the decimal point
-            nutritionData["food_qty"] = parseFloat(parsedResponse["Quantity"].replace(/[^0-9.]/g, ''));
-        } else {
-            nutritionData["food_qty"] = 0
-        }
-        if (parsedResponse["Calories"]) {
-            //remove all non-numeric characters from the string but keep the decimal point
-            nutritionData["kkcals"] = parseFloat(parsedResponse["Calories"].replace(/[^0-9.]/g, ''));
-        } else {
-            nutritionData["kkcals"] = 0
-        }
-        if (parsedResponse["Protein"]) {
-            nutritionData["protein_grams"] = parseFloat(parsedResponse["Protein"].replace(/[^0-9.]/g, ''));
-        } else {
-            nutritionData["protein_grams"] = 0
-        }
-        if (parsedResponse["Fat"]) {
-            nutritionData["fat_grams"] = parseFloat(parsedResponse["Fat"].replace(/[^0-9.]/g, ''));
-        } else {
-            nutritionData["fat_grams"] = 0
-        }
-        if (parsedResponse["Carbs"]) {
-            nutritionData["carbs_grams"] = parseFloat(parsedResponse["Carbs"].replace(/[^0-9.]/g, ''));
-        } else {
-            nutritionData["carbs_grams"] = 0
+        var trainingData = {};
+        // program name is likely irrelevant, so default to "New Program " + current date
+        trainingData.program_name = "New Program " + new Date().toLocaleDateString();
+        // let's set the end date to ~7 years from now
+        trainingData.end_date = new Date();
+        trainingData.end_date.setFullYear(trainingData.end_date.getFullYear() + 7);
+
+        // append each element of parsedResponse to the trainingData object
+        for (var key in parsedResponse) {
+            trainingData[key] = parsedResponse[key];
         }
 
-        return nutritionData;
+        return trainingData;
     }
 
 }

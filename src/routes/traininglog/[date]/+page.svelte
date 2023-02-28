@@ -1,15 +1,30 @@
 <script>
     export let data;	
 	import { onDestroy, onMount } from 'svelte';
+	import { Chasing } from 'svelte-loading-spinners';
+
+	var isLoading = true;
+	const submitTrainingProgram = (e) => {
+		/* populate hidden form value and submit form programmatically */
+		isLoading = true;
+		document.forms["trainingprogram"].submit();
+	}
 
 	onMount(() => {
-
+		isLoading = false;
 	});
 
     onDestroy(() => {
     });
 
 </script>
+
+{#if isLoading}
+<!-- align in the middle of the screen and on top-->
+<div style="display: flex; justify-content: center; padding: 10px;">
+	<Chasing size="60" color="#FF3E00" unit="px" duration="1s" />
+</div>
+{/if}
 
 <form action="?/createprogram" method = "POST">
 <textarea
@@ -32,6 +47,7 @@ Day 8: OFF'
 
 on:focus={(evt) => evt.target.select()}
 />
+<button on:click={submitTrainingProgram}>Submit</button>
 </form>
 
 <style>
@@ -58,6 +74,7 @@ button  {
     padding: 5px;
     background: #d95753;
     border: 0;
+	margin: 9px;
 }
 
 .btn-size {
