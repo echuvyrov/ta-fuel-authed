@@ -18,7 +18,7 @@ export const load = async ({ params }) => {
 	if(!params.date) {
 		// set forDate to today's date
 		forDate = new Date().toString().split('T')[0];
-	} else {		
+	} else {
 		/* create date from the params passed in (use local time) */
 		forDate = params.date;
 	}

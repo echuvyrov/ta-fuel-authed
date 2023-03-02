@@ -170,8 +170,8 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
     static async parseResponse(rawResponse) {
         console.log("rawResponse: " + JSON.stringify(rawResponse));
         var parsedResponse = {};
+        var lines = rawResponse.choices[0].text.split("\n");
 
-        var lines = rawResponse.choices[0].text.split("\r\n");
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
             if (line.indexOf(":") > -1) {
@@ -183,19 +183,12 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
                 var value = line.substring(line.indexOf("-") + 1);
                 parsedResponse[key] = value;
             }
-
         }
         return parsedResponse;
     }
 
     static parseTraining(parsedResponse) {
         var trainingData = {};
-        // program name is likely irrelevant, so default to "New Program " + current date
-        trainingData.program_name = "New Program " + new Date().toLocaleDateString();
-        // let's set the end date to ~7 years from now
-        trainingData.end_date = new Date();
-        trainingData.end_date.setFullYear(trainingData.end_date.getFullYear() + 7);
-
         // append each element of parsedResponse to the trainingData object
         for (var key in parsedResponse) {
             trainingData[key] = parsedResponse[key];

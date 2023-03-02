@@ -60,7 +60,8 @@ model TrainingProgram {
 model TrainingProgramDay {
   id            String   @id @default(uuid())
   user_id       String   @default("")
-  program_name  String
+  day_name      String
+  day_description String
   start_date    DateTime @default(now())
   end_date      DateTime
   createdAt     DateTime @default(now())
