@@ -166,12 +166,11 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
         return trainingData;
     }
 
-    /* a function to create a JSON object from a string with line breaks as separators for different elements */
+    /* a function to create an array from a string with line breaks as separators for different elements */
     static async parseResponse(rawResponse) {
         console.log("rawResponse: " + JSON.stringify(rawResponse));
-        var parsedResponse = {};
         var lines = rawResponse.choices[0].text.split("\n");
-
+        // we will need to remove characters that shouldn't belong
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
             if (line.indexOf(":") > -1) {
@@ -184,7 +183,7 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
                 parsedResponse[key] = value;
             }
         }
-        return parsedResponse;
+        return lines;
     }
 
     static parseTraining(parsedResponse) {
