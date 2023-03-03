@@ -18,8 +18,8 @@ export const actions = {
 		const data = await request.formData();
 		const trainingProgramRaw = data.get('trainingprogram');
 		// format training program as JSON with OpenAI
-		var trainingProgram = await TrainingSmartAIThingie.askForTrainingProgramJSON(trainingProgramRaw);
-		console.log("training program: " + JSON.stringify(trainingProgram));
+		var trainingProgramDays = await TrainingSmartAIThingie.askForTrainingProgramJSON(trainingProgramRaw);
+		console.log("training program: " + JSON.stringify(trainingProgramDays));
 
 		// program name is likely irrelevant, so default to "New Program " + current date
         var trainingProgramName = "New Program " + new Date().toLocaleDateString();
@@ -36,19 +36,21 @@ export const actions = {
 			},
 		})
 
-		// convert trainingProgramDay JSON to an array of objects
-		trainingProgramArray = JSON.parse(trainingProgram);
-		console.log("training program: " + JSON.stringify(trainingProgramArray));
-
-		// now, and its associated training days for the training program to the database
-		for (var i = 0; i < trainingProgramArray.length; i++) {
-			// create a training day for the training program
+		// add associated training days for the training program to the database
+		for (var i = 0; i < trainingProgramDays.length; i++) {
+			// create training day for the new training program
 			const newTrainingDay = await prisma.trainingProgramDay.create({
 				data: {
 					user_id: user.name,
-					program_id: newTrainingProgram.id,
-					day_name: trainingProgramArray[i].day_name
-				},
+					program: {
+						connect: {
+							id: newTrainingProgram.id
+						}
+					},
+					end_date: trainingProgramNameEndDate,
+					day_name: trainingProgramDays[i].day_name,
+					day_description: trainingProgramDays[i].day_description,
+				}
 			})
 		}
 	}

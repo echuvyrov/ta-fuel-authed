@@ -1,13 +1,12 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
   binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
 datasource db {
   provider             = "mysql"
   url                  = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
+  relationMode         = "prisma"
 }
 
 model FoodLog {
@@ -70,6 +69,7 @@ model TrainingProgramDay {
   program_id    String  // relation field (used in the `@relation` attribute above)
   exercises     TrainingProgramDayExercise[]
   log           TrainingProgramDayLog[]
+  @@index([program_id])
 }
 
 model TrainingProgramDayExercise {
@@ -82,6 +82,7 @@ model TrainingProgramDayExercise {
   updatedAt     DateTime @default(now())
   program_day   TrainingProgramDay @relation(fields: [program_day_id], references: [id])
   program_day_id String // relation field (used in the `@relation` attribute above)
+  @@index([program_day_id])
 }
 
 model TrainingProgramDayLog {
@@ -94,4 +95,5 @@ model TrainingProgramDayLog {
   updatedAt     DateTime @default(now())
   program_day   TrainingProgramDay @relation(fields: [program_day_id], references: [id])
   program_day_id String // relation field (used in the `@relation` attribute above)
+  @@index([program_day_id])
 }

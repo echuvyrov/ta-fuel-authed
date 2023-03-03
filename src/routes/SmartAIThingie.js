@@ -160,8 +160,7 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
     static async askForTrainingProgramJSON(prompt) {
         var trainingProgramPrompt = "A JSON representation of the following exercise program, removing all non-JSON characters: " + prompt;
         var rawResponse = await super.askForJSON(trainingProgramPrompt);
-        var parsedResponse = await this.parseResponse(rawResponse);
-        var trainingData = await this.parseTraining(parsedResponse);
+        var trainingData = await this.parseResponse(rawResponse);
 
         return trainingData;
     }
@@ -170,30 +169,17 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
     static async parseResponse(rawResponse) {
         console.log("rawResponse: " + JSON.stringify(rawResponse));
         var lines = rawResponse.choices[0].text.split("\n");
+        var trainingDays = [];
         // we will need to remove characters that shouldn't belong
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
             if (line.indexOf(":") > -1) {
-                var key = line.substring(0, line.indexOf(":"));
-                var value = line.substring(line.indexOf(":") + 1);
-                parsedResponse[key] = value;
-            } else if (line.indexOf("-") > -1) {
-                var key = line.substring(0, line.indexOf("-"));
-                var value = line.substring(line.indexOf("-") + 1);
-                parsedResponse[key] = value;
+                var trainingDay = {}
+                trainingDay.day_name = line.substring(0, line.indexOf(":"));
+                trainingDay.day_description = line.substring(line.indexOf(":") + 1);
+                trainingDays.push(trainingDay);
             }
         }
-        return lines;
+        return trainingDays;
     }
-
-    static parseTraining(parsedResponse) {
-        var trainingData = {};
-        // append each element of parsedResponse to the trainingData object
-        for (var key in parsedResponse) {
-            trainingData[key] = parsedResponse[key];
-        }
-
-        return trainingData;
-    }
-
 }
