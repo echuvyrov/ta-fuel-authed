@@ -3,11 +3,22 @@ import { user } from '$lib/stores/stores.js';
 import {TrainingSmartAIThingie} from '../../SmartAIThingie.js';
 
 const prisma = new PrismaClient()
+var forDate = "";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ params })  => {
-	return {
+	if(!params.date) {
+		// set forDate to today's date
+		forDate = new Date().toString().split('T')[0];
+	} else {
+		/* create date from the params passed in (use local time) */
+		forDate = params.date;
+	}
 
+	var currentTrainingProgramDays = await loadTraining(forDate);
+
+	return {
+		trainingProgamDays: currentTrainingProgramDays
 	};
 };
 
@@ -55,3 +66,20 @@ export const actions = {
 		}
 	}
 };
+
+async function loadTraining(date) {
+
+	// select the first training program
+	// 	where ending date is greater than today's date
+	var trainingData = await prisma.trainingProgram.findFirst ({
+		where: {
+			user_id: user.name,
+			end_date: {
+				gte: new Date(date)
+			}
+		},
+	});
+
+	console.log("trainingData: " + JSON.stringify(trainingData));
+	return trainingData;
+}

@@ -296,7 +296,7 @@
 
 <!-- hitting serverless functions limits of 4.5 mb per payload on vercel, commenting out this coolest part of the app -->
 <!-- due to that limiation -->
-<!--
+<!-- eventually, I will move this to cloudify instead of using the database to store the images
 
 		{#each data.foodReferences as foodReference}
 			<form action="?/addfood" method = "POST">
@@ -311,6 +311,16 @@
 
 	</div>
 
+	<!-- add Totals AgGrid component with grid options -->
+	<div style="display: flex; justify-content: center; align-items: center;">
+		<div
+			id="totals"
+			bind:this={domNodeTotals}
+			class="ag-theme-alpine"
+			style="height: 22vh; width: 100%;"
+		/>
+	</div>
+
 	<!-- add AgGrid component with grid options -->
 	<div style="display: flex; justify-content: center; align-items: center;">
 	<div
@@ -321,15 +331,5 @@
 	/>
 	</div>
 
-	<h3>Totals:</h3>
-	<!-- add Totals AgGrid component with grid options -->
-	<div style="display: flex; justify-content: center; align-items: center;">
-		<div
-			id="totals"
-			bind:this={domNodeTotals}
-			class="ag-theme-alpine"
-			style="height: 22vh; width: 100%;"
-		/>
-	</div>
 </div>	
 
