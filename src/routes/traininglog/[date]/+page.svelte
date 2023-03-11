@@ -17,9 +17,10 @@
     onDestroy(() => {
     });
 
-	function openCity(evt, cityName) {
+	function openTrainingDay(dayId) {
 		// Declare all variables
 		var i, tabcontent, tablinks;
+		console.log("Day Id: " + dayId);
 
 		// Get all elements with class="tabcontent" and hide them
 		tabcontent = document.getElementsByClassName("tabcontent");
@@ -34,8 +35,6 @@
 		}
 
 		// Show the current tab, and add an "active" class to the button that opened the tab
-		document.getElementById(cityName).style.display = "block";
-		evt.currentTarget.className += " active";
 	}
 </script>
 
@@ -70,12 +69,14 @@ on:focus={(evt) => evt.target.select()}
 <button on:click={submitTrainingProgram}>Submit</button>
 </form>
 
+<!-- show training_days from data in a page-->
+
 <!-- tabs for the training program days-->
 <div class="tab">
 
 	<!-- loop through all days in data.trainingProgramDays -->
-	{#each data.trainingProgramDays as day}
-		<button class="tablinks" onclick="openCity(event, 'London')">{day.day_name}</button>
+	{#each data.trainingProgamDays.training_days as day}
+		<button on:click={openTrainingDay('London')}>{day.day_description}</button>
 	{/each}
 
   </div>
@@ -168,4 +169,5 @@ button  {
   border: 1px solid #ccc;
   border-top: none;
 }
+
 </style>

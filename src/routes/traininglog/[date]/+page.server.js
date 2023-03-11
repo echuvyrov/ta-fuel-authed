@@ -16,7 +16,13 @@ export const load = async ({ params })  => {
 	}
 
 	var currentTrainingProgramDays = await loadTraining(forDate);
-
+	if(currentTrainingProgramDays == null) {
+		currentTrainingProgramDays = { training_days: [] };
+	} else {
+		// sort the training days by day_order_num
+		currentTrainingProgramDays.training_days.sort((a, b) => (a.day_order_num > b.day_order_num) ? 1 : -1);
+	}
+	
 	return {
 		trainingProgamDays: currentTrainingProgramDays
 	};
@@ -30,11 +36,10 @@ export const actions = {
 		const trainingProgramRaw = data.get('trainingprogram');
 		// format training program as JSON with OpenAI
 		var trainingProgramDays = await TrainingSmartAIThingie.askForTrainingProgramJSON(trainingProgramRaw);
-		console.log("training program: " + JSON.stringify(trainingProgramDays));
 
 		// program name is likely irrelevant, so default to "New Program " + current date
         var trainingProgramName = "New Program " + new Date().toLocaleDateString();
-        // let's set the end date to ~7 years from now
+        // let's set the end date to seven years from now                                                                                                                                                    ~7 years from now
         var trainingProgramNameEndDate = new Date();
         trainingProgramNameEndDate.setFullYear(trainingProgramNameEndDate.getFullYear() + 7);
 
@@ -58,6 +63,7 @@ export const actions = {
 							id: newTrainingProgram.id
 						}
 					},
+					day_order_num: i,
 					end_date: trainingProgramNameEndDate,
 					day_name: trainingProgramDays[i].day_name,
 					day_description: trainingProgramDays[i].day_description,
@@ -78,8 +84,11 @@ async function loadTraining(date) {
 				gte: new Date(date)
 			}
 		},
+		// include the training days for the training program
+		include: {
+			training_days: true
+		}
 	});
 
-	console.log("trainingData: " + JSON.stringify(trainingData));
 	return trainingData;
 }

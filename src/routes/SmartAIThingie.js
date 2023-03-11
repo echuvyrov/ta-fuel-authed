@@ -158,8 +158,13 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
     }
 
     static async askForTrainingProgramJSON(prompt) {
-        var trainingProgramPrompt = "A JSON representation of the following exercise program, removing all non-JSON characters: " + prompt;
+        var trainingProgramPrompt = "Return an array of JSON objects representing \
+                the following exercise program, removing all non-JSON characters. Each \
+                JSON objects should be in the format { day_name, day_description }. Do not\
+                confirm, do not output anything else other than JSON array." + prompt;
         var rawResponse = await super.askForJSON(trainingProgramPrompt);
+        console.log("rawResponse: " + JSON.stringify(rawResponse));
+
         var trainingData = await this.parseResponse(rawResponse);
 
         return trainingData;
@@ -167,7 +172,6 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
 
     /* a function to create an array from a string with line breaks as separators for different elements */
     static async parseResponse(rawResponse) {
-        console.log("rawResponse: " + JSON.stringify(rawResponse));
         var lines = rawResponse.choices[0].text.split("\n");
         var trainingDays = [];
         // we will need to remove characters that shouldn't belong

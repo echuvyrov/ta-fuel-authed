@@ -61,6 +61,7 @@ model TrainingProgramDay {
   user_id       String   @default("")
   day_name      String
   day_description String
+  day_order_num Int
   start_date    DateTime @default(now())
   end_date      DateTime
   createdAt     DateTime @default(now())
