@@ -9,20 +9,17 @@ export class SmartAIThingie {
     static async ask(prompt) {
 
         var responseJSON = {}
-		const response = await fetch('https://api.openai.com/v1/completions', {
+		const response = await fetch('https://api.openai.com/v1/chat/completions', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 				'Authorization': 'Bearer ' + process.env.GPT3_API_KEY
 			},
 			body: JSON.stringify({
-                model: 'text-davinci-003',
-                prompt: prompt,
-				max_tokens: 128,
-				temperature: 1.0,
-				top_p: 1,
-				frequency_penalty: 0,
-				presence_penalty: 0,
+                model: 'gpt-3.5-turbo',
+                messages: [{"role":"user","content": prompt }],
+				max_tokens: 512,
+				temperature: 1.0
 			})
 		});
 
@@ -88,7 +85,7 @@ export class NutritionSmartAIThingie extends SmartAIThingie {
     static async parseResponse(rawResponse) {
         console.log("rawResponse: " + JSON.stringify(rawResponse));
         var parsedResponse = {};
-        var lines = rawResponse.choices[0].text.split("\n");
+        var lines = rawResponse.choices[0].message.content.split("\n");
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
             if (line.indexOf(":") > -1) {
@@ -116,8 +113,8 @@ export class NutritionSmartAIThingie extends SmartAIThingie {
             nutritionData["kkcals"] = 0
         }
         if (parsedResponse["Quantity"]) {
-            //remove all non-numeric characters from the string but keep the decimal point
-            nutritionData["food_qty"] = parseFloat(parsedResponse["Quantity"].replace(/[^0-9.]/g, ''));
+            // parse out the first occurrence of the number separated by a space
+            nutritionData["food_qty"] = parseFloat(parsedResponse["Quantity"].match(/\d+/)[0]);
         } else {
             nutritionData["food_qty"] = 0
         }
@@ -163,16 +160,15 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
                 JSON objects should be in the format { day_name, day_description }. Do not\
                 confirm, do not output anything else other than JSON array." + prompt;
         var rawResponse = await super.askForJSON(trainingProgramPrompt);
-        console.log("rawResponse: " + JSON.stringify(rawResponse));
-
-        var trainingData = await this.parseResponse(rawResponse);
+        var trainingData = await this.parseTraining(rawResponse);
 
         return trainingData;
     }
 
     /* a function to create an array from a string with line breaks as separators for different elements */
-    static async parseResponse(rawResponse) {
-        var lines = rawResponse.choices[0].text.split("\n");
+    static async parseTraining(rawResponse) {
+        var rawTrainingJSON = rawResponse.choices[0].message.content;
+        /* this should no longer be needed since prompt engineering it into JSON
         var trainingDays = [];
         // we will need to remove characters that shouldn't belong
         for (var i = 0; i < lines.length; i++) {
@@ -185,5 +181,9 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
             }
         }
         return trainingDays;
+        */
+        console.log("rawTrainingJSON: " + rawTrainingJSON);
+        console.log("rawTrainingJSON: " + JSON.stringify(JSON.parse(rawTrainingJSON)));
+        return JSON.parse(rawTrainingJSON);
     }
 }

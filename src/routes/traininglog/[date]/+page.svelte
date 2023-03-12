@@ -45,29 +45,63 @@
 </div>
 {/if}
 
-<form action="?/createprogram" method = "POST">
-<textarea
-name="trainingprogram"
-value='Create a training program by writing out on what day to train what 
+
+{#if !data.trainingProgamDays}
+	<details open>
+		<summary>Create New Training Program</summary>
+		<form action="?/createprogram" method = "POST">
+		<textarea
+		name="trainingprogram"
+		value='Create a training program by writing out on what day to train what 
 For example:
-
+	
 Day 1: Squats
-
+	
 Day 2: Bench Press
-
+	
 Day 3: 30-45 mins cardio, light Olympic lifts
-
+	
 Day 4: OFF
-
+	
 Day 5: Deadlifts
 Day 6: Shoulders, Arms
 Day 7: 30-45 mins cardio, calisthenics
 Day 8: OFF'
+			
+		on:focus={(evt) => evt.target.select()}
+		/>
+		<button on:click={submitTrainingProgram}>Submit</button>
+		</form>
+	</details>		
+{:else}
+	<details>
+		<summary>Create New Training Program</summary>
+		<form action="?/createprogram" method = "POST">
+		<textarea
+		name="trainingprogram"
+		value='Create a training program by writing out on what day to train what 
+For example:
+	
+Day 1: Squats
+	
+Day 2: Bench Press
+	
+Day 3: 30-45 mins cardio, light Olympic lifts
+	
+Day 4: OFF
+	
+Day 5: Deadlifts
+Day 6: Shoulders, Arms
+Day 7: 30-45 mins cardio, calisthenics
+Day 8: OFF'
+	
+		on:focus={(evt) => evt.target.select()}
+		/>
+		<button on:click={submitTrainingProgram}>Submit</button>
+		</form>
+	</details>
+{/if}
 
-on:focus={(evt) => evt.target.select()}
-/>
-<button on:click={submitTrainingProgram}>Submit</button>
-</form>
 
 <!-- show training_days from data in a page-->
 
@@ -116,17 +150,10 @@ textarea {
 	}
 
 button  {
-	width: 75px;
-    height: 75px;
-    padding: 5px;
+    padding: 1px;
     background: #d95753;
     border: 0;
-	margin: 9px;
-}
-
-.btn-size {
-    width: 30px;
-    height: 30px;
+	margin: 3px;
 }
 
 .img-size img {
@@ -143,12 +170,12 @@ button  {
 
 /* Style the buttons that are used to open the tab content */
 .tab button {
-  background-color: inherit;
+  /* background-color: inherit; */
   float: left;
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 4px 3px;
   transition: 0.3s;
 }
 
@@ -168,6 +195,20 @@ button  {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+}
+
+summary {
+	background-color: #ccc;
+	widows: 100%;
+	cursor: pointer;
+	padding: 5px 5px 5px 5px;
+	margin-bottom: 20px;
+}
+summary::-webkit-details-marker {
+  color: blue;
+}
+summary:focus {
+  outline-style: none;
 }
 
 </style>

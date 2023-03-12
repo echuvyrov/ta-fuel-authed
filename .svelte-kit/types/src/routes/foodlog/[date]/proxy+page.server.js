@@ -78,7 +78,12 @@ async function loadData(date) {
 			protein_grams: { gt: 0 }
 		}
 	});
-	targetTotals.label = "Target Totals";
+
+	if (targetTotals == null) {
+		targetTotals = { label: "Target Totals"}
+	} else {
+		targetTotals.label = "Target Totals";
+	}
 
 	// sum up the columns in dbData and round to whole numbers
 	calculatedTotals = dbData.reduce((acc, cur) => {
