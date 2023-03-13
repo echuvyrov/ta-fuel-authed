@@ -7,6 +7,8 @@ var forDate = "";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ params })  => {
+	var trainingDataForDay = [];
+
 	if(!params.date) {
 		// set forDate to today's date
 		forDate = new Date().toString().split('T')[0];
@@ -24,7 +26,8 @@ export const load = async ({ params })  => {
 	}
 	
 	return {
-		trainingProgamDays: currentTrainingProgramDays
+		trainingProgamDays: currentTrainingProgramDays,
+		trainingData: trainingDataForDay
 	};
 };
 
