@@ -16,6 +16,9 @@
 
 	/* sveltekit fetch method to update the record */
 	async function updateRecord(row, data) {
+		/* read the contents of the AgGrid and save it as a JSON object */
+		
+
 		/* commenting the update portion to work out the kinks 
 		const jsonData = JSON.stringify(data);
 		const res = await fetch('/traininglog/[date]/updaterecord', {

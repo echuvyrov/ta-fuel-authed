@@ -39,10 +39,12 @@ model FoodReference {
 
 model TargetTotals {
   id            String   @id @default(uuid())
+  user_id       String   @default("")
   feeding_date  String
   fat_grams     Float
   carbs_grams   Float
   protein_grams Float
+  kcals         Float   @default(0)
 }
 
 model TrainingProgram {

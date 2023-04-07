@@ -21,6 +21,9 @@
 	"/foodlog/[date]/updaterecord": [
 		"src/routes/foodlog/[date]/updaterecord/+server.js"
 	],
+	"/foodlog/[date]/updatetargettotals": [
+		"src/routes/foodlog/[date]/updatetargettotals/+server.js"
+	],
 	"/protected": [
 		"src/routes/+layout.server.js"
 	],

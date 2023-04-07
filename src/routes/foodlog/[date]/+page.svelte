@@ -73,11 +73,35 @@
 				},
 		}, 
 		{headerName: "", field: "", editable: false, colId: 'Empty', minWidth: 100},
-		{headerName: "Fat, g", field: "fat_grams", editable: false, colId: 'Fat', minWidth: 70},
-		{headerName: "Carbs, g", field: "carbs_grams", editable: false, colId: 'Carbs', minWidth: 70},
-		{headerName: "Protein, g", field: "protein_grams", editable: false, colId: 'Protein', minWidth: 70},
+		
+		{headerName: "Fat, g", field: "fat_grams", 
+			editable: (params) => {
+        		return isCellEditable(params);
+      		}, 
+		colId: 'Fat', minWidth: 70},
+		
+		{headerName: "Carbs, g", 
+		field: "carbs_grams",
+		editable: (params) => {
+        		return isCellEditable(params);
+      		}, 
+		colId: 'Carbs', 
+		minWidth: 70},
+		
+		{headerName: "Protein, g", 
+		field: "protein_grams",
+		editable: (params) => {
+        		return isCellEditable(params);
+      		}, 
+		colId: 'Protein', 
+		minWidth: 70},
+		
 		{headerName: "Kcals", field: "kcals", editable: false, colId: 'Kcals', minWidth: 120}
 	];
+
+	function isCellEditable(params) {
+		return params.data.label === "Target Totals";
+	}
 
 	// create data for AgGrid totalsColumnDefs
 	let totalsData = [
@@ -205,6 +229,9 @@
 	let totalsOptions = {
 		columnDefs: totalsColumnDefs,
 		rowData: totalsData,
+		onCellValueChanged: function(params)  {
+			updateTargetTotalsRecord(params.node, params.data, params.column.colId);
+  		},
 		onGridSizeChanged: onTotalsGridSizeChanged
 	};
 
@@ -221,6 +248,38 @@
 
 		const jsonData = JSON.stringify(data);
 		const res = await fetch('/foodlog/[date]/updaterecord', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: jsonData
+		});
+		const json = await res.json();
+		if (!res.ok) {
+			console.log(json);
+		}
+		return json;
+	}
+
+	/* sveltekit fetch method to update the record */
+	async function updateTargetTotalsRecord(row, data, colId) {
+		// if it's Kcals col that triggered this, ignore it (avoid the infinite loop)
+		console.log('Triggered by ' + colId);
+		if(colId === 'Kcals') {
+			return;
+		}
+		// recalc Kcals first by taking integer values of Protein, Carbs, and Fat
+		//  and multiplying by 4, 4, and 9 respectively
+		const protein = parseInt(data.protein_grams);
+		const carbs = parseInt(data.carbs_grams);
+		const fat = parseInt(data.fat_grams);
+		const kcals = (protein * 4) + (carbs * 4) + (fat * 9);
+		data.Kcals = kcals;
+		data.feeding_date = today;
+		row.setDataValue('Kcals', data.Kcals, { suppressCellChangedEvent: true });
+
+		const jsonData = JSON.stringify(data);
+		const res = await fetch('/foodlog/[date]/updatetargettotals', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
