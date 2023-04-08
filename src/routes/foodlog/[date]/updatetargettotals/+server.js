@@ -16,7 +16,7 @@ export async function POST({ request }) {
   })
   if (existingRecord == null) {
     console.log("creating Record: " + record.feeding_datecl);
-    //create a new TargetTotals record
+    //create a new TargetTotals record for the user
     const createFood = await prisma.targetTotals.create({
       data: {
         feeding_date: record.feeding_date,
