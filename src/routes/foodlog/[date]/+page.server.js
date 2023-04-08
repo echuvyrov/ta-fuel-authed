@@ -74,8 +74,7 @@ async function loadData(date) {
 
 	targetTotals = await prisma.targetTotals.findFirst({
 		where: {
-			feeding_date: date,
-			user_id: user.name
+			feeding_date: date
 		}
 	});
 
