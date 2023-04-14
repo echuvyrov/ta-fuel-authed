@@ -75,7 +75,9 @@ async function loadData(date) {
 
 	targetTotals = await prisma.targetTotals.findFirst({
 		where: {
-			feeding_date: date
+			feeding_date: date //,
+			// TODO: Figure out why this is not working in prod, the filter is failing as not defined
+			// user_id: user.name
 		}
 	});
 

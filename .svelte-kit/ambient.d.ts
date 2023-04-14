@@ -48,8 +48,8 @@ declare module '$env/static/private' {
 	export const TMPDIR: string;
 	export const npm_config_global_prefix: string;
 	export const CONDA_SHLVL: string;
-	export const TERM_PROGRAM_VERSION: string;
 	export const CONDA_PROMPT_MODIFIER: string;
+	export const TERM_PROGRAM_VERSION: string;
 	export const MallocNanoZone: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const COLOR: string;
@@ -60,8 +60,8 @@ declare module '$env/static/private' {
 	export const COMMAND_MODE: string;
 	export const OPENAI_API_KEY: string;
 	export const npm_config_globalconfig: string;
-	export const HOMEBREW_NO_ANALYTICS: string;
 	export const CONDA_EXE: string;
+	export const HOMEBREW_NO_ANALYTICS: string;
 	export const SSH_AUTH_SOCK: string;
 	export const __CF_USER_TEXT_ENCODING: string;
 	export const npm_execpath: string;
@@ -70,14 +70,13 @@ declare module '$env/static/private' {
 	export const PATH: string;
 	export const npm_package_json: string;
 	export const _: string;
-	export const LaunchInstanceID: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_init_module: string;
 	export const __CFBundleIdentifier: string;
 	export const CONDA_PREFIX: string;
 	export const npm_command: string;
-	export const PWD: string;
 	export const HOMEBREW_HOME: string;
+	export const PWD: string;
 	export const JAVA_HOME: string;
 	export const npm_lifecycle_event: string;
 	export const EDITOR: string;
@@ -101,7 +100,6 @@ declare module '$env/static/private' {
 	export const MYSQL_HOME: string;
 	export const GIT_ASKPASS: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
-	export const SECURITYSESSIONID: string;
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const COLORTERM: string;
@@ -157,8 +155,8 @@ declare module '$env/dynamic/private' {
 		TMPDIR: string;
 		npm_config_global_prefix: string;
 		CONDA_SHLVL: string;
-		TERM_PROGRAM_VERSION: string;
 		CONDA_PROMPT_MODIFIER: string;
+		TERM_PROGRAM_VERSION: string;
 		MallocNanoZone: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		COLOR: string;
@@ -169,8 +167,8 @@ declare module '$env/dynamic/private' {
 		COMMAND_MODE: string;
 		OPENAI_API_KEY: string;
 		npm_config_globalconfig: string;
-		HOMEBREW_NO_ANALYTICS: string;
 		CONDA_EXE: string;
+		HOMEBREW_NO_ANALYTICS: string;
 		SSH_AUTH_SOCK: string;
 		__CF_USER_TEXT_ENCODING: string;
 		npm_execpath: string;
@@ -179,14 +177,13 @@ declare module '$env/dynamic/private' {
 		PATH: string;
 		npm_package_json: string;
 		_: string;
-		LaunchInstanceID: string;
 		npm_config_userconfig: string;
 		npm_config_init_module: string;
 		__CFBundleIdentifier: string;
 		CONDA_PREFIX: string;
 		npm_command: string;
-		PWD: string;
 		HOMEBREW_HOME: string;
+		PWD: string;
 		JAVA_HOME: string;
 		npm_lifecycle_event: string;
 		EDITOR: string;
@@ -210,7 +207,6 @@ declare module '$env/dynamic/private' {
 		MYSQL_HOME: string;
 		GIT_ASKPASS: string;
 		VSCODE_GIT_ASKPASS_NODE: string;
-		SECURITYSESSIONID: string;
 		npm_node_execpath: string;
 		npm_config_prefix: string;
 		COLORTERM: string;

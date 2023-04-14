@@ -34,6 +34,9 @@ async function loadData() {
 		},
 		where: {
 			user_id: user.name,
+		},
+		orderBy: {
+			food_name: 'asc'
 		}
 	});
 }
@@ -88,6 +91,9 @@ export const actions = {
 			},
 			where: {
 				user_id: user.name,
+			},
+			orderBy: {
+				food_name: 'asc'
 			}
 		});
 	}

@@ -33,6 +33,9 @@ async function loadData() {
 		},
 		where: {
 			user_id: user.name,
+		},
+		orderBy: {
+			food_name: 'asc'
 		}
 	});
 }
