@@ -23,10 +23,10 @@ export async function POST({ request }) {
       },
       data: {
         food_name: record.food_name,
-        food_qty: parseInt(record.food_qty),
-        fat_grams: parseInt(record.fat_grams),
-        carbs_grams: parseInt(record.carbs_grams),
-        protein_grams: parseInt(record.protein_grams),
+        food_qty: parseFloat(record.food_qty),
+        fat_grams: parseFloat(record.fat_grams),
+        carbs_grams: parseFloat(record.carbs_grams),
+        protein_grams: parseFloat(record.protein_grams),
         kkcals: parseInt(record.kkcals),
         user_id: user.name
       },
