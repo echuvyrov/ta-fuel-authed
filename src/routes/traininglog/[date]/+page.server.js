@@ -7,7 +7,11 @@ var forDate = "";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ params })  => {
-	var trainingDataForDay = [];
+	var trainingDataForDay = [
+		{"exercise": "Push-ups", "exercise_date": "2022-01-01"},
+		{"exercise": "Squats", "exercise_date": "2022-01-02"},
+		{"exercise": "Sit-ups", "exercise_date": "2022-01-03"}
+	  ];
 
 	if(!params.date) {
 		// set forDate to today's date
