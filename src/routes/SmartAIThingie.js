@@ -37,7 +37,7 @@ export class SmartAIThingie {
 
     /* a function that calls DALL-E to generate an image and returns it as a base64 string */
     static async generateImage(food) {
-        const prompt = "A photo of " + food + " using random style with words '" + food + "' in it"
+        const prompt = "A creative, appetizing photo of " + food + " using gourmet food photography in the style of Caroline Losse, with the following words '" + food + "' in it"
         var responseJSON = {}
 		const response = await fetch('https://api.openai.com/v1/images/generations', {
 			method: 'POST',

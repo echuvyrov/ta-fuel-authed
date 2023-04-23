@@ -40,7 +40,6 @@ declare module '$env/static/private' {
 	export const GPT3_API_KEY: string;
 	export const DATABASE_URL: string;
 	export const TERM_PROGRAM: string;
-	export const VSCODE_SHELL_LOGIN: string;
 	export const NODE: string;
 	export const INIT_CWD: string;
 	export const SHELL: string;
@@ -87,7 +86,6 @@ declare module '$env/static/private' {
 	export const npm_config_node_gyp: string;
 	export const XPC_SERVICE_NAME: string;
 	export const _CE_M: string;
-	export const VSCODE_INJECTION: string;
 	export const HOME: string;
 	export const SHLVL: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
@@ -149,7 +147,6 @@ declare module '$env/dynamic/private' {
 		GPT3_API_KEY: string;
 		DATABASE_URL: string;
 		TERM_PROGRAM: string;
-		VSCODE_SHELL_LOGIN: string;
 		NODE: string;
 		INIT_CWD: string;
 		SHELL: string;
@@ -196,7 +193,6 @@ declare module '$env/dynamic/private' {
 		npm_config_node_gyp: string;
 		XPC_SERVICE_NAME: string;
 		_CE_M: string;
-		VSCODE_INJECTION: string;
 		HOME: string;
 		SHLVL: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;

@@ -39,8 +39,12 @@ async function loadData() {
 		where: {
 			user_id: user.name
 		},
-		take: 10
-	});
+		orderBy: {
+			/* sort by date added, desc */
+			createdAt: 'desc'
+		},
+		take: 12
+	});			
 }
 
 /** @type {import('./$types').Actions} */
