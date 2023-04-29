@@ -28,7 +28,7 @@ export class SmartAIThingie {
     }
 
     static askForJSON(prompt) {
-        // JSON returned is generally invalid due to string properties appened as ints, among other things
+        // JSON returned is generally invalid due to string properties appended as ints, among other things
         //  so for right now, we'll simply skip packaging it as JSON
         // var modifiedPrompt = prompt + " returned as JSON";
         var modifiedPrompt = prompt + "";
