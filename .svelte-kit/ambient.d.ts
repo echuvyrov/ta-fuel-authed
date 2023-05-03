@@ -41,6 +41,7 @@ declare module '$env/static/private' {
 	export const POSTGRES_URL: string;
 	export const POSTGRES_PRISMA_URL: string;
 	export const POSTGRES_URL_NON_POOLING: string;
+	export const DATABASE_URL: string;
 	export const TERM_PROGRAM: string;
 	export const NODE: string;
 	export const INIT_CWD: string;
@@ -150,6 +151,7 @@ declare module '$env/dynamic/private' {
 		POSTGRES_URL: string;
 		POSTGRES_PRISMA_URL: string;
 		POSTGRES_URL_NON_POOLING: string;
+		DATABASE_URL: string;
 		TERM_PROGRAM: string;
 		NODE: string;
 		INIT_CWD: string;
