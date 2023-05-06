@@ -27,7 +27,6 @@
 		columnDefs: columnDefs,
 		rowData: data.rowData,
 		onCellValueChanged: function(params)  {
-			// alert('wtf ' + JSON.stringify(params.data));
 			updateRecord(params.node, params.data);
   		},
 	};

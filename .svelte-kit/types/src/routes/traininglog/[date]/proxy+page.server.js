@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { user } from '$lib/stores/stores.js';
 import {TrainingSmartAIThingie} from '../../SmartAIThingie.js';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 var forDate = "";
 
 /** @param {Parameters<import('./$types').PageServerLoad>[0]} event */
@@ -47,7 +47,7 @@ export const actions = {
 
 		// program name is likely irrelevant, so default to "New Program " + current date
         var trainingProgramName = "New Program " + new Date().toLocaleDateString();
-        // let's set the end date to seven years from now                                                                                                                                                    ~7 years from now
+        // let's set the end date to seven years from now                                                                                                                                                   ~7 years from now
         var trainingProgramNameEndDate = new Date();
         trainingProgramNameEndDate.setFullYear(trainingProgramNameEndDate.getFullYear() + 7);
 
@@ -83,7 +83,7 @@ export const actions = {
 
 async function loadTraining(date) {
 
-	// select the first training program
+	// select the latest training program
 	// 	where ending date is greater than today's date
 	var trainingData = await prisma.trainingProgram.findFirst ({
 		where: {
@@ -95,6 +95,9 @@ async function loadTraining(date) {
 		// include the training days for the training program
 		include: {
 			training_days: true
+		},
+		orderBy: {
+			createdAt: 'desc'
 		}
 	});
 

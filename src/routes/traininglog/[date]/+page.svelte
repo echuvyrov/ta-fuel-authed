@@ -3,34 +3,37 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { Grid } from 'ag-grid-community';
 	import { Chasing } from 'svelte-loading-spinners';
-
+	import Modal from './CreateTrainingProgramModal.svelte';
+	
 	import 'ag-grid-community/styles//ag-grid.css';
 	import 'ag-grid-community/styles//ag-theme-alpine.css';
 
 	var domNode;
     var grid;
 	var isLoading = true;
+	let showModal = false;
 
 	const today = new Date();
 
 	let columnDefs = [
-		{headerName: "Food", field: "food_name", editable: true, minWidth: 100},
-		{headerName: "Qty", field: "food_qty", editable: true, minWidth: 70},
-		{headerName: "Fat, g", field: "fat_grams", editable: true, minWidth: 70},
-		{headerName: "Carbs, g", field: "carbs_grams", editable: true, minWidth: 70},
-		{headerName: "Protein, g", field: "protein_grams", editable: true, minWidth: 70},
-		{headerName: "Kcals", field: "kkcals", editable: true, minWidth: 120}
+		{headerName: "Exercise", field: "exercise", editable: true, minWidth: 200},
+		{headerName: "Date", field: "exercise_date", editable: true, minWidth: 100}
 	];
     
 	// let the grid know which columns and what data to use
 	let options = {
 		columnDefs: columnDefs,
-		rowData: data.rowData,
+		rowData: data.trainingData,
 		onCellValueChanged: function(params)  {
-			// alert('wtf ' + JSON.stringify(params.data));
 			updateRecord(params.node, params.data);
   		},
 	};
+
+	const submitTrainingProgram = (e) => {
+		/* populate hidden form value and submit form programmatically */
+		isLoading = true;
+		document.forms["trainingprogram"].submit();
+	}
 
 	/* sveltekit fetch method to update the record */
 	async function updateRecord(row, data) {
@@ -74,16 +77,19 @@
 		}
 	}
 
+	function showCreateProgram() {
+    	showModal = true;
+  	}
+  
+	function createTrainingProgram(event) {
+    	alert(event.detail);
+    	showModal = false;
+  	}
+  
+  	function cancelModal() {
+    	showModal = false;
+  	}
 </script>
-
-<form action="?/addfood" method = "POST">
-<input
-name="food"
-value='Add food to the reference list'
-on:focus={(evt) => evt.target.select()}
-on:keydown={submitFood}
-/>
-</form>
 
 {#if isLoading}
 <!-- align in the middle of the screen and on top-->
@@ -92,7 +98,23 @@ on:keydown={submitFood}
 </div>
 {/if}
 
-<center><h3>Food Reference List</h3></center>
+<div class="newProgram">
+	<button on:click={showCreateProgram}>
+		create new training program
+	</button>
+</div>
+
+<!-- tabs for the training program days-->
+<div class="trainingdaytabs">
+
+	<!-- loop through all days in data.trainingProgramDays -->
+	{#each data.trainingProgamDays.training_days as day}
+		<!-- make a pretty button for each tab -->
+		<button class="trainingdaytab" on:click={openTrainingDay(day.day_name)}>{day.day_description}</button>
+	{/each}
+
+</div>
+
 
 <!-- add AgGrid component with grid options -->
 <div style="display: flex; justify-content: center; align-items: center;">
@@ -104,11 +126,15 @@ on:keydown={submitFood}
 />
 </div>
 
+{#if showModal}
+  <Modal on:save={createTrainingProgram} on:cancel={cancelModal} />
+{/if}
+
 <style>
 
-input {
-        height: 50px;
-		width: 100%;
+/* make the button blue and nicely formatted */
+button {
+		height: 50px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -117,17 +143,43 @@ input {
 		border: none;
 		font-size: calc(0.08 * var(--width));
 		border-radius: 2px;
-		background: white;
+		background: #007aff;
 		margin: 0;
-		color: rgba(0, 0, 0, 0.7);
+		color: white;
+		padding: 5px 5px 5px 5px;
+		/* rounded corners */
+		border-radius: 5px;
 	}
 
-button  {
-	width: 75px;
-    height: 75px;
-    padding: 5px;
-    background: #d95753;
-    border: 0;
+/* style button with red background and a hover effect, make it pretty */
+/* underline text color on hover */
+button:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.trainingdaytab {
+		height: 50px;
+		width: 120px;
+		display: flex;
+		float: left;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		box-sizing: border-box;
+		border: none;
+		font-size: calc(0.08 * var(--width));
+		border-radius: 2px;
+		background: #FF3E00;
+		margin: 0px 3px 2px 0px;
+		color: white;
+		padding: 5px 5px 5px 5px;
+		/* rounded corners */
+		border-radius: 5px;
+}
+.trainingdaytab:hover {
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .btn-size {
@@ -139,4 +191,24 @@ button  {
     width: 75px;
     height: 75px;
 }
+
+.newProgram {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	padding-bottom: 10px;
+}
+
+/* make the text inside textarea look nice */
+textarea {
+    width: 100%;
+    height: 100%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+	font-size: 16px;
+}
+
 </style>
