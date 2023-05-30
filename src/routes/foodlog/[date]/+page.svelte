@@ -326,7 +326,7 @@
 			extract={typeaheadExtract}
 			on:keydown={submitFood}
 		/>	
-		</form>
+	</form>
 
 	<form id="foodForm" action="?/addfood" method = "POST">
 	<input

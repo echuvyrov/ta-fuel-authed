@@ -38,12 +38,15 @@ body {
 :global(p) {
   line-height: 1.5rem;
 }
+
 :global(a) {
   font-weight: 500;
 }
+
 :global(hr) {
   border: 1px solid #ddd;
 }
+
 :global(iframe) {
   background: #ccc;
   border: 1px solid #ccc;
@@ -57,11 +60,13 @@ body {
   opacity: 1;
   top: 0;
 }
+
 .signedInStatus {
   display: block;
   min-height: 4rem;
   width: 100%;
 }
+
 .loaded {
   position: relative;
   top: 0;
@@ -73,6 +78,7 @@ body {
   background-color: rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease-in;
 }
+
 .signedInText,
 .notSignedInText {
   position: absolute;
@@ -86,10 +92,12 @@ body {
   line-height: 1.3rem;
   color: #fff;
 }
+
 .signedInText {
   padding-top: 0rem;
   left: 4.6rem;
 }
+
 .avatar {
   border-radius: 2rem;
   float: left;
@@ -271,10 +279,26 @@ button:focus:not(:focus-visible) {
 	text-align: left;
 }
 
+#exerciseautocomplete-typeahead{
+	width: 30%;
+	float: left;
+	margin: 5px 5px 5px 0px;
+    border-radius: 5px;
+}
+
+#exerciseautocomplete-typeahead-input {
+    border-radius: 5px;
+}
+
+#exerciseautocomplete-listbox {
+	width: 100%;
+	background-color: #000;
+	text-align: left;
+}
+
 input {
 		font-size: 2.2rem;
         height: 50px;
-		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -287,6 +311,10 @@ input {
 		margin: 0;
 		color: rgba(0, 0, 0, 0.7);
 	}
+
+.input_full_width {
+	width: 100%;
+}
 
 /* Grid */
 .grid {

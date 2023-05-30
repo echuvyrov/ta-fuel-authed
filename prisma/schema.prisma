@@ -1,20 +1,14 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
- 
-datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
-}
 
-// Old PlanetScale MySql DB
-// datasource db {
-//   provider = "mysql"
-//   url = env("DATABASE_URL")
-// }
+datasource db {
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+}
 
 model FoodLog {
   id            String   @id @default(uuid())
@@ -41,69 +35,81 @@ model FoodReference {
   kkcals        Float
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now())
-  imageBase64   String @db.Text
+  imageBase64   String
 }
 
 model TargetTotals {
-  id            String   @id @default(uuid())
-  user_id       String   @default("")
+  id            String @id @default(uuid())
+  user_id       String @default("")
   feeding_date  String
   fat_grams     Float
   carbs_grams   Float
   protein_grams Float
-  kcals         Float   @default(0)
+  kcals         Float  @default(0)
 }
 
 model TrainingProgram {
-  id            String   @id @default(uuid())
-  user_id       String   @default("")
+  id            String               @id @default(uuid())
+  user_id       String               @default("")
   program_name  String
-  start_date    DateTime @default(now())
+  start_date    DateTime             @default(now())
   end_date      DateTime
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @default(now())
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @default(now())
   training_days TrainingProgramDay[]
 }
 
 model TrainingProgramDay {
-  id            String   @id @default(uuid())
-  user_id       String   @default("")
-  day_name      String
+  id              String                       @id @default(uuid())
+  user_id         String                       @default("")
+  day_name        String
   day_description String
-  day_order_num Int
-  start_date    DateTime @default(now())
-  end_date      DateTime
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @default(now())
-  program       TrainingProgram @relation(fields: [program_id], references: [id])
-  program_id    String  // relation field (used in the `@relation` attribute above)
-  exercises     TrainingProgramDayExercise[]
-  log           TrainingProgramDayLog[]
+  day_order_num   Int
+  start_date      DateTime                     @default(now())
+  end_date        DateTime
+  createdAt       DateTime                     @default(now())
+  updatedAt       DateTime                     @default(now())
+  program_id      String
+  training_grid   Json                         @db.Json
+  program         TrainingProgram              @relation(fields: [program_id], references: [id])
+  exercises       TrainingProgramDayExercise[]
+  log             TrainingProgramDayLog[]
+
   @@index([program_id])
 }
 
 model TrainingProgramDayExercise {
-  id            String   @id @default(uuid())
-  user_id       String   @default("")
-  program_name  String
-  start_date    DateTime @default(now())
-  end_date      DateTime
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @default(now())
-  program_day   TrainingProgramDay @relation(fields: [program_day_id], references: [id])
-  program_day_id String // relation field (used in the `@relation` attribute above)
+  id             String             @id @default(uuid())
+  user_id        String             @default("")
+  program_name   String
+  start_date     DateTime           @default(now())
+  end_date       DateTime
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @default(now())
+  program_day_id String
+  program_day    TrainingProgramDay @relation(fields: [program_day_id], references: [id])
+
   @@index([program_day_id])
 }
 
 model TrainingProgramDayLog {
+  id             String             @id @default(uuid())
+  user_id        String             @default("")
+  program_name   String
+  start_date     DateTime           @default(now())
+  end_date       DateTime
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @default(now())
+  program_day_id String
+  program_day    TrainingProgramDay @relation(fields: [program_day_id], references: [id])
+
+  @@index([program_day_id])
+}
+
+model ExerciseReference {
   id            String   @id @default(uuid())
   user_id       String   @default("")
-  program_name  String
-  start_date    DateTime @default(now())
-  end_date      DateTime
+  exercise_name String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now())
-  program_day   TrainingProgramDay @relation(fields: [program_day_id], references: [id])
-  program_day_id String // relation field (used in the `@relation` attribute above)
-  @@index([program_day_id])
 }

@@ -70,6 +70,7 @@ CREATE TABLE "TrainingProgramDay" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "program_id" TEXT NOT NULL,
+    "training_grid" JSON NOT NULL,
 
     CONSTRAINT "TrainingProgramDay_pkey" PRIMARY KEY ("id")
 );
@@ -119,3 +120,4 @@ ALTER TABLE "TrainingProgramDayExercise" ADD CONSTRAINT "TrainingProgramDayExerc
 
 -- AddForeignKey
 ALTER TABLE "TrainingProgramDayLog" ADD CONSTRAINT "TrainingProgramDayLog_program_day_id_fkey" FOREIGN KEY ("program_day_id") REFERENCES "TrainingProgramDay"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
