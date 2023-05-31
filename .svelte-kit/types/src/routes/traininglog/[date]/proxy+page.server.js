@@ -7,6 +7,8 @@ const prisma = new PrismaClient();
 var forDate = "";
 var trainingDataForDay = [];
 var exercises = [];
+var selectedDayId = "";
+var selectedDayDescription = "";
 
 /** @param {Parameters<import('./$types').PageServerLoad>[0]} event */
 export const load = async ({ params })  => {
@@ -45,7 +47,9 @@ export const load = async ({ params })  => {
 	
 	return {
 		trainingProgamDays: currentTrainingProgramDays,
-		exerciseReferences: exercises
+		exerciseReferences: exercises,
+		selectedDayId: selectedDayId,
+		selectedDayDescription: selectedDayDescription
 	};
 };
 
@@ -97,7 +101,8 @@ export const actions = {
 	addexercise:/** @param {import('./$types').RequestEvent} event */   async ({ request, cookies }) => {
 		// extract the id of the day being updated from the request
 		const data = await request.formData();
-		const dayId = data.get('day_id');
+		// set dayId to empty string if not passed in as day_id
+		let dayId = data.get('day_id') || "";
 		const exerciseName = data.get('exercise_name');
 		let exerciseDate = data.get('exercise_date');
 		const exerciseLoad = data.get('exercise_load');
@@ -143,12 +148,13 @@ export const actions = {
 				},
 			})
 
+			const dayDescription = "Training on " + exerciseDate.toString();
 			let gridRow = [{ "exercise": exerciseName, [exerciseDate]: exerciseValue }];
 			const newTrainingDay = await prisma.trainingProgramDay.create({
 				data: {
 					user_id: user.name,
 					day_name: exerciseDate.toString(),
-					day_description: "Training on " + exerciseDate.toString(),
+					day_description: dayDescription,
 					day_order_num: 0,
 					end_date: endProgramDate.toISOString(),
 					training_grid: gridRow,
@@ -160,7 +166,8 @@ export const actions = {
 				}
 			})
 
-			newDayIdToLoad = newTrainingDay.id;
+			dayId = newTrainingDay.id;
+			selectedDayDescription = dayDescription;
 
 		} else {
 			// updating an existing training day
@@ -174,7 +181,23 @@ export const actions = {
 			//  { "exercise": "exercise name", "date1": "some sets and weights and notes value", "date2": "some sets and eights and notes value"....}
 			console.log("extracting training grid : " + JSON.stringify(trainingDay.training_grid));
 			var trainingGrid = trainingDay.training_grid;
-			trainingGrid.push({ "exercise": exerciseName, [exerciseDate]: exerciseValue });
+			// scan through the training grid to see if the exercise already exists for a different day
+			let exerciseUpdated = false;
+			for (var i = 0; i < trainingGrid.length; i++) {
+				if (trainingGrid[i].exercise == exerciseName) {
+					// exercise already exists, does it exist for today? if so, skip it
+					if (!trainingGrid[i][exerciseDate]) {
+						trainingGrid[i][exerciseDate] = exerciseValue;
+						exerciseUpdated = true;
+						break;
+					}
+				}
+			} 
+
+			if (!exerciseUpdated) {
+				// exercise doesn't exist, so add a new record
+				trainingGrid.push({ "exercise": exerciseName, [exerciseDate]: exerciseValue });
+			}
 			console.log("trainingGrid: " + JSON.stringify(trainingGrid));
 			
 			// persist JSON to the database
@@ -186,7 +209,11 @@ export const actions = {
 					training_grid: trainingGrid
 				}
 			});
+
+			selectedDayDescription = updatedTrainingDay.day_description;
 		}
+
+		selectedDayId = dayId;
 	}
 };
 

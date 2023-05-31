@@ -14,6 +14,7 @@
   var isLoading = true;
   let showModal = false;
   let dayId = 0;
+  let dayDescription = "";
   var columnDefs = [];
   var trainingGrid = [];
 
@@ -43,8 +44,11 @@
   const submitTrainingGrid = (e) => {
     /* populate hidden form value and submit form programmatically */
     isLoading = true;
-    const exerciseEntered = document.getElementById("exerciseautocomplete").value;
-    document.forms["trainingGrid"].elements["exercise_name"].value = exerciseEntered;
+    const exerciseEntered = document.getElementById(
+      "exerciseautocomplete"
+    ).value;
+    document.forms["trainingGrid"].elements["exercise_name"].value =
+      exerciseEntered;
 
     document.forms["trainingGrid"].submit();
   };
@@ -61,6 +65,7 @@
     /* turn all tabs to inactive */
     var buttons = document.getElementsByClassName("trainingdaytab");
     dayId = day_id;
+    dayDescription = day;
 
     // Reset all buttons to orange except for the current day
     for (var i = 0; i < buttons.length; i++) {
@@ -69,7 +74,6 @@
         buttons[i].style.backgroundColor = "#007aff";
         // load the training grid for the day by scanning the trainingProgramDays array for the day
         data.trainingProgamDays.training_days.forEach((trainingDay) => {
-
           if (trainingDay.day_description == day) {
             trainingGrid = trainingDay.training_grid;
             // reload the grid with the new data
@@ -114,13 +118,15 @@
       trainingGrid = data.trainingProgamDays.training_days[0].training_grid;
       loadColumnDefsFromJson();
     }
+
     grid = new Grid(domNode, options);
     // open the first training day
     if (data.trainingProgamDays != null) {
-      openTrainingDay(
-        data.trainingProgamDays.training_days[0].day_description,
-        data.trainingProgamDays.training_days[0].id
-      );
+      if (data.selectedDayId == "") {
+        openTrainingDay(data.trainingProgamDays.training_days[0].day_description, data.trainingProgamDays.training_days[0].id);
+      } else {
+        openTrainingDay(data.selectedDayDescription, data.selectedDayId);
+      }
     }
     isLoading = false;
   });
@@ -152,6 +158,8 @@
               field: key,
               headerName: key,
               editable: true,
+              minWidth: 70,
+              width: 125              
             };
 
             // add the column to the columnDefs array if the column with the matching key doesn't already exist there
@@ -212,6 +220,7 @@
 
   <form id="trainingGrid" action="?/addexercise" method="POST">
     <input type="hidden" name="day_id" value={dayId} />
+    <input type="hidden" name="day_id" value={dayDescription} />
     <input type="hidden" name="exercise_date" value={todayString} />
 
     <input
