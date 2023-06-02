@@ -186,4 +186,19 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
         console.log("rawTrainingJSON: " + JSON.stringify(JSON.parse(rawTrainingJSON)));
         return JSON.parse(rawTrainingJSON);
     }
+
+    static async askForActivityKCals(prompt) {
+        var activityKCals = 0;
+        var activityPrompt = "Return the number of kilocalories burned for the following activity. Do not offer explanations, before or after. Just return a single number. Here's the activitye: " + prompt;
+        var rawResponse = await super.ask(activityPrompt);
+        console.log("rawResponse for Activity KCals: " + rawResponse);
+
+        if (rawResponse == null) {
+            activityKCals = 0;
+        } else {
+            activityKCals = parseFloat(rawResponse);
+        }
+        
+        return activityKCals;
+    }
 }

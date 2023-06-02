@@ -19,8 +19,20 @@
   var trainingGrid = [];
 
   const today = new Date();
-  const todayString = new Date(today).toISOString().split("T")[0];
-  const typeaheadData = data.exerciseReferences;
+	// get month with leading zero
+	const todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
+  let typeaheadData = data.exerciseReferences;
+  // if typeaheadData does not contain items with "/cmd" options, add it
+
+  if (!typeaheadData.some((item) => item.exercise_name.indexOf("cmd") > 0)) 
+  {
+    typeaheadData.push({
+      user_id: 0,
+      exercise_name: "💪 /cmd Count KCals for the Day",
+      exercise_id: 0,
+    });
+  }
+
   const typeaheadExtract = (item) => item.exercise_name;
 
   // let the grid know which columns and what data to use
@@ -151,6 +163,8 @@
 
   function loadColumnDefsFromJson() {
     if (trainingGrid != null) {
+      // reset all columns
+      columnDefs = [];
       trainingGrid.forEach((column) => {
         for (const key in column) {
           if (column.hasOwnProperty(key)) {
@@ -159,7 +173,7 @@
               headerName: key,
               editable: true,
               minWidth: 70,
-              width: 125              
+              width: 125
             };
 
             // add the column to the columnDefs array if the column with the matching key doesn't already exist there
@@ -212,6 +226,7 @@
       hideLabel
       focusAfterSelect
       placeholder="Exercise, i.e. Squat or Run"
+      limit={5}
       data={typeaheadData}
       extract={typeaheadExtract}
       on:keydown={fillExercise}

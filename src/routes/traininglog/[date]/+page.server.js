@@ -104,6 +104,17 @@ export const actions = {
 		let dayId = data.get('day_id') || "";
 		const exerciseName = data.get('exercise_name');
 		let exerciseDate = data.get('exercise_date');
+
+		// if exerciseName contains cmd, split off the logic for command execution
+		if(exerciseName.includes("cmd")) {
+			// split off the command
+			const command = exerciseName.split("cmd")[1];
+			// execute the command
+			await executeCommand(command, dayId, exerciseDate);
+			// return
+			return;
+		}
+		
 		const exerciseLoad = data.get('exercise_load');
 		const exerciseReps = data.get('exercise_reps');
 		let exerciseValue = exerciseLoad;
@@ -191,13 +202,12 @@ export const actions = {
 						break;
 					}
 				}
-			} 
+			}
 
 			if (!exerciseUpdated) {
 				// exercise doesn't exist, so add a new record
 				trainingGrid.push({ "exercise": exerciseName, [exerciseDate]: exerciseValue });
 			}
-			console.log("trainingGrid: " + JSON.stringify(trainingGrid));
 			
 			// persist JSON to the database
 			const updatedTrainingDay = await prisma.trainingProgramDay.update({
@@ -237,4 +247,38 @@ async function loadTraining(date) {
 	});
 
 	return trainingData;
+}
+
+async function executeCommand(command, dayId, exerciseDate) {
+	// depending on the command, execute the appropriate action
+	switch(command.toLowerCase()) {
+		case "count kcals for the day":
+			// get the training day
+			const trainingDay = await prisma.trainingProgramDay.findUnique({
+				where: {
+					id: dayId
+				}
+			});
+
+			// extract trainingGrid from the record and parse all the values for the exerciseDate
+			var trainingGrid = trainingDay.training_grid;
+			var totalKcals = 0;
+			for (var i = 0; i < trainingGrid.length; i++) {
+				if (trainingGrid[i][exerciseDate]) {
+					// extract the exercise name
+					var exerciseName = trainingGrid[i].exercise;
+					// extract the value
+					var exerciseValue = trainingGrid[i][exerciseDate];
+					// concat the exercise name and value, then ship it off to the chatGPT
+					var exerciseNameValue = exerciseName + " " + exerciseValue + "\n";
+				}
+			}
+
+			// ask LLM to count the kcals
+			var kcalsForDay = await TrainingSmartAIThingie.askForActivityKCals(exerciseNameValue);				
+
+			break;
+
+		case "delete":
+	}
 }
