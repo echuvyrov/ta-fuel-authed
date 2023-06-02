@@ -165,6 +165,15 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
         return trainingData;
     }
 
+    static async askForKCalsJSON(prompt) {
+        var activityPrompt = "Return the number of kilocalories burned for the following \
+                                activity. Do not offer explanations, before or after. Just \
+                                return a single number. Here's the activity: " + prompt;
+        var rawResponse = await super.askForJSON(activityPrompt);
+        var kcalsData =  rawResponse.choices[0].message.content;
+        return kcalsData;
+    }
+
     /* a function to create an array from a string with line breaks as separators for different elements */
     static async parseTraining(rawResponse) {
         var rawTrainingJSON = rawResponse.choices[0].message.content;
@@ -188,17 +197,10 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
     }
 
     static async askForActivityKCals(prompt) {
-        var activityKCals = 0;
-        var activityPrompt = "Return the number of kilocalories burned for the following activity. Do not offer explanations, before or after. Just return a single number. Here's the activitye: " + prompt;
-        var rawResponse = await super.ask(activityPrompt);
-        console.log("rawResponse for Activity KCals: " + rawResponse);
+        console.log("asking " + prompt);
+        var totalKCals = await this.askForKCalsJSON(prompt);
+        console.log("totalKCals for Activity KCals: " + totalKCals);
 
-        if (rawResponse == null) {
-            activityKCals = 0;
-        } else {
-            activityKCals = parseFloat(rawResponse);
-        }
-        
-        return activityKCals;
+        return totalKCals;
     }
 }

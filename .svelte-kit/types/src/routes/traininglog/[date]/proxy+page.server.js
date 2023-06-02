@@ -103,31 +103,15 @@ export const actions = {
 		const data = await request.formData();
 		// set dayId to empty string if not passed in as day_id
 		let dayId = data.get('day_id') || "";
-		const exerciseName = data.get('exercise_name');
+		let exerciseName = data.get('exercise_name');
 		let exerciseDate = data.get('exercise_date');
 
-		// if exerciseName contains cmd, split off the logic for command execution
-		if(exerciseName.includes("cmd")) {
-			// split off the command
-			const command = exerciseName.split("cmd")[1];
-			// execute the command
-			await executeCommand(command, dayId, exerciseDate);
-			// return
-			return;
-		}
-		
 		const exerciseLoad = data.get('exercise_load');
 		const exerciseReps = data.get('exercise_reps');
 		let exerciseValue = exerciseLoad;
 		if (exerciseReps != null && exerciseReps != "") {
 			exerciseValue += " x " + exerciseReps;
 		}
-
-		var currentDate = new Date();
-		// Set the date to be 5 years from now
-		var endProgramDate = new Date();
-		endProgramDate.setFullYear(currentDate.getFullYear() + 5)
-		var newDayIdToLoad = dayId;
 
 		// look up exercise in the ExerciseReference and add it if it doesn't exist
 		const exerciseReference = await prisma.exerciseReference.findFirst({
@@ -145,10 +129,31 @@ export const actions = {
 			});
 		}
 
+		// if exerciseName contains cmd, split off the logic for command execution
+		if(exerciseName.includes("cmd")) {
+			// split off the command
+			const command = exerciseName.split("cmd")[1].toLowerCase();
+			console.log("command: " + command);
+			// switch on the command, trimmed of whitespace
+			switch(command.trim()) {
+				case "count kcals for the day":
+					console.log("counting kcals: " + command);
+
+					const kcalsBurned = await getKcalsForDay(command, dayId, exerciseDate);
+					exerciseName = "Total kcals burned";
+					exerciseValue = kcalsBurned;
+			}
+		}
+		
 		// if dayId is 0, this means that there's no training program defined and the user
 		//  just wants to add the records directly into the grid
 		//  so, we'll create a new training program and add the exercise to the first day
 		if(dayId == 0) {
+			var currentDate = new Date();
+			// Set the date to be 5 years from now
+			var endProgramDate = new Date();
+			endProgramDate.setFullYear(currentDate.getFullYear() + 5)
+	
 			// create a "shell" for the training program
 			const newTrainingProgram = await prisma.trainingProgram.create({
 				data: {
@@ -190,7 +195,6 @@ export const actions = {
 
 			// extract trainingGrid from the record and parse it in the format of 
 			//  { "exercise": "exercise name", "date1": "some sets and weights and notes value", "date2": "some sets and eights and notes value"....}
-			console.log("extracting training grid : " + JSON.stringify(trainingDay.training_grid));
 			var trainingGrid = trainingDay.training_grid;
 			// scan through the training grid to see if the exercise already exists for a different day
 			let exerciseUpdated = false;
@@ -250,36 +254,30 @@ async function loadTraining(date) {
 	return trainingData;
 }
 
-async function executeCommand(command, dayId, exerciseDate) {
+async function getKcalsForDay(command, dayId, exerciseDate) {
 	// depending on the command, execute the appropriate action
-	switch(command.toLowerCase()) {
-		case "count kcals for the day":
-			// get the training day
-			const trainingDay = await prisma.trainingProgramDay.findUnique({
-				where: {
-					id: dayId
-				}
-			});
 
-			// extract trainingGrid from the record and parse all the values for the exerciseDate
-			var trainingGrid = trainingDay.training_grid;
-			var totalKcals = 0;
-			for (var i = 0; i < trainingGrid.length; i++) {
-				if (trainingGrid[i][exerciseDate]) {
-					// extract the exercise name
-					var exerciseName = trainingGrid[i].exercise;
-					// extract the value
-					var exerciseValue = trainingGrid[i][exerciseDate];
-					// concat the exercise name and value, then ship it off to the chatGPT
-					var exerciseNameValue = exerciseName + " " + exerciseValue + "\n";
-				}
-			}
+	const trainingDay = await prisma.trainingProgramDay.findUnique({
+		where: {
+			id: dayId
+		}
+	});
 
-			// ask LLM to count the kcals
-			var kcalsForDay = await TrainingSmartAIThingie.askForActivityKCals(exerciseNameValue);				
-
-			break;
-
-		case "delete":
+	// extract trainingGrid from the record and parse all the values for the exerciseDate
+	var trainingGrid = trainingDay.training_grid;
+	var totalKcals = 0;
+	for (var i = 0; i < trainingGrid.length; i++) {
+		if (trainingGrid[i][exerciseDate]) {
+			// extract the exercise name
+			var exerciseName = trainingGrid[i].exercise;
+			// extract the value
+			var exerciseValue = trainingGrid[i][exerciseDate];
+			// concat the exercise name and value, then append it to the existing exercise and value, then ship it off to the chatGPT
+			var exerciseNameValue = exerciseNameValue + exerciseName + " " + exerciseValue + "\n";
+		}
 	}
+
+	// ask LLM to count the kcals
+	var kcalsForDay = await TrainingSmartAIThingie.askForActivityKCals(exerciseNameValue);				
+	return kcalsForDay;
 }
