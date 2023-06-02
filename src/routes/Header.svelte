@@ -15,7 +15,6 @@
 	</div>
 
 	<div class = "header">
-
 		<div class="signedInStatus">
 			<p class="nojs-show loaded">
 				{#if $page.data.session}

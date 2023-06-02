@@ -22,8 +22,8 @@
 	// get month with leading zero
 	const todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
   let typeaheadData = data.exerciseReferences;
-  // if typeaheadData does not contain items with "/cmd" options, add it
 
+  // if typeaheadData does not contain items with "/cmd" options, add it
   if (!typeaheadData.some((item) => item.exercise_name.indexOf("cmd") > 0)) 
   {
     typeaheadData.push({
@@ -230,6 +230,7 @@
       data={typeaheadData}
       extract={typeaheadExtract}
       on:keydown={fillExercise}
+      class="training_input"
     />
   </form>
 
@@ -242,10 +243,10 @@
       type="hidden"
       name="exercise_name"
       class="training_input"
-      width="30%"
+      width="20%"
     />
 
-    <!-- textbox for load, i.e. weight or distance -->
+    <!-- textbox for load, i.e. weight or distance, should be 50% on mobile but about 20% on desktop -->
     <input
       type="text"
       name="exercise_load"
@@ -414,4 +415,15 @@
     background-color: #f8f8f8;
     font-size: 16px;
   }
+  
+  /* Media query for mobile */
+  @media screen and (max-width: 768px) {
+    .training_input {
+      width: 100%; /* Set to 100% on screens smaller than 768px */
+    }
+    #exerciseautocomplete-typeahead {
+
+    }
+  }
+  
 </style>

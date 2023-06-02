@@ -336,14 +336,17 @@
 	</form>
 	
 	<!-- svg icon of rectangle pointing to the left -->
-	<center>
-		<a data-sveltekit-reload href="/foodlog/{yesterdayString}"><i class="fa fa-arrow-circle-left" style="font-size:36px; color:blue; padding:10px"></i></a>
-
-		<div class="foodheader">Food Log for {todayString}
+	<div class="container">
+		<div class="left-image">
+			<a data-sveltekit-reload href="/foodlog/{yesterdayString}"><i class="fa fa-arrow-circle-left" style="font-size:36px; color:blue; padding:10px"></i></a>
 		</div>
-		
-		<a data-sveltekit-reload href="/foodlog/{tomorrowString}"><i class="fa fa-arrow-circle-right" style="font-size:36px; color:blue; padding:10px"></i></a>
-	</center>
+		<div class="foodheader">
+			Food Log for {todayString}
+		</div>
+		<div class="right-image">
+			<a data-sveltekit-reload href="/foodlog/{tomorrowString}"><i class="fa fa-arrow-circle-right" style="font-size:36px; color:blue; padding:10px"></i></a>
+		</div>
+		</div>		
 	{#if isLoading}
 		<!-- align in the middle of the screen and on top-->
 		<div style="display: flex; justify-content: center; padding: 10px;">
@@ -389,6 +392,24 @@
 		style="height: 170vh; width: 100%;"
 	/>
 	</div>
-
 </div>	
 
+<style>
+.container {
+	/* center the div within the page */
+	display: flex;
+	align-items: center; /* Center vertically */
+	justify-content: center;
+}
+
+.left-image,
+.right-image {
+  /* Adjust width and height as needed */
+}
+
+.middle-text {
+  flex: 1; /* Expand to fill remaining space */
+  text-align: center; /* Center the text horizontally */
+}
+
+</style>

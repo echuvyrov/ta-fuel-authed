@@ -235,7 +235,7 @@ button:focus:not(:focus-visible) {
 .foodheader {
 	margin: 5px;
 	display: inline;
-	font-size: 17px;
+	font-size: 15px;
 	color: white;
 }
 
@@ -321,4 +321,12 @@ input {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(75px, 75px));
 	grid-gap: 0.8rem;
+}
+
+/* Media query for mobile */
+@media screen and (max-width: 768px) {
+    #exerciseautocomplete-typeahead {
+		width: 100%;
+		margin: 5px;
+    }
 }
