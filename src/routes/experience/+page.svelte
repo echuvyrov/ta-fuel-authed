@@ -21,7 +21,31 @@
 
 </script>
 <center>
-	<div class="experienceheader">Log foods by simply clicking the images custom created for your foods</div>
+	<div class="experienceheader">What you ate today</div>
+</center>
+
+
+<!-- create a 5-column flex box and add foodReference items to each column -->
+<div class="grid">
+	<!-- iterate over all items in data.foodReferences -->
+	{#each data.todaysFoods as todaysFood, i}
+		{#if todaysFood.foodReference != null }
+			<form action="?/addfood" method = "POST">
+				<div class="grid-item">
+					<input type="hidden" value={JSON.stringify(todaysFood.foodReference)} name="food">
+						<!-- image from base64 string -->
+						<button title = "{todaysFood.foodReference.food_name}">
+							<img src="data:image/png;base64, {todaysFood.foodReference.imageBase64}" />
+						</button>		
+				</div>
+			</form>
+		{/if}
+	{/each}
+</div>
+
+
+<center>
+	<div class="experienceheader">What you eat most frequently (simply click to add to today's log)</div>
 </center>
 
 
@@ -29,15 +53,18 @@
 <div class="grid">
 	<!-- iterate over all items in data.foodReferences -->
 	{#each data.foodReferences as foodReference, i}
-		<form action="?/addfood" method = "POST">
-			<div class="grid-item">
-				<input type="hidden" value={JSON.stringify(foodReference)} name="food">
-				<!-- image from base64 string -->
-				<button title = "{foodReference.food_name}">
-					<img src="data:image/png;base64, {foodReference.imageBase64}" />
-				</button>			
-			</div>
-		</form>
+		{#if foodReference.foodReference != null }
+
+			<form action="?/addfood" method = "POST">
+				<div class="grid-item">
+					<input type="hidden" value={JSON.stringify(foodReference.foodReference)} name="food">
+						<!-- image from base64 string -->
+						<button title = "{foodReference.foodReference.food_name} (used {foodReference.count} times)">
+							<img src="data:image/png;base64, {foodReference.foodReference.imageBase64}" />
+						</button>		
+				</div>
+			</form>
+		{/if}
 	{/each}
 </div>
 
