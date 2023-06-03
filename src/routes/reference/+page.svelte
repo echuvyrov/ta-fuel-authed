@@ -10,6 +10,8 @@
 	var domNode;
     var grid;
 	var isLoading = true;
+	let searchQuery = '';
+	var filteredRecords = data.rowData;
 
 	const today = new Date();
 
@@ -25,7 +27,7 @@
 	// let the grid know which columns and what data to use
 	let options = {
 		columnDefs: columnDefs,
-		rowData: data.rowData,
+		rowData: filteredRecords,
 		onCellValueChanged: function(params)  {
 			updateRecord(params.node, params.data);
   		},
@@ -70,17 +72,32 @@
 	const submitFood = (e) => {
 		if (e.key == 'Enter') {
 			isLoading = true;
-		}
+		} 
 	}
+
+	const handleSearch = (e) => {
+		searchQuery = e.target.value;
+		filterRecords();
+		options.api.setRowData(filteredRecords);
+	}
+
+	function filterRecords() {
+   		filteredRecords = data.rowData.filter(record => {
+      		const recordValue = record.food_name.toLowerCase();
+      		const searchValue = searchQuery.toLowerCase();
+      		return recordValue.includes(searchValue);
+    });
+  }
 
 </script>
 
 <form action="?/addfood" method = "POST">
 <input
-name="food"
-value='Add food to the reference list'
-on:focus={(evt) => evt.target.select()}
-on:keydown={submitFood}
+	name="food"
+	value='Add food to the reference list'
+	on:focus={(evt) => evt.target.select()}
+	on:keydown={submitFood}
+	on:input={handleSearch}
 />
 </form>
 
