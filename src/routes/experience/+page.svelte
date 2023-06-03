@@ -57,7 +57,8 @@
 
 			<form action="?/addfood" method = "POST">
 				<div class="grid-item">
-					<input type="hidden" value={JSON.stringify(foodReference.foodReference)} name="food">
+					<!-- removing the image64 from embedding to save up bandwidth -->
+					<input type="hidden" value={JSON.stringify((({ imageBase64, ...rest }) => rest)(foodReference.foodReference))} name="food">
 						<!-- image from base64 string -->
 						<button title = "{foodReference.foodReference.food_name} (used {foodReference.count} times)">
 							<img src="data:image/png;base64, {foodReference.foodReference.imageBase64}" />

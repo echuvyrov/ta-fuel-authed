@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 var foodNutrition = "wait for it...";
 var todaysFoodsWithImages = [];
 var top30MostCommonFoods = [];
+
 var currDate = "";
 const today = new Date();
 // get month with leading zero
@@ -15,7 +16,6 @@ const todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).s
 /** @param {Parameters<import('./$types').PageServerLoad>[0]} event */
 export const load = async ({ cookies }) => {
   currDate = get(currentDate);
-  console.log("current date: " + JSON.stringify(currDate));
 
   await loadData();
   return {
@@ -93,7 +93,9 @@ export const actions = {
     if (Object.keys(nutritionData).length === 0) {
       // do nothing
     } else {
-      // add the food to the database
+		console.log("adding food for date: " + todayString);
+
+		// add the food to the database
       const newFoodLogEntry = await prisma.foodLog.create({
         data: {
           user_id: user.name,
@@ -103,7 +105,7 @@ export const actions = {
           carbs_grams: nutritionData.carbs_grams,
           protein_grams: nutritionData.protein_grams,
           kkcals: nutritionData.kkcals,
-          feeding_date: currDate,
+          feeding_date: todayString,
         },
       });
     }
