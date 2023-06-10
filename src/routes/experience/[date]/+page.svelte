@@ -136,6 +136,14 @@ button  {
 		width: 150px;
 		height: 150px;
 	}
-  }
+
+	/* Grid */
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(170px, .1fr));
+		grid-gap: 0.4rem;
+	}
+
+}
   
 </style>
