@@ -125,16 +125,16 @@ button  {
  /* Media query for mobile */
  @media screen and (max-width: 768px) {
 	button  {
-		width: 233px;
-    	height: 233px;
+		width: 200px;
+    	height: 200px;
     	padding: 5px;
     	background: #d95753;
     	border: 0;
 	}
 	
 	.food_image {
-		width: 220px;
-		height: 220px;
+		width: 190px;
+		height: 190px;
 	}
   }
   
