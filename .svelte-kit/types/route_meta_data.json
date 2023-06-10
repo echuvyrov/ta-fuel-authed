@@ -7,12 +7,12 @@
 		"src/routes/about/+page.js",
 		"src/routes/+layout.server.js"
 	],
-	"/experience": [
-		"src/routes/experience/+page.server.js",
-		"src/routes/+layout.server.js"
-	],
 	"/experience/updaterecord": [
 		"src/routes/experience/updaterecord/+server.js"
+	],
+	"/experience/[date]": [
+		"src/routes/experience/[date]/+page.server.js",
+		"src/routes/+layout.server.js"
 	],
 	"/foodlog/[date]": [
 		"src/routes/foodlog/[date]/+page.server.js",

@@ -424,6 +424,10 @@
     #exerciseautocomplete-typeahead {
 
     }
+
+    .trainingdaytab {
+      width: 110px;
+    }
   }
   
 </style>

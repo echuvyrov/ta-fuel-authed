@@ -50,8 +50,8 @@
 					<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
 				</svg>
 				<ul>
-					<li class:active={$page.url.pathname === ('/experience')}>
-						<a href="/experience">Experience</a>
+					<li class:active={$page.url.pathname.includes('/experience')}>
+						<a href="/experience/{todayString}">Experience</a>
 					</li>
 					<li class:active={$page.url.pathname.includes('traininglog')}>
 						<a href="/traininglog/{todayString}">Train</a>
