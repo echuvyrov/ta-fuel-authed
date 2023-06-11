@@ -128,7 +128,9 @@
   onMount(() => {
     if (data.trainingProgamDays != null) {
       trainingGrid = data.trainingProgamDays.training_days[0].training_grid;
-      loadColumnDefsFromJson();
+      if(trainingGrid != null) {
+        loadColumnDefsFromJson();
+      }
     }
 
     grid = new Grid(domNode, options);

@@ -64,6 +64,10 @@ async function loadData() {
 			food_name: 'desc'
 	  		}
 		},
+		where: {
+			user_id: user.name,
+		},
+		
 		take: 30
 	});
   
