@@ -15,7 +15,6 @@ export async function POST({ request }) {
     }
   })
   if (existingRecord == null) {
-    console.log("creating Record: " + record.feeding_datecl);
     //create a new TargetTotals record for the user
     const createFood = await prisma.targetTotals.create({
       data: {
@@ -28,7 +27,6 @@ export async function POST({ request }) {
       },
     })
   } else {
-    console.log("existingRecord: " + existingRecord.id);
     //update the existing TargetTotals record
     const updateFood = await prisma.targetTotals.update ({
       where: {

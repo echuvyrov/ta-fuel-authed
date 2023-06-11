@@ -174,6 +174,17 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
         return kcalsData;
     }
 
+    static async askForFoodIdeaJSON(prompt) {
+        var foodMacrosPrompt = "I need help trying to come up with food or recipe for the following macros. \
+                                Please respond with details on ingredient size, as well as macros for each ingredient. \
+                                Package the response as JSON with the following fields: \
+                                food_name, food_description, food_recipe, total_fat_grams, total_carbs_grams, \
+                                total_protein_grams, total_kkcals. Here's the prompt: " + prompt;
+        var rawResponse = await super.askForJSON(foodMacrosPrompt);
+        var foodIdeaJSON =  rawResponse.choices[0].message.content;
+        return foodIdeaJSON;
+    }
+
     /* a function to create an array from a string with line breaks as separators for different elements */
     static async parseTraining(rawResponse) {
         var rawTrainingJSON = rawResponse.choices[0].message.content;
@@ -197,10 +208,18 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
     }
 
     static async askForActivityKCals(prompt) {
-        console.log("asking " + prompt);
+        console.log("asking for total kcals" + prompt);
         var totalKCals = await this.askForKCalsJSON(prompt);
-        console.log("totalKCals for Activity KCals: " + totalKCals);
+        console.log("total KCals for Activity: " + totalKCals);
 
         return totalKCals;
+    }
+
+    static async askForFoodIdeas(prompt) {
+        console.log("asking for food ideas " + prompt);
+        var foodIdea = await this.askForFoodIdeaJSON(prompt);
+        console.log("Food Idea for given Macros: " + foodIdea);
+
+        return foodIdea;
     }
 }

@@ -18,6 +18,9 @@
 		"src/routes/foodlog/[date]/+page.server.js",
 		"src/routes/+layout.server.js"
 	],
+	"/foodlog/[date]/generatefoodsuggestions": [
+		"src/routes/foodlog/[date]/generatefoodsuggestions/+server.js"
+	],
 	"/foodlog/[date]/updaterecord": [
 		"src/routes/foodlog/[date]/updaterecord/+server.js"
 	],

@@ -21,9 +21,9 @@
   const today = new Date();
 	// get month with leading zero
 	const todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
-  let typeaheadData = data.exerciseReferences;
 
-  // if typeaheadData does not contain items with "/cmd" options, add it
+  let typeaheadData = data.exerciseReferences;
+  // if typeaheadData does not contain items with "/cmd" options, add them
   if (!typeaheadData.some((item) => item.exercise_name.indexOf("cmd") > 0)) 
   {
     typeaheadData.push({

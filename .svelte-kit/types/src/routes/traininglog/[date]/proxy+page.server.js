@@ -266,6 +266,7 @@ async function getKcalsForDay(command, dayId, exerciseDate) {
 	// extract trainingGrid from the record and parse all the values for the exerciseDate
 	var trainingGrid = trainingDay.training_grid;
 	var totalKcals = 0;
+	var exerciseNameValue = "";
 	for (var i = 0; i < trainingGrid.length; i++) {
 		if (trainingGrid[i][exerciseDate]) {
 			// extract the exercise name
@@ -273,7 +274,7 @@ async function getKcalsForDay(command, dayId, exerciseDate) {
 			// extract the value
 			var exerciseValue = trainingGrid[i][exerciseDate];
 			// concat the exercise name and value, then append it to the existing exercise and value, then ship it off to the chatGPT
-			var exerciseNameValue = exerciseNameValue + exerciseName + " " + exerciseValue + "\n";
+			exerciseNameValue = exerciseNameValue + exerciseName + " " + exerciseValue + "\n";
 		}
 	}
 

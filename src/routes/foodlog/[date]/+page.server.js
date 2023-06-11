@@ -114,7 +114,7 @@ async function loadData(date) {
 /** @type {import('../../../.svelte-kit/types/src/routes/foodlog/$types').Actions} */
 export const actions = {
 	/**
-	 * add new food to the log, whether a lookup from a reference list or a result of calling GPT-3
+	 * add new food to the log, whether a lookup from a reference list or a result of calling chatGPT
 	 */
 	addfood: async ({ request, cookies }) => {
 
@@ -159,6 +159,87 @@ export const actions = {
 				carbs_grams: nutritionData.carbs_grams,
 				protein_grams: nutritionData.protein_grams,
 				kkcals: nutritionData.kkcals,
+				feeding_date: forDate
+			},
+		})
+
+		// reload the data
+		dbData = await prisma.foodLog.findMany({
+			where: {
+				feeding_date: forDate,
+				user_id: user.name
+			},
+			orderBy: {
+				createdAt: 'asc'
+			}
+		});
+	
+		allFoods = await prisma.foodReference.findMany({
+			// select everything except the image
+			select: {
+				food_name: true,
+				food_qty: true,
+				fat_grams: true,
+				carbs_grams: true,
+				protein_grams: true,
+				kkcals: true
+			},
+			where: {
+				user_id: user.name,
+			}
+		});
+	},
+	/**
+	 * add food to the log from the recipe provided by chatGPT
+	 */
+	addsuggestedfood: async ({ request, cookies }) => {
+
+		const data = await request.formData();		
+		const food = data.get('food');
+		const food_qty = parseFloat(data.get('food_qty'));
+		const fat_grams = parseFloat(data.get('fat_grams'));
+		const carbs_grams = parseFloat(data.get('carbs_grams'));
+		const protein_grams = parseFloat(data.get('protein_grams'));
+		const total_kkcals = parseFloat(data.get('total_kkcals'));
+
+		// check whether the food exists in the foodReference table
+		const foodReferenceEntry = await prisma.foodReference.findFirst({
+			where: {
+				food_name: food,
+				user_id: user.name
+			}
+		})
+
+		// add the food to the log
+		if (foodReferenceEntry != null) {
+			nutritionData = foodReferenceEntry;
+		} else {
+			// generate an image for food
+			var imageBase64 = await NutritionSmartAIThingie.generateImage(food);
+			// and write it to the foodReference table
+			const newFoodReferenceEntry = await prisma.foodReference.create({
+				data: {
+					user_id: user.name,
+					food_name: food,
+					food_qty: food_qty,
+					fat_grams: fat_grams,
+					carbs_grams: carbs_grams,
+					protein_grams: protein_grams,
+					kkcals: total_kkcals,
+					imageBase64: imageBase64
+				},
+			})
+		}
+
+		const newFoodLogEntry = await prisma.foodLog.create({
+			data: {
+				user_id: user.name,
+				food_name: food,
+				food_qty: food_qty,
+				fat_grams: fat_grams,
+				carbs_grams: carbs_grams,
+				protein_grams: protein_grams,
+				kkcals: total_kkcals,
 				feeding_date: forDate
 			},
 		})

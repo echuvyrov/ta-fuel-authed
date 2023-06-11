@@ -7,6 +7,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { Grid } from 'ag-grid-community';
 	import Typeahead from "svelte-typeahead";
+	import Modal from "./SuggestRecipesForMacros.svelte";
 
 	import 'ag-grid-community/styles//ag-grid.css';
 	import 'ag-grid-community/styles//ag-theme-alpine.css';
@@ -16,6 +17,7 @@
 	var domNode;
     var grid;
 	var isLoading = true;
+	let showModal = false;
 
 	var domNodeTotals;
     var gridTotals;
@@ -35,16 +37,44 @@
 	yesterday.setDate(yesterday.getDate() - 1);
 	const yesterdayString = yesterday.toISOString().split('T')[0];
 
-	const typeaheadData = data.foodReferences;
+	let typeaheadData = data.foodReferences;
+  	// if typeaheadData does not contain items with "/cmd" options, add them
+  	if (!typeaheadData.some((item) => item.food_name.indexOf("cmd") > 0)) 
+  	{
+    	typeaheadData.push({
+      		user_id: 0,
+      		food_name: "💪 /cmd Suggest some food to fit my macros",
+      		food_id: 0,
+    	});
+  	}
+
 	const typeaheadExtract = (item) => item.food_name;
+
+	function showCreativeMacros() {
+    	showModal = true;
+  	}
+
+  	function getCreativeWithMacros() {
+    	showModal = false;
+		isLoading = true;
+  	}
+
+  	function cancelModal() {
+    	showModal = false;
+  	}
 
 	const submitFood = (e) => {
 		if (e.key == 'Enter') {
 			/* populate hidden form value and submit form programmatically */
 			const foodEntered = document.getElementById('foodautocomplete').value;
-			document.forms["foodForm"].elements["food"].value = foodEntered;
-			document.forms["foodForm"].submit();
-			isLoading = true;
+			/* if foodEntered contains cmd, then show modal */
+			if (foodEntered.includes("/cmd")) {
+				showCreativeMacros();
+			} else {
+				document.forms["foodForm"].elements["food"].value = foodEntered;
+				document.forms["foodForm"].submit();
+				isLoading = true;
+			}
 		}
 	}
 
@@ -264,7 +294,6 @@
 	/* sveltekit fetch method to update the record */
 	async function updateTargetTotalsRecord(row, data, colId) {
 		// if it's Kcals col that triggered this, ignore it (avoid the infinite loop)
-		console.log('Triggered by ' + colId);
 		if(colId === 'Kcals') {
 			return;
 		}
@@ -393,6 +422,10 @@
 	/>
 	</div>
 </div>	
+
+{#if showModal}
+  <Modal {totalsData} on:save={getCreativeWithMacros} on:cancel={cancelModal} />
+{/if}
 
 <style>
 .container {
