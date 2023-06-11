@@ -11,7 +11,6 @@ var selectedDayDescription = "";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ params })  => {
-
 	// load all exercises from the database
 	exercises = await prisma.exerciseReference.findMany({
 		// select everything except the image

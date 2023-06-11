@@ -8,8 +8,8 @@ const GITHUB_ID = process.env.GITHUB_ID;
 const GITHUB_SECRET = process.env.GITHUB_SECRET;
 const TWITTER_ID = process.env.TWITTER_ID;
 const TWITTER_SECRET = process.env.TWITTER_SECRET;
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GOOGLE_ID = process.env.GOOGLE_ID;
+const GOOGLE_SECRET = process.env.GOOGLE_SECRET;
 
 // import { GITHUB_ID, GITHUB_SECRET, TWITTER_ID, TWITTER_SECRET } from "$env/static/private"
 
@@ -26,8 +26,8 @@ export const handle = SvelteKitAuth({
       version: "2.0"
     }),
     Google({ 
-      clientId: GOOGLE_CLIENT_ID, 
-      clientSecret: GOOGLE_CLIENT_SECRET 
+      clientId: GOOGLE_ID, 
+      clientSecret: GOOGLE_SECRET 
     }),
   ],
 })
