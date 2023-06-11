@@ -37,6 +37,8 @@ declare module '$env/static/private' {
 	export const TWITTER_KEY: string;
 	export const TWITTER_ID: string;
 	export const TWITTER_SECRET: string;
+	export const GOOGLE_CLIENT_ID: string;
+	export const GOOGLE_CLIENT_SECRET: string;
 	export const GPT3_API_KEY: string;
 	export const POSTGRES_URL: string;
 	export const POSTGRES_PRISMA_URL: string;
@@ -147,6 +149,8 @@ declare module '$env/dynamic/private' {
 		TWITTER_KEY: string;
 		TWITTER_ID: string;
 		TWITTER_SECRET: string;
+		GOOGLE_CLIENT_ID: string;
+		GOOGLE_CLIENT_SECRET: string;
 		GPT3_API_KEY: string;
 		POSTGRES_URL: string;
 		POSTGRES_PRISMA_URL: string;
