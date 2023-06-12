@@ -5,6 +5,12 @@
 	const today = new Date();
 	// get month with leading zero
 	const todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
+
+	function resetUser() {
+		user.set({});
+		return false;
+	}
+
 </script>
 
 <header>
@@ -35,7 +41,7 @@
 						>{$page.data.session.user?.name}</strong
 						>
 					</span>
-					<a href="/auth/signout" class="buttonPrimary">Sign out</a>
+					<a href="/auth/signout" on:click={resetUser} class="buttonPrimary">Sign out</a>
 			
 				{:else}
 					<a href="/auth/signin" class="buttonPrimary">Sign in</a>

@@ -127,8 +127,9 @@
 
   onMount(() => {
     if (data.trainingProgamDays != null) {
-      trainingGrid = data.trainingProgamDays.training_days[0].training_grid;
-      if(trainingGrid != null) {
+      var trainingProgramDays = data.trainingProgamDays.training_days;
+      if(trainingProgramDays != null) {
+        trainingGrid = data.trainingProgamDays.training_days[0].training_grid;
         loadColumnDefsFromJson();
       }
     }
