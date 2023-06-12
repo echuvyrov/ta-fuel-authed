@@ -46,7 +46,7 @@
 					<a href="/auth/signout" on:click={resetUser} class="buttonPrimary">Sign out</a>
 			
 				{:else}
-					<a href="/auth/signin" class="buttonPrimary">Sign in</a>
+					<a href="/auth/signin" on:click={resetUser} class="buttonPrimary">Sign in</a>
 				{/if}
 			</p>
 		</div>
