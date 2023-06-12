@@ -7,7 +7,7 @@
 	const todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
 
 	function resetUser() {
-		alert("resetUser b4: " + JSON.stringify($page.data.session));
+		alert("resetUser b4: " + JSON.stringify(user) + " session " + JSON.stringify($page.data.session));
 		if ($page.data.session != null) {
 			user.name = null;
 			$page.data.session.set(null);
