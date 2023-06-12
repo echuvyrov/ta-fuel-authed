@@ -141,7 +141,7 @@
     grid = new Grid(domNode, options);
     // open the first training day
     if (data.trainingProgamDays != null) {
-      if (data.selectedDayId == "") {
+      if (data.selectedDayId == "" && data.trainingProgamDays.training_days.length > 0) {
         openTrainingDay(data.trainingProgamDays.training_days[0].day_description, data.trainingProgamDays.training_days[0].id);
       } else {
         openTrainingDay(data.selectedDayDescription, data.selectedDayId);
