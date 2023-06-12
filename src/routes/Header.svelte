@@ -7,10 +7,9 @@
 	const todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
 
 	function resetUser() {
-		user.set({});
+		user.set(null);
 		return false;
 	}
-
 </script>
 
 <header>

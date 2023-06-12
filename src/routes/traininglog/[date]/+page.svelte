@@ -129,8 +129,10 @@
     if (data.trainingProgamDays != null) {
       var trainingProgramDays = data.trainingProgamDays.training_days;
       if(trainingProgramDays != null) {
-        trainingGrid = data.trainingProgamDays.training_days[0].training_grid;
-        loadColumnDefsFromJson();
+        if (length(data.trainingProgamDays.training_days)> 0) {
+          trainingGrid = data.trainingProgamDays.training_days[0].training_grid;
+          loadColumnDefsFromJson();
+        }
       }
     }
 
