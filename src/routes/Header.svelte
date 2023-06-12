@@ -10,7 +10,7 @@
 		alert("resetUser b4: " + JSON.stringify($page.data.session));
 		if ($page.data.session != null) {
 			user.name = null;
-			$page.data.session = null;
+			$page.data.session.set(null);
 			alert("resetUser after: " + JSON.stringify(user) + " session " + JSON.stringify($page.data.session));
 		}
 		return false;
