@@ -8,7 +8,7 @@
 
 	function resetUser() {
 		alert("resetUser b4: " + JSON.stringify(user));
-		user.set({});
+		user.name = null;
 		alert("resetUser after: " + JSON.stringify(user));
 		return false;
 	}
