@@ -5,16 +5,6 @@
 	const today = new Date();
 	// get month with leading zero
 	const todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
-
-	function resetUser() {
-		alert("resetUser b4: " + JSON.stringify(user) + " session " + JSON.stringify($page.data.session));
-		if ($page.data.session != null) {
-			user.name = null;
-			$page.data.session.set(null);
-			alert("resetUser after: " + JSON.stringify(user) + " session " + JSON.stringify($page.data.session));
-		}
-		return false;
-	}
 </script>
 
 <header>
@@ -45,10 +35,10 @@
 						>{$page.data.session.user?.name}</strong
 						>
 					</span>
-					<a href="/auth/signout" on:click={resetUser} class="buttonPrimary">Sign out</a>
+					<a href="/auth/signout" class="buttonPrimary">Sign out</a>
 			
 				{:else}
-					<a href="/auth/signin" on:click={resetUser} class="buttonPrimary">Sign in</a>
+					<a href="/auth/signin" class="buttonPrimary">Sign in</a>
 				{/if}
 			</p>
 		</div>
