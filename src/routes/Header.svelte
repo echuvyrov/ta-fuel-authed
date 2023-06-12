@@ -7,10 +7,10 @@
 	const todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
 
 	function resetUser() {
-		alert("resetUser b4: " + JSON.stringify(user));
+		alert("resetUser b4: " + JSON.stringify(user) + " session " + JSON.stringify(page.data.session.user));
 		user.name = null;
 		page.data.session.user.name = null;
-		alert("resetUser after: " + JSON.stringify(user));
+		alert("resetUser after: " + JSON.stringify(user) + " session " + JSON.stringify(page.data.session.user));
 		return false;
 	}
 </script>
