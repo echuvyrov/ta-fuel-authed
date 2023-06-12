@@ -129,7 +129,9 @@
     if (data.trainingProgamDays != null) {
       var trainingProgramDays = data.trainingProgamDays.training_days;
       if(trainingProgramDays != null) {
-        if (length(data.trainingProgamDays.training_days)> 0) {
+        /* if there are more than 0 elements in training_days */
+
+        if (data.trainingProgamDays.training_days.length > 0) {
           trainingGrid = data.trainingProgamDays.training_days[0].training_grid;
           loadColumnDefsFromJson();
         }
