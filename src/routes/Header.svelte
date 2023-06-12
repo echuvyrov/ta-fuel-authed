@@ -9,6 +9,7 @@
 	function resetUser() {
 		alert("resetUser b4: " + JSON.stringify(user));
 		user.name = null;
+		page.data.session.user.name = null;
 		alert("resetUser after: " + JSON.stringify(user));
 		return false;
 	}
