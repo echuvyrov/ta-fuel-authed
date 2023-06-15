@@ -18,8 +18,8 @@ export const load = async ({ params }) => {
 		currDate = params.date;
 	}
 
-  	await loadData();
-  	return {
+	await loadData();
+	return {
     	/**
      	* Get nutrition data from the server
      	*/

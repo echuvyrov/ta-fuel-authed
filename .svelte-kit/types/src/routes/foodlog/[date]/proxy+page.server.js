@@ -25,6 +25,8 @@ export const load = async ({ params }) => {
 
 	// set session variable for date to be accessible throughout the application
 	currentDate.set(forDate);
+	
+	// load the data, but only if we have the user
 	await loadData(forDate);
 	return {
 		/**
@@ -44,11 +46,12 @@ export const load = async ({ params }) => {
  * @param {string | number | Date} date
  */
 async function loadData(date) {
+	console.log("user.name: " + user.name + ", is user name null? " + (user.name == null));
 
 	dbData = await prisma.foodLog.findMany({
 		where: {
 			feeding_date: date,
-			user_id: user.name
+			user_id: undefined
 		},
 		orderBy: {
 			createdAt: 'asc'
@@ -69,15 +72,16 @@ async function loadData(date) {
 			kkcals: true
 		},
 		where: {
+			user_id: {	not: null},
 			user_id: user.name,
 		}
 	});
 
 	targetTotals = await prisma.targetTotals.findFirst({
 		where: {
-			feeding_date: date //,
-			// TODO: Figure out why this is not working in prod, the filter is failing as not defined
-			// user_id: user.name
+			feeding_date: date,
+			user_id: {	not: null},
+			user_id: user.name
 		}
 	});
 
