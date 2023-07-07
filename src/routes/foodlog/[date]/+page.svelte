@@ -265,7 +265,7 @@
 		onGridSizeChanged: onTotalsGridSizeChanged
 	};
 
-	/* sveltekit fetch method to update the record */
+	/* fetch method to update the record */
 	async function updateRecord(row, data) {
 		// recalc Kcals first by taking integer values of Protein, Carbs, and Fat
 		//  and multiplying by 4, 4, and 9 respectively
