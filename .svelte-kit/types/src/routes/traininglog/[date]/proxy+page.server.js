@@ -107,12 +107,13 @@ export const actions = {
 
 		const exerciseLoad = data.get('exercise_load');
 		const exerciseReps = data.get('exercise_reps');
-		const exerciseNotes = data.get('exercise_notes');
+		const exerciseNotes = data.get('notes');
 
 		let exerciseValue = exerciseLoad;
 		if (exerciseReps != null && exerciseReps != "") {
 			exerciseValue += " x " + exerciseReps;
 		}
+
 		if (exerciseNotes != null && exerciseNotes != "") {
 			exerciseValue += " (" + exerciseNotes + ")";
 		}
