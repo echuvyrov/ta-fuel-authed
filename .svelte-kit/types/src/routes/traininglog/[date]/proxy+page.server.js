@@ -12,22 +12,8 @@ var selectedDayDescription = "";
 
 /** @param {Parameters<import('./$types').PageServerLoad>[0]} event */
 export const load = async ({ params })  => {
-	// load all exercises from the database
-	exercises = await prisma.exerciseReference.findMany({
-		// select everything except the image
-		select: {
-			exercise_name: true,
-			user_id: true,
-			id: true
-		},
-		where: {
-			user_id: user.name,
-		},
-		orderBy: {
-			exercise_name: 'asc'
-		}
-	});
 
+	loadExercises();
 	if(!params.date) {
 		// set forDate to today's date
 		forDate = new Date().toString().split('T')[0];
@@ -132,6 +118,9 @@ export const actions = {
 					exercise_name: exerciseName
 				}
 			});
+			
+			//reload exercises
+			loadExercises();
 		}
 
 		// if exerciseName contains cmd, split off the logic for command execution
@@ -286,4 +275,22 @@ async function getKcalsForDay(command, dayId, exerciseDate) {
 	// ask LLM to count the kcals
 	var kcalsForDay = await TrainingSmartAIThingie.askForActivityKCals(exerciseNameValue);				
 	return kcalsForDay;
+}
+
+async function loadExercises() {
+	// load all exercises from the database
+	exercises = await prisma.exerciseReference.findMany({
+		// select everything except the image
+		select: {
+			exercise_name: true,
+			user_id: true,
+			id: true
+		},
+		where: {
+			user_id: user.name,
+		},
+		orderBy: {
+			exercise_name: 'asc'
+		}
+	});
 }
