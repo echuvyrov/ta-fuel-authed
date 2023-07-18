@@ -90,6 +90,8 @@ export const actions = {
 		let dayId = data.get('day_id') || "";
 		let exerciseName = data.get('exercise_name');
 		let exerciseDate = data.get('exercise_date');
+		let trainingGridInsertionIndex = 0;
+		let trainingGridInsertionRecords = [];
 
 		const exerciseLoad = data.get('exercise_load');
 		const exerciseReps = data.get('exercise_reps');
@@ -118,7 +120,7 @@ export const actions = {
 					exercise_name: exerciseName
 				}
 			});
-			
+
 			//reload exercises
 			loadExercises();
 		}
@@ -198,6 +200,7 @@ export const actions = {
 					if (!trainingGrid[i][exerciseDate]) {
 						trainingGrid[i][exerciseDate] = exerciseValue;
 						exerciseUpdated = true;
+						trainingGridInsertionIndex = i;
 						break;
 					}
 				}
@@ -205,9 +208,21 @@ export const actions = {
 
 			if (!exerciseUpdated) {
 				// exercise doesn't exist, so add a new record
+				trainingGridInsertionIndex = trainingGrid.length;
 				trainingGrid.push({ "exercise": exerciseName, [exerciseDate]: exerciseValue });
 			}
 			
+			// shuffle the records so that the newly added exercise name appears right below the last non-empty
+			//  entry for the current date in the grid, i.e. all the current date exercise entries are grouped together
+			for (var i = 0; i < trainingGrid.length; i++) {
+				if (trainingGrid[i][exerciseDate] == null && trainingGridInsertionIndex > i) {
+					// found the last non-empty entry for the current date
+					//  so, shuffle the records so that the newly added log entry appears right below it
+					trainingGrid.splice(i, 0, trainingGrid.splice(trainingGridInsertionIndex, 1)[0]);
+					break;
+				}
+			}
+
 			// persist JSON to the database
 			const updatedTrainingDay = await prisma.trainingProgramDay.update({
 				where: {
