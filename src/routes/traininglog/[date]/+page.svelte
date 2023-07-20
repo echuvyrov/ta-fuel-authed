@@ -56,12 +56,9 @@
   const submitTrainingGrid = (e) => {
     /* populate hidden form value and submit form programmatically */
     isLoading = true;
-    const exerciseEntered = document.getElementById(
-      "exerciseautocomplete"
-    ).value;
-    document.forms["trainingGrid"].elements["exercise_name"].value =
-      exerciseEntered;
-
+    const exerciseEntered = document.getElementById("exerciseautocomplete").value;
+    document.forms["trainingGrid"].elements["exercise_name"].value = exerciseEntered;
+    
     document.forms["trainingGrid"].submit();
   };
 
@@ -274,7 +271,7 @@
     <!-- textbox for load, i.e. weight or distance -->
     <input
       type="text"
-      name="notes"
+      name="exercise_notes"
       placeholder="Notes, i.e. how you felt or something for next time"
       class="training_input"
       width="30%"

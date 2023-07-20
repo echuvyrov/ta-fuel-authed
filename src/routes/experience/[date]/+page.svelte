@@ -1,6 +1,23 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script>
     export let data;	
 	import { onDestroy, onMount } from 'svelte';
+
+	const today = data.today;
+	const todayString = new Date(today).toISOString().split('T')[0];;
+
+	// get tomorrow from today + 1 day without time zone
+
+	// tomorrow is today + 1 day
+	var tomorrow = new Date(today);
+	tomorrow.setDate(tomorrow.getDate() + 1);
+	const tomorrowString = tomorrow.toISOString().split('T')[0];
+
+	// yesterday is today - 1 day
+	var yesterday = new Date(today);
+	yesterday.setDate(yesterday.getDate() - 1);
+	const yesterdayString = yesterday.toISOString().split('T')[0];
 
 	/* sveltekit fetch method to update the record */
 	async function updateRecord(data) {
@@ -20,9 +37,18 @@
 	}
 
 </script>
-<center>
-	<div class="experienceheader">What you ate today</div>
-</center>
+<!-- svg icon of rectangle pointing to the left -->
+<div class="container">
+	<div class="left-image">
+		<a data-sveltekit-reload href="/experience/{yesterdayString}"><i class="fa fa-arrow-circle-left" style="font-size:36px; color:blue; padding:10px"></i></a>
+	</div>
+	<div class="foodheader">
+		What you ate on {todayString}
+	</div>
+	<div class="right-image">
+		<a data-sveltekit-reload href="/experience/{tomorrowString}"><i class="fa fa-arrow-circle-right" style="font-size:36px; color:blue; padding:10px"></i></a>
+	</div>
+</div>
 
 
 <!-- create a 5-column flex box and add foodReference items to each column -->

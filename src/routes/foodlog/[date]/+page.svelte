@@ -375,7 +375,7 @@
 		<div class="right-image">
 			<a data-sveltekit-reload href="/foodlog/{tomorrowString}"><i class="fa fa-arrow-circle-right" style="font-size:36px; color:blue; padding:10px"></i></a>
 		</div>
-		</div>		
+	</div>		
 	{#if isLoading}
 		<!-- align in the middle of the screen and on top-->
 		<div style="display: flex; justify-content: center; padding: 10px;">
@@ -426,23 +426,3 @@
 {#if showModal}
   <Modal {totalsData} on:save={getCreativeWithMacros} on:cancel={cancelModal} />
 {/if}
-
-<style>
-.container {
-	/* center the div within the page */
-	display: flex;
-	align-items: center; /* Center vertically */
-	justify-content: center;
-}
-
-.left-image,
-.right-image {
-  /* Adjust width and height as needed */
-}
-
-.middle-text {
-  flex: 1; /* Expand to fill remaining space */
-  text-align: center; /* Center the text horizontally */
-}
-
-</style>

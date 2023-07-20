@@ -27,7 +27,7 @@ export const load = async ({ params }) => {
     	kcals: foodNutrition,
     	todaysFoods: todaysFoodsWithImages,
     	foodReferences: top30MostCommonFoods,
-    	forDate: currDate,
+    	today: currDate,
   	};
 };
 

@@ -94,7 +94,7 @@
 <form action="?/addfood" method = "POST">
 <input
 	name="food"
-	value='Add food to the reference list'
+	value='Search for or add food to the reference list'
 	on:focus={(evt) => evt.target.select()}
 	on:keydown={submitFood}
 	on:input={handleSearch}

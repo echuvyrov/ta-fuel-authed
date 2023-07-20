@@ -328,3 +328,20 @@ input {
 		margin: 5px;
     }
 }
+
+.container {
+	/* center the div within the page */
+	display: flex;
+	align-items: center; /* Center vertically */
+	justify-content: center;
+}
+
+.left-image,
+.right-image {
+  /* Adjust width and height as needed */
+}
+
+.middle-text {
+  flex: 1; /* Expand to fill remaining space */
+  text-align: center; /* Center the text horizontally */
+}
