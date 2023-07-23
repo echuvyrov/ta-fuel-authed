@@ -94,7 +94,7 @@ export const actions = {
 
 		const exerciseLoad = data.get('exercise_load');
 		const exerciseReps = data.get('exercise_reps');
-		const exerciseNotes = data.get('notes');
+		const exerciseNotes = data.get('exercise_notes');
 
 		let exerciseValue = exerciseLoad;
 		if (exerciseReps != null && exerciseReps != "") {
@@ -239,7 +239,7 @@ export const actions = {
 	}
 };
 
-async function loadTraining(date) {
+async function loadTraining(forDate) {
 
 	// select the latest training program
 	// 	where ending date is greater than today's date
@@ -247,7 +247,7 @@ async function loadTraining(date) {
 		where: {
 			user_id: user.name,
 			end_date: {
-				gte: new Date(date)
+				gte: new Date(forDate)
 			}
 		},
 		// include the training days for the training program
