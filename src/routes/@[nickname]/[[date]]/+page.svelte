@@ -20,12 +20,12 @@
 	const yesterdayString = yesterday.toISOString().split('T')[0];
 </script>
 
-<!-- tabs for the experience, training and food log for the requested user-->
-<div class="viewingtabs">
-	<a data-sveltekit-reload href="/@{data.nickname}/{yesterdayString}">
-	<div class="button_viewing">experience</div>
+<div class="container">
+	<h3><a data-sveltekit-reload href="/@{data.nickname}/">@{data.nickname} Food Porn</a> 
+		| <a data-sveltekit-reload href="/@{data.nickname}/">Training</a> 
+		| <a data-sveltekit-reload href="/@{data.nickname}/">Food Log</a></h3>
 </div>
-  
+
 <!-- svg icon of rectangle pointing to the left -->
 <div class="container">
 	<div class="left-image">
@@ -130,6 +130,10 @@ button  {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 	grid-gap: 0.8rem;
+}
+
+h3 {
+	color:#d95753;
 }
 
  /* Media query for mobile */
