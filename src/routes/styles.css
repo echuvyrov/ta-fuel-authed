@@ -334,6 +334,7 @@ input {
 	display: flex;
 	align-items: center; /* Center vertically */
 	justify-content: center;
+	text-align: center; /* Center horizontally */
 }
 
 .left-image,

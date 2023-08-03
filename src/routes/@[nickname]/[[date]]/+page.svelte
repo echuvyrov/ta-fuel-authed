@@ -22,8 +22,9 @@
 
 <div class="container">
 	<h3><a data-sveltekit-reload href="/@{data.nickname}/">@{data.nickname} Food Porn</a> 
-		| <a data-sveltekit-reload href="/@{data.nickname}/">Training</a> 
-		| <a data-sveltekit-reload href="/@{data.nickname}/">Food Log</a></h3>
+		| <a data-sveltekit-reload href="/@{data.nickname}/traininglog">Training</a> 
+		| <a data-sveltekit-reload href="/@{data.nickname}/foodlog">Food Log</a>
+	</h3>
 </div>
 
 <!-- svg icon of rectangle pointing to the left -->

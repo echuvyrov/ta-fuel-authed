@@ -10,10 +10,9 @@ var top30MostCommonFoods = [];
 var currDate = "";
 var nickname = "name";
 
-/** @param {Parameters<import('../$types').PageServerLoad>[0]} event */
+/** @param {Parameters<import('../../$types').PageServerLoad>[0]} event */
 export const load = async ({ params }) => {
 	if(!params.date) {
-		// in the very unlikely event that the date wasn't passed in
 		//  set currDate to today's date (use local time)
 		currDate = getLocalDate();
 

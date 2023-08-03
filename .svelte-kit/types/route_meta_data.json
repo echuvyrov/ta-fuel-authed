@@ -3,6 +3,14 @@
 		"src/routes/+layout.server.js",
 		"src/routes/+layout.server.js"
 	],
+	"/@[nickname]/[[date]]/foodlog": [
+		"src/routes/@[nickname]/[[date]]/foodlog/+page.server.js",
+		"src/routes/+layout.server.js"
+	],
+	"/@[nickname]/[[date]]/traininglog": [
+		"src/routes/@[nickname]/[[date]]/traininglog/+page.server.js",
+		"src/routes/+layout.server.js"
+	],
 	"/@[nickname]/[[date]]": [
 		"src/routes/@[nickname]/[[date]]/+page.server.js",
 		"src/routes/+layout.server.js"
