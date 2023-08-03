@@ -345,3 +345,43 @@ input {
   flex: 1; /* Expand to fill remaining space */
   text-align: center; /* Center the text horizontally */
 }
+
+
+.viewingtab {
+    height: 50px;
+    width: 120px;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    border: none;
+    font-size: calc(0.08 * var(--width));
+    border-radius: 2px;
+    background: c41744;
+    margin: 0px 3px 2px 0px;
+    color: white;
+    padding: 5px 5px 5px 5px;
+    /* rounded corners */
+    border-radius: 5px;
+  }
+
+button_viewing {
+    background-color: #6d7279;
+    color: #c41744;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button_viewing:hover {
+    background-color: #0e1521;
+    color: white;
+}

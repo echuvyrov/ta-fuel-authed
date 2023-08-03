@@ -22,7 +22,6 @@ export const load = async ({ params })  => {
 		forDate = params.date;
 	}
 
-	console.log("forDate: " + forDate);
 	var currentTrainingProgramDays = await loadTraining(forDate);
 	if(currentTrainingProgramDays == null) {
 		currentTrainingProgramDays = { training_days: [] };

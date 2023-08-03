@@ -17,7 +17,7 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
-    "prisma": "^4.8.0",
+    "prisma": "^5.1.0",
     "svelte": "3.55.0",
     "svelte-check": "2.10.2",
     "svelte-loading-spinners": "^0.3.4",
@@ -29,7 +29,7 @@
     "@auth/core": "latest",
     "@auth/sveltekit": "latest",
     "@fontsource/fira-mono": "^4.5.0",
-    "@prisma/client": "^4.8.0",
+    "@prisma/client": "^5.1.0",
     "@sveltejs/adapter-node": "^1.2.4",
     "ag-grid-community": "^28.2.1",
     "dotenv": "^16.1.4",
