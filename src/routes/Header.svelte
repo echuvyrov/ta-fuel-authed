@@ -44,8 +44,8 @@
 		</div>
 		<!-- for dev purposes on localhost and to avoid dealing with redirect url bs, allow non-authed user to work with the app -->
 		<!-- remove the comments from lines below before pushing to prod -->
-		<!-- {#if $page.data.session} -->
-		<!-- {#if $page.data.session.user?.name} -->
+		{#if $page.data.session}
+			{#if $page.data.session.user?.name}
 			<nav>
 				<svg viewBox="0 0 2 3" aria-hidden="true">
 					<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
@@ -71,8 +71,8 @@
 				<div class="corner">
 				</div>
 			</nav>
-		<!-- {/if} --> 
-	<!-- {/if} -->
+		{/if}
+	{/if}
 </header>
 
 <style>
