@@ -128,7 +128,6 @@ async function loadData(date) {
 	};
 }
 
-
 function getLocalDate() {
 	const currentDate = new Date();
 
