@@ -1,4 +1,4 @@
-import { c as create_ssr_component, a as subscribe, d as add_attribute, e as escape, v as validate_component } from "../../chunks/index3.js";
+import { c as create_ssr_component, a as subscribe, b as add_attribute, e as escape, v as validate_component } from "../../chunks/index3.js";
 import { p as page } from "../../chunks/stores2.js";
 import { u as user } from "../../chunks/stores.js";
 import { t as ta_logo } from "../../chunks/ta-logo.js";
@@ -25,9 +25,13 @@ const Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 					<a href="${"/auth/signout"}" class="${"buttonPrimary svelte-1b1ge90"}">Sign out</a>` : `<a href="${"/auth/signin"}" class="${"buttonPrimary svelte-1b1ge90"}">Sign in</a>`}</p></div>
 		
 		
-
+		
+		
 			<nav class="${"svelte-1b1ge90"}"><svg viewBox="${"0 0 2 3"}" aria-hidden="${"true"}" class="${"svelte-1b1ge90"}"><path d="${"M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z"}" class="${"svelte-1b1ge90"}"></path></svg>
-				<ul class="${"svelte-1b1ge90"}"><li class="${["svelte-1b1ge90", $page.url.pathname === "/experience" ? "active" : ""].join(" ").trim()}"><a href="${"/experience"}" class="${"svelte-1b1ge90"}">Experience</a></li>
+				<ul class="${"svelte-1b1ge90"}"><li class="${[
+    "svelte-1b1ge90",
+    $page.url.pathname.includes("/experience") ? "active" : ""
+  ].join(" ").trim()}"><a href="${"/experience/" + escape(todayString, true)}" class="${"svelte-1b1ge90"}">Experience</a></li>
 					<li class="${[
     "svelte-1b1ge90",
     $page.url.pathname.includes("traininglog") ? "active" : ""
@@ -37,7 +41,7 @@ const Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 				<svg viewBox="${"0 0 2 3"}" aria-hidden="${"true"}" class="${"svelte-1b1ge90"}"><path d="${"M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z"}" class="${"svelte-1b1ge90"}"></path></svg>
 
 				<div class="${"corner svelte-1b1ge90"}"></div></nav>
-		
+		 
 	</div></header>`;
 });
 const styles = "";

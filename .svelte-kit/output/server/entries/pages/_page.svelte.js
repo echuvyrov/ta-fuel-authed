@@ -1,4 +1,4 @@
-import { c as create_ssr_component, d as add_attribute } from "../../chunks/index3.js";
+import { c as create_ssr_component, b as add_attribute } from "../../chunks/index3.js";
 import { t as ta_logo } from "../../chunks/ta-logo.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<section><h1><img${add_attribute("src", ta_logo, 0)} alt="${"Tactical Athletics"}" style="${"width:256px;"}"></h1>

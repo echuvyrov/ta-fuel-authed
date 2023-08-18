@@ -1,8 +1,8 @@
 
 
 export const index = 2;
-export const component = async () => (await import('../entries/pages/_page.svelte.js')).default;
-export const file = '_app/immutable/components/pages/_page.svelte-990a277d.js';
-export const imports = ["_app/immutable/components/pages/_page.svelte-990a277d.js","_app/immutable/chunks/index-188eb586.js","_app/immutable/chunks/ta-logo-6eca49f4.js"];
+let component_cache;
+export const component = async () => component_cache ??= (await import('../entries/pages/_page.svelte.js')).default;
+export const imports = ["_app/immutable/nodes/2.55585258.js","_app/immutable/chunks/index.4bd8640c.js","_app/immutable/chunks/ta-logo.83e008af.js"];
 export const stylesheets = [];
 export const fonts = [];

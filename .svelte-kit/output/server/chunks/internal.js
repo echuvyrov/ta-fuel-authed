@@ -1,24 +1,25 @@
 import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component } from "./index3.js";
-const base = "";
+let base = "";
 let assets = base;
-function set_assets(path) {
-  assets = path;
+const initial = { base, assets };
+function reset() {
+  base = initial.base;
+  assets = initial.assets;
 }
-let version = "";
+function set_assets(path) {
+  assets = initial.assets = path;
+}
 let private_env = {};
 let public_env = {};
-function set_building(value) {
-}
 function set_private_env(environment) {
   private_env = environment;
 }
 function set_public_env(environment) {
   public_env = environment;
 }
-function set_version(value) {
-  version = value;
-}
 function afterUpdate() {
+}
+function set_building() {
 }
 const Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { stores } = $$props;
@@ -96,14 +97,17 @@ ${``}`;
   } while (!$$settled);
   return $$rendered;
 });
-set_version("1682907607121");
 const options = {
+  app_template_contains_nonce: false,
   csp: { "mode": "auto", "directives": { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, "reportOnly": { "upgrade-insecure-requests": false, "block-all-mixed-content": false } },
   csrf_check_origin: true,
+  track_server_fetches: false,
   embedded: false,
   env_public_prefix: "PUBLIC_",
+  env_private_prefix: "",
   hooks: null,
   // added lazily, via `get_hooks`
+  preload_strategy: "modulepreload",
   root: Root,
   service_worker: false,
   templates: {
@@ -112,12 +116,18 @@ const options = {
 
 		<style>
 			body {
+				--bg: white;
+				--fg: #222;
+				--divider: #ccc;
+				background: var(--bg);
+				color: var(--fg);
 				font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 					Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				height: 100vh;
+				margin: 0;
 			}
 
 			.error {
@@ -136,7 +146,7 @@ const options = {
 			}
 
 			.message {
-				border-left: 1px solid #ccc;
+				border-left: 1px solid var(--divider);
 				padding: 0 0 0 1rem;
 				margin: 0 0 0 1rem;
 				min-height: 2.5rem;
@@ -149,12 +159,21 @@ const options = {
 				font-size: 1em;
 				margin: 0;
 			}
+
+			@media (prefers-color-scheme: dark) {
+				body {
+					--bg: #222;
+					--fg: #ddd;
+					--divider: #666;
+				}
+			}
 		</style>
 	</head>
 	<body>
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
-  }
+  },
+  version_hash: "1dan1g1"
 };
 function get_hooks() {
   return import("./hooks.server.js");
@@ -169,6 +188,6 @@ export {
   get_hooks as g,
   options as o,
   public_env as p,
-  set_private_env as s,
-  version as v
+  reset as r,
+  set_private_env as s
 };

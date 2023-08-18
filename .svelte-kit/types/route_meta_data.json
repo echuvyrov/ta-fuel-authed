@@ -39,9 +39,6 @@
 	"/foodlog/[date]/updatetargettotals": [
 		"src/routes/foodlog/[date]/updatetargettotals/+server.js"
 	],
-	"/naturalbbevents": [
-		"src/routes/+layout.server.js"
-	],
 	"/protected": [
 		"src/routes/+layout.server.js"
 	],

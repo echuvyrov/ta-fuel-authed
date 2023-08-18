@@ -22,11 +22,6 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
-function get_store_value(store) {
-  let value;
-  subscribe(store, (_) => value = _)();
-  return value;
-}
 function compute_rest_props(props, keys) {
   const rest = {};
   keys = new Set(keys);
@@ -259,24 +254,23 @@ function style_object_to_string(style_object) {
 }
 export {
   subscribe as a,
-  safe_not_equal as b,
+  add_attribute as b,
   create_ssr_component as c,
-  add_attribute as d,
+  each as d,
   escape as e,
-  each as f,
+  compute_rest_props as f,
   getContext as g,
-  get_store_value as h,
-  is_function as i,
-  compute_rest_props as j,
-  createEventDispatcher as k,
-  spread as l,
+  createEventDispatcher as h,
+  spread as i,
+  escape_object as j,
+  escape_attribute_value as k,
+  compute_slots as l,
   missing_component as m,
   noop as n,
-  escape_object as o,
-  escape_attribute_value as p,
-  compute_slots as q,
+  onDestroy as o,
+  safe_not_equal as p,
+  is_function as q,
   run_all as r,
   setContext as s,
-  onDestroy as t,
   validate_component as v
 };

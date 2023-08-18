@@ -11,7 +11,6 @@ async function POST({ request }) {
     }
   });
   if (existingRecord == null) {
-    console.log("creating Record: " + record.feeding_datecl);
     await prisma.targetTotals.create({
       data: {
         feeding_date: record.feeding_date,
@@ -23,7 +22,6 @@ async function POST({ request }) {
       }
     });
   } else {
-    console.log("existingRecord: " + existingRecord.id);
     await prisma.targetTotals.update({
       where: {
         id: existingRecord.id

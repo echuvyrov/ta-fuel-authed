@@ -1,12 +1,16 @@
+import dotenv from "dotenv";
 import { d as dev } from "./environment.js";
 import { d as private_env } from "./internal.js";
 import { Auth } from "@auth/core";
 import GitHub from "@auth/core/providers/github";
 import Twitter from "@auth/core/providers/twitter";
+import Google from "@auth/core/providers/google";
+import "@auth/core/providers/discord";
 async function getSession(req, config) {
   config.secret ??= private_env.AUTH_SECRET;
   config.trustHost ??= true;
-  const url = new URL("/api/auth/session", req.url);
+  const prefix = config.prefix ?? "/auth";
+  const url = new URL(prefix + "/session", req.url);
   const request = new Request(url, { headers: req.headers });
   const response = await Auth(request, config);
   const { status = 200 } = response;
@@ -27,8 +31,10 @@ const actions = [
   "verify-request",
   "error"
 ];
-function AuthHandle(prefix, authOptions) {
-  return function({ event, resolve }) {
+function AuthHandle(svelteKitAuthOptions) {
+  return async function({ event, resolve }) {
+    const authOptions = typeof svelteKitAuthOptions === "object" ? svelteKitAuthOptions : await svelteKitAuthOptions(event);
+    const { prefix = "/auth" } = authOptions;
     const { url, request } = event;
     event.locals.getSession ??= () => getSession(request, authOptions);
     const action = url.pathname.slice(prefix.length + 1).split("/")[0];
@@ -39,15 +45,19 @@ function AuthHandle(prefix, authOptions) {
   };
 }
 function SvelteKitAuth(options) {
-  const { prefix = "/auth", ...authOptions } = options;
-  authOptions.secret ??= private_env.AUTH_SECRET;
-  authOptions.trustHost ??= !!(private_env.AUTH_TRUST_HOST ?? private_env.VERCEL ?? dev);
-  return AuthHandle(prefix, authOptions);
+  if (typeof options === "object") {
+    options.secret ??= private_env.AUTH_SECRET;
+    options.trustHost ??= !!(private_env.AUTH_TRUST_HOST ?? private_env.VERCEL ?? dev);
+  }
+  return AuthHandle(options);
 }
+dotenv.config();
 const GITHUB_ID = process.env.GITHUB_ID;
 const GITHUB_SECRET = process.env.GITHUB_SECRET;
 const TWITTER_ID = process.env.TWITTER_ID;
 const TWITTER_SECRET = process.env.TWITTER_SECRET;
+const GOOGLE_ID = process.env.GOOGLE_ID;
+const GOOGLE_SECRET = process.env.GOOGLE_SECRET;
 const handle = SvelteKitAuth({
   debug: true,
   providers: [
@@ -59,6 +69,10 @@ const handle = SvelteKitAuth({
       clientId: TWITTER_ID,
       clientSecret: TWITTER_SECRET,
       version: "2.0"
+    }),
+    Google({
+      clientId: GOOGLE_ID,
+      clientSecret: GOOGLE_SECRET
     })
   ]
 });
