@@ -106,9 +106,11 @@ export const actions = {
 			exerciseValue += " (" + exerciseNotes + ")";
 		}
 
-		// look up exercise in the ExerciseReference and add it if it doesn't exist
+		// look up exercise in the ExerciseReference and 
+		//  add it if it doesn't exist for the user
 		const exerciseReference = await prisma.exerciseReference.findFirst({
 			where: {
+				user_id: user.name,
 				exercise_name: exerciseName
 			}
 		});
@@ -117,7 +119,8 @@ export const actions = {
 			// create a new exercise reference
 			const newExerciseReference = await prisma.exerciseReference.create({
 				data: {
-					exercise_name: exerciseName
+					exercise_name: exerciseName,
+					user_id: user.name
 				}
 			});
 
@@ -129,12 +132,9 @@ export const actions = {
 		if(exerciseName.includes("cmd")) {
 			// split off the command
 			const command = exerciseName.split("cmd")[1].toLowerCase();
-			console.log("command: " + command);
 			// switch on the command, trimmed of whitespace
 			switch(command.trim()) {
 				case "count kcals for the day":
-					console.log("counting kcals: " + command);
-
 					const kcalsBurned = await getKcalsForDay(command, dayId, exerciseDate);
 					exerciseName = "Total kcals burned";
 					exerciseValue = kcalsBurned;
