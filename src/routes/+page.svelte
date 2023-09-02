@@ -7,7 +7,7 @@
 		<img src={ta_logo} alt="Tactical Athletics" style="width:256px;" />
 	</h1>
 	<center>
-		<iframe width="375" height="211" src="https://youtu.be/xN2IJOkGXQw" title="YouTube video player" frameborder="1" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+		<iframe width="375" height="211" src="https://youtu.be/B8LQEuIBZp4" title="YouTube video player" frameborder="1" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 	</center>
 
 </section>
