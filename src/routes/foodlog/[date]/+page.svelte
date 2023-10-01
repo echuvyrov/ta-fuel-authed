@@ -8,6 +8,7 @@
 	import { Grid } from 'ag-grid-community';
 	import Typeahead from "svelte-typeahead";
 	import Modal from "./SuggestRecipesForMacros.svelte";
+	import VeganizeThis from "./VeganizeThis.svelte";
 
 	import 'ag-grid-community/styles//ag-grid.css';
 	import 'ag-grid-community/styles//ag-theme-alpine.css';
@@ -18,6 +19,7 @@
     var grid;
 	var isLoading = true;
 	let showModal = false;
+	let showVeganizeThisModal = false;
 
 	var domNodeTotals;
     var gridTotals;
@@ -45,6 +47,11 @@
       		user_id: 0,
       		food_name: "💪 /cmd Suggest some food to fit my macros",
       		food_id: 0,
+    	},
+		{
+      		user_id: 0,
+      		food_name: "💪 /cmd Veganize this: suggest how to convert non-vegan foods for the day to vegan (and log them)",
+      		food_id: 0,
     	});
   	}
 
@@ -63,13 +70,37 @@
     	showModal = false;
   	}
 
+	function showVeganizeThis() {
+		console.log("showVeganizeThis");
+    	showVeganizeThisModal = true;
+  	}
+
+	function getVeganized() {
+    	showVeganizeThisModal = false;
+		isLoading = true;
+  	}
+
+  	function cancelVeganizeThisModal() {
+    	showVeganizeThisModal = false;
+  	}
+
+	let foodData = [
+		data.targetTotals,
+		data.calculatedTotals,
+		data.differenceTotals
+	];
+
 	const submitFood = (e) => {
 		if (e.key == 'Enter') {
 			/* populate hidden form value and submit form programmatically */
 			const foodEntered = document.getElementById('foodautocomplete').value;
 			/* if foodEntered contains cmd, then show modal */
-			if (foodEntered.includes("/cmd")) {
+			if (foodEntered.includes("/cmd Suggest some food to fit my macros")) {
+				console.log("suggest stuff");
 				showCreativeMacros();
+			} else if (foodEntered.includes("/cmd Veganize this:")) {
+				console.log("veganize this");
+				showVeganizeThis();
 			} else {
 				document.forms["foodForm"].elements["food"].value = foodEntered;
 				document.forms["foodForm"].submit();
@@ -425,4 +456,8 @@
 
 {#if showModal}
   <Modal {totalsData} on:save={getCreativeWithMacros} on:cancel={cancelModal} />
+{/if}
+
+{#if showVeganizeThisModal}
+  <VeganizeThis {foodData} on:save={getVeganized} on:cancel={cancelVeganizeThisModal} />
 {/if}
