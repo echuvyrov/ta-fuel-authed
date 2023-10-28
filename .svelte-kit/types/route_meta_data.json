@@ -39,6 +39,9 @@
 	"/foodlog/[date]/updatetargettotals": [
 		"src/routes/foodlog/[date]/updatetargettotals/+server.js"
 	],
+	"/foodlog/[date]/veganizefood": [
+		"src/routes/foodlog/[date]/veganizefood/+server.js"
+	],
 	"/protected": [
 		"src/routes/+layout.server.js"
 	],

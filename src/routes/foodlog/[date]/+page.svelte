@@ -18,14 +18,14 @@
 	var domNode;
     var grid;
 	var isLoading = true;
+	var domNodeTotals;
+    var gridTotals;
 	let showModal = false;
 	let showVeganizeThisModal = false;
 
-	var domNodeTotals;
-    var gridTotals;
-
+	const foodLog = data.rowData;
 	const today = data.today;
-	const todayString = new Date(today).toISOString().split('T')[0];;
+	const todayString = new Date(today).toISOString().split('T')[0];
 
 	// get tomorrow from today + 1 day without time zone
 
@@ -98,7 +98,7 @@
 			if (foodEntered.includes("/cmd Suggest some food to fit my macros")) {
 				console.log("suggest stuff");
 				showCreativeMacros();
-			} else if (foodEntered.includes("/cmd Veganize this:")) {
+			} else if (foodEntered.includes("/cmd Veganize this")) {
 				console.log("veganize this");
 				showVeganizeThis();
 			} else {
@@ -459,5 +459,5 @@
 {/if}
 
 {#if showVeganizeThisModal}
-  <VeganizeThis {foodData} on:save={getVeganized} on:cancel={cancelVeganizeThisModal} />
+  <VeganizeThis {foodLog} on:save={getVeganized} on:cancel={cancelVeganizeThisModal} />
 {/if}
