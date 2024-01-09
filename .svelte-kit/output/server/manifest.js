@@ -7,10 +7,10 @@ function __memo(fn) {
 return {
 	appDir: "_app",
 	appPath: "_app",
-	assets: new Set([".DS_Store","favicon.ico","naturalbbevents.hml"]),
-	mimeTypes: {".ico":"image/vnd.microsoft.icon"},
+	assets: new Set([".DS_Store","events.html","favicon.ico","styles.css"]),
+	mimeTypes: {".html":"text/html",".css":"text/css"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.34ed9c4d.js","app":"_app/immutable/entry/app.2b6d88e9.js","imports":["_app/immutable/entry/start.34ed9c4d.js","_app/immutable/chunks/index.4bd8640c.js","_app/immutable/chunks/singletons.51925275.js","_app/immutable/chunks/index.fd763c3b.js","_app/immutable/entry/app.2b6d88e9.js","_app/immutable/chunks/index.4bd8640c.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.ffc06bf0.js","app":"_app/immutable/entry/app.8f53afee.js","imports":["_app/immutable/entry/start.ffc06bf0.js","_app/immutable/chunks/index.2f3c9293.js","_app/immutable/chunks/singletons.3e2d54fb.js","_app/immutable/chunks/index.2a178420.js","_app/immutable/entry/app.8f53afee.js","_app/immutable/chunks/index.2f3c9293.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -23,8 +23,7 @@ return {
 			__memo(() => import('./nodes/8.js')),
 			__memo(() => import('./nodes/9.js')),
 			__memo(() => import('./nodes/10.js')),
-			__memo(() => import('./nodes/11.js')),
-			__memo(() => import('./nodes/12.js'))
+			__memo(() => import('./nodes/11.js'))
 		],
 		routes: [
 			{
@@ -105,24 +104,24 @@ return {
 				endpoint: __memo(() => import('./entries/endpoints/foodlog/_date_/updatetargettotals/_server.js'))
 			},
 			{
-				id: "/naturalbbevents",
-				pattern: /^\/naturalbbevents\/?$/,
-				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 9 },
-				endpoint: null
+				id: "/foodlog/[date]/veganizefood",
+				pattern: /^\/foodlog\/([^/]+?)\/veganizefood\/?$/,
+				params: [{"name":"date","optional":false,"rest":false,"chained":false}],
+				page: null,
+				endpoint: __memo(() => import('./entries/endpoints/foodlog/_date_/veganizefood/_server.js'))
 			},
 			{
 				id: "/protected",
 				pattern: /^\/protected\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 10 },
+				page: { layouts: [0,], errors: [1,], leaf: 9 },
 				endpoint: null
 			},
 			{
 				id: "/reference",
 				pattern: /^\/reference\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 11 },
+				page: { layouts: [0,], errors: [1,], leaf: 10 },
 				endpoint: null
 			},
 			{
@@ -136,7 +135,7 @@ return {
 				id: "/traininglog/[date]",
 				pattern: /^\/traininglog\/([^/]+?)\/?$/,
 				params: [{"name":"date","optional":false,"rest":false,"chained":false}],
-				page: { layouts: [0,], errors: [1,], leaf: 12 },
+				page: { layouts: [0,], errors: [1,], leaf: 11 },
 				endpoint: null
 			},
 			{

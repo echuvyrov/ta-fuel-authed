@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { d as dev } from "./environment.js";
-import { d as private_env } from "./internal.js";
+import { d as private_env, b as base } from "./internal.js";
 import { Auth } from "@auth/core";
 import GitHub from "@auth/core/providers/github";
 import Twitter from "@auth/core/providers/twitter";
@@ -9,7 +9,7 @@ import "@auth/core/providers/discord";
 async function getSession(req, config) {
   config.secret ??= private_env.AUTH_SECRET;
   config.trustHost ??= true;
-  const prefix = config.prefix ?? "/auth";
+  const prefix = config.prefix ?? `${base}/auth`;
   const url = new URL(prefix + "/session", req.url);
   const request = new Request(url, { headers: req.headers });
   const response = await Auth(request, config);
@@ -34,7 +34,7 @@ const actions = [
 function AuthHandle(svelteKitAuthOptions) {
   return async function({ event, resolve }) {
     const authOptions = typeof svelteKitAuthOptions === "object" ? svelteKitAuthOptions : await svelteKitAuthOptions(event);
-    const { prefix = "/auth" } = authOptions;
+    const { prefix = `${base}/auth` } = authOptions;
     const { url, request } = event;
     event.locals.getSession ??= () => getSession(request, authOptions);
     const action = url.pathname.slice(prefix.length + 1).split("/")[0];
@@ -48,6 +48,7 @@ function SvelteKitAuth(options) {
   if (typeof options === "object") {
     options.secret ??= private_env.AUTH_SECRET;
     options.trustHost ??= !!(private_env.AUTH_TRUST_HOST ?? private_env.VERCEL ?? dev);
+    options.prefix ??= `${base}/auth`;
   }
   return AuthHandle(options);
 }

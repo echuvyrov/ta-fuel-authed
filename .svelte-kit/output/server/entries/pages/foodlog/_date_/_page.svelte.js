@@ -5,6 +5,7 @@ import "ag-grid-community";
 import { T as Typeahead } from "../../../../chunks/Typeahead.js";
 /* empty css                                                        */import { C as Chasing } from "../../../../chunks/Chasing.js";
 /* empty css                                  */const SuggestRecipesForMacros_svelte_svelte_type_style_lang = "";
+const VeganizeThis_svelte_svelte_type_style_lang = "";
 function onGridSizeChanged(params) {
   var gridWidth = document.getElementById("foodLog").offsetWidth;
   var columnsToShow = [];
@@ -52,6 +53,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;
   var domNode;
   var domNodeTotals;
+  data.rowData;
   const today = data.today;
   const todayString = new Date(today).toISOString().split("T")[0];
   var tomorrow = new Date(today);
@@ -62,13 +64,21 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const yesterdayString = yesterday.toISOString().split("T")[0];
   let typeaheadData = data.foodReferences;
   if (!typeaheadData.some((item) => item.food_name.indexOf("cmd") > 0)) {
-    typeaheadData.push({
-      user_id: 0,
-      food_name: "💪 /cmd Suggest some food to fit my macros",
-      food_id: 0
-    });
+    typeaheadData.push(
+      {
+        user_id: 0,
+        food_name: "💪 /cmd Suggest some food to fit my macros",
+        food_id: 0
+      },
+      {
+        user_id: 0,
+        food_name: "💪 /cmd Veganize this: suggest how to convert non-vegan foods for the day to vegan (and log them)",
+        food_id: 0
+      }
+    );
   }
   const typeaheadExtract = (item) => item.food_name;
+  [data.targetTotals, data.calculatedTotals, data.differenceTotals];
   let columnDefs = [
     {
       headerName: "Food",
@@ -190,6 +200,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 	
 	<div style="${"display: flex; justify-content: center; align-items: center;"}"><div id="${"datagrid"}" class="${"ag-theme-alpine"}" style="${"height: 170vh; width: 100%;"}"${add_attribute("this", domNode, 0)}></div></div></div>	
+
+${``}
 
 ${``}`;
 });

@@ -138,6 +138,12 @@ class TrainingSmartAIThingie extends SmartAIThingie {
     var foodIdeaJSON = rawResponse.choices[0].message.content;
     return foodIdeaJSON;
   }
+  static async askToVeganizeFoodJSON(prompt) {
+    let veganizerPrompt = "Please analyze my daily food log below and make recommendations 		on how I can substitute each one of them with vegan equivalents that have roughly the same nutritional profile 		in terms of protein, fat and carbs.         If no substitutions are needed, state that.         Do not overanalyze things: if food such as bread is generally vegan, don't bother suggesting a vegan bread.         Try not to be too verbose, but do be specific.         Ignore the items that you cannot interpret.         For the cases where substitutions are needed, provide a brief reason why substitution is needed.         For each item that needs to be substituted, make as specific recommendation as you can, with brand name,         quantity and nutritional breakdown in terms of fats, carbs and protein to closely match the nutritional profile of the original food.         Similarly, try to recognize brands that are vegan, such as Impossible or Beyond, and don't bother suggesting a vegan version of a brand         Here's my daily food intake: \n\n" + prompt;
+    var rawResponse = await super.askForJSON(veganizerPrompt);
+    var veganizedFoods = rawResponse.choices[0].message.content;
+    return veganizedFoods;
+  }
   /* a function to create an array from a string with line breaks as separators for different elements */
   static async parseTraining(rawResponse) {
     var rawTrainingJSON = rawResponse.choices[0].message.content;
@@ -156,6 +162,12 @@ class TrainingSmartAIThingie extends SmartAIThingie {
     var foodIdea = await this.askForFoodIdeaJSON(prompt);
     console.log("Food Idea for given Macros: " + foodIdea);
     return foodIdea;
+  }
+  static async askToVeganizeFood(prompt) {
+    console.log("asking to veganize food " + prompt);
+    var veganizedFoods = await this.askToVeganizeFoodJSON(prompt);
+    console.log("Food Idea for given Macros: " + veganizedFoods);
+    return veganizedFoods;
   }
 }
 export {
