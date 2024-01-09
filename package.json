@@ -15,8 +15,8 @@
     "postinstall": "prisma generate"
   },
   "devDependencies": {
-    "@sveltejs/adapter-vercel": "latest",
     "@sveltejs/adapter-auto": "next",
+    "@sveltejs/adapter-vercel": "latest",
     "@sveltejs/kit": "next",
     "prisma": "^5.1.0",
     "svelte": "^3.55.0",

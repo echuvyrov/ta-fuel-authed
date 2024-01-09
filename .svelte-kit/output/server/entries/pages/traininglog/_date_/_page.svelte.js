@@ -1,4 +1,4 @@
-import { c as create_ssr_component, o as onDestroy, v as validate_component, d as each, b as add_attribute, e as escape } from "../../../../chunks/index3.js";
+import { c as create_ssr_component, o as onDestroy, v as validate_component, d as each, b as add_attribute, e as escape } from "../../../../chunks/index2.js";
 import "ag-grid-community";
 /* empty css                                                        */import { C as Chasing } from "../../../../chunks/Chasing.js";
 import { T as Typeahead } from "../../../../chunks/Typeahead.js";
@@ -30,7 +30,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.data(data);
   $$result.css.add(css);
   return `${`
-  <div style="${"display: flex; justify-content: center; padding: 10px;"}">${validate_component(Chasing, "Chasing").$$render(
+  <div style="display: flex; justify-content: center; padding: 10px;">${validate_component(Chasing, "Chasing").$$render(
     $$result,
     {
       size: "60",
@@ -42,18 +42,18 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {}
   )}</div>`}
 
-<div class="${"newProgram svelte-1krqaef"}"><button class="${"svelte-1krqaef"}">create new training program </button></div>
+<div class="newProgram svelte-1krqaef"><button class="svelte-1krqaef">create new training program </button></div>
 
 
-<div class="${"trainingdaytabs"}">
+<div class="trainingdaytabs">
   ${each(data.trainingProgamDays.training_days, (day) => {
     return `
-    <button class="${"trainingdaytab svelte-1krqaef"}">${escape(day.day_description)}</button>`;
+    <button class="trainingdaytab svelte-1krqaef">${escape(day.day_description)}</button>`;
   })}</div>
 
-<div class="${"exerciseandload"}">
+<div class="exerciseandload">
   
-  <form action="${"?/addexercise"}" method="${"POST"}">${validate_component(Typeahead, "Typeahead").$$render(
+  <form action="?/addexercise" method="POST">${validate_component(Typeahead, "Typeahead").$$render(
     $$result,
     {
       id: "exerciseautocomplete",
@@ -71,25 +71,25 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {}
   )}</form>
 
-  <form id="${"trainingGrid"}" action="${"?/addexercise"}" method="${"POST"}"><input type="${"hidden"}" name="${"day_id"}"${add_attribute("value", dayId, 0)}>
-    <input type="${"hidden"}" name="${"day_id"}"${add_attribute("value", dayDescription, 0)}>
-    <input type="${"hidden"}" name="${"exercise_date"}"${add_attribute("value", todayString, 0)}>
+  <form id="trainingGrid" action="?/addexercise" method="POST"><input type="hidden" name="day_id"${add_attribute("value", dayId, 0)}>
+    <input type="hidden" name="day_id"${add_attribute("value", dayDescription, 0)}>
+    <input type="hidden" name="exercise_date"${add_attribute("value", todayString, 0)}>
 
-    <input type="${"hidden"}" name="${"exercise_name"}" class="${"training_input svelte-1krqaef"}" width="${"20%"}">
-
-    
-    <input type="${"text"}" name="${"exercise_load"}" placeholder="${"Load, i.e. weight or distance"}" class="${"training_input svelte-1krqaef"}" width="${"20%"}">
+    <input type="hidden" name="exercise_name" class="training_input svelte-1krqaef" width="20%">
 
     
-    <input type="${"text"}" name="${"exercise_reps"}" placeholder="${"Reps"}" class="${"training_input svelte-1krqaef"}" width="${"20%"}">
+    <input type="text" name="exercise_load" placeholder="Load, i.e. weight or distance" class="training_input svelte-1krqaef" width="20%">
 
     
-    <input type="${"text"}" name="${"exercise_notes"}" placeholder="${"Notes, i.e. how you felt or something for next time"}" class="${"training_input svelte-1krqaef"}" width="${"30%"}">
+    <input type="text" name="exercise_reps" placeholder="Reps" class="training_input svelte-1krqaef" width="20%">
 
-    <input type="${"button"}" value="${"add"}" class="${"training_input submit_button svelte-1krqaef"}"></form></div>
+    
+    <input type="text" name="exercise_notes" placeholder="Notes, i.e. how you felt or something for next time" class="training_input svelte-1krqaef" width="30%">
+
+    <input type="button" value="add" class="training_input submit_button svelte-1krqaef"></form></div>
 
 
-<div style="${"display: flex; justify-content: center; align-items: center;"}"><div id="${"datagrid"}" class="${"ag-theme-alpine"}" style="${"height: 70vh; width: 100%;"}"${add_attribute("this", domNode, 0)}></div></div>
+<div style="display: flex; justify-content: center; align-items: center;"><div id="datagrid" class="ag-theme-alpine" style="height: 70vh; width: 100%;"${add_attribute("this", domNode, 0)}></div></div>
 
 ${``}`;
 });

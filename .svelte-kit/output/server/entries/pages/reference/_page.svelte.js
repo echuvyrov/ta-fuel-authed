@@ -1,4 +1,4 @@
-import { c as create_ssr_component, o as onDestroy, v as validate_component, b as add_attribute } from "../../../chunks/index3.js";
+import { c as create_ssr_component, o as onDestroy, v as validate_component, b as add_attribute } from "../../../chunks/index2.js";
 import "ag-grid-community";
 /* empty css                                                     */import { C as Chasing } from "../../../chunks/Chasing.js";
 /* empty css                               */const _page_svelte_svelte_type_style_lang = "";
@@ -15,10 +15,10 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.data === void 0 && $$bindings.data && data !== void 0)
     $$bindings.data(data);
   $$result.css.add(css);
-  return `<form action="${"?/addfood"}" method="${"POST"}"><input name="${"food"}" value="${"Search for or add food to the reference list"}" class="${"svelte-brt59l"}"></form>
+  return `<form action="?/addfood" method="POST"><input name="food" value="Search for or add food to the reference list" class="svelte-brt59l"></form>
 
 ${`
-<div style="${"display: flex; justify-content: center; padding: 10px;"}">${validate_component(Chasing, "Chasing").$$render(
+<div style="display: flex; justify-content: center; padding: 10px;">${validate_component(Chasing, "Chasing").$$render(
     $$result,
     {
       size: "60",
@@ -33,7 +33,7 @@ ${`
 <center><h3>Food Reference List</h3></center>
 
 
-<div style="${"display: flex; justify-content: center; align-items: center;"}"><div id="${"datagrid"}" class="${"ag-theme-alpine"}" style="${"height: 70vh; width: 100%;"}"${add_attribute("this", domNode, 0)}></div>
+<div style="display: flex; justify-content: center; align-items: center;"><div id="datagrid" class="ag-theme-alpine" style="height: 70vh; width: 100%;"${add_attribute("this", domNode, 0)}></div>
 </div>`;
 });
 export {

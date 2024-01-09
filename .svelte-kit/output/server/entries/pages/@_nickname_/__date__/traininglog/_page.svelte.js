@@ -1,4 +1,4 @@
-import { c as create_ssr_component, o as onDestroy, e as escape, d as each, b as add_attribute } from "../../../../../chunks/index3.js";
+import { c as create_ssr_component, o as onDestroy, e as escape, d as each, b as add_attribute } from "../../../../../chunks/index2.js";
 import "ag-grid-community";
 /* empty css                                     */const _page_svelte_svelte_type_style_lang = "";
 const css = {
@@ -15,19 +15,19 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.data === void 0 && $$bindings.data && data !== void 0)
     $$bindings.data(data);
   $$result.css.add(css);
-  return `<div class="${"container"}"><h3 class="${"svelte-hl29oo"}"><a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/"}">@${escape(data.nickname)} Food Porn</a> 
+  return `<div class="container"><h3 class="svelte-hl29oo"><a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/"}">@${escape(data.nickname)} Food Porn</a> 
 		| <a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/traininglog"}">Training</a> 
 		| <a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/foodlog"}">Food Log</a></h3></div>
 
 
-<div class="${"trainingdaytabs"}">
+<div class="trainingdaytabs">
   ${each(data.trainingProgamDays.training_days, (day) => {
     return `
-    <button class="${"trainingdaytab svelte-hl29oo"}">${escape(day.day_description)}</button>`;
+    <button class="trainingdaytab svelte-hl29oo">${escape(day.day_description)}</button>`;
   })}</div>
 
 
-<div style="${"display: flex; justify-content: center; align-items: center;"}"><div id="${"datagrid"}" class="${"ag-theme-alpine"}" style="${"height: 70vh; width: 100%;"}"${add_attribute("this", domNode, 0)}></div>
+<div style="display: flex; justify-content: center; align-items: center;"><div id="datagrid" class="ag-theme-alpine" style="height: 70vh; width: 100%;"${add_attribute("this", domNode, 0)}></div>
 </div>`;
 });
 export {

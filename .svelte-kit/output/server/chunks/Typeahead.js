@@ -1,4 +1,4 @@
-import { c as create_ssr_component, f as compute_rest_props, h as createEventDispatcher, b as add_attribute, e as escape, i as spread, j as escape_object, k as escape_attribute_value, v as validate_component, d as each, l as compute_slots } from "./index3.js";
+import { c as create_ssr_component, f as compute_rest_props, h as createEventDispatcher, b as add_attribute, e as escape, i as spread, j as escape_object, k as escape_attribute_value, v as validate_component, d as each, l as compute_slots } from "./index2.js";
 import fuzzy from "fuzzy";
 const Search_svelte_svelte_type_style_lang = "";
 const css$1 = {
@@ -146,9 +146,10 @@ const Typeahead = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     }
     $$rendered = `
 
-<div data-svelte-typeahead role="${"combobox"}" aria-haspopup="${"listbox"}" aria-controls="${escape(id, true) + "-listbox"}"${add_attribute("aria-expanded", showResults, 0)} id="${escape(id, true) + "-typeahead"}" class="${["svelte-1t4elht", results.length > 0 ? "dropdown" : ""].join(" ").trim()}"${add_attribute("this", comboboxRef, 0)}>${validate_component(Search$1, "Search").$$render(
+<div data-svelte-typeahead role="combobox" aria-haspopup="listbox" aria-controls="${escape(id, true) + "-listbox"}"${add_attribute("aria-expanded", showResults, 0)} id="${escape(id, true) + "-typeahead"}" class="${["svelte-1t4elht", results.length > 0 ? "dropdown" : ""].join(" ").trim()}"${add_attribute("this", comboboxRef, 0)}>${validate_component(Search$1, "Search").$$render(
       $$result,
       Object.assign(
+        {},
         { id },
         { removeFormAriaAttributes: true },
         $$restProps,
@@ -173,9 +174,9 @@ const Typeahead = create_ssr_component(($$result, $$props, $$bindings, slots) =>
       },
       {}
     )}
-  <ul role="${"listbox"}" aria-labelledby="${escape(id, true) + "-label"}" id="${escape(id, true) + "-listbox"}" class="${["svelte-1t4elht", "svelte-typeahead-list"].join(" ").trim()}">${showResults ? `${each(results, (result2, index2) => {
+  <ul role="listbox" aria-labelledby="${escape(id, true) + "-label"}" id="${escape(id, true) + "-listbox"}" class="${["svelte-1t4elht", "svelte-typeahead-list"].join(" ").trim()}">${showResults ? `${each(results, (result2, index2) => {
       return `
-        <li role="${"option"}" id="${escape(id, true) + "-result-" + escape(index2, true)}"${add_attribute("aria-selected", selectedIndex === index2, 0)} class="${[
+        <li role="option" id="${escape(id, true) + "-result-" + escape(index2, true)}"${add_attribute("aria-selected", selectedIndex === index2, 0)} class="${[
         "svelte-1t4elht",
         (selectedIndex === index2 ? "selected" : "") + " " + (result2.disabled ? "disabled" : "")
       ].join(" ").trim()}">${slots.default ? slots.default({ result: result2, index: index2, value }) : `

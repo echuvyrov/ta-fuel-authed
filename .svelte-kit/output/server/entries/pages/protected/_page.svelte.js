@@ -1,4 +1,4 @@
-import { c as create_ssr_component, a as subscribe, e as escape } from "../../../chunks/index3.js";
+import { c as create_ssr_component, a as subscribe, e as escape } from "../../../chunks/index2.js";
 import { p as page } from "../../../chunks/stores2.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $page, $$unsubscribe_page;
@@ -9,7 +9,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   signed in.
 </p>
 <p>Session expiry: ${escape($page.data.session?.expires)}</p>` : `<h1>Access Denied</h1>
-<p><a href="${"/auth/signin"}">You must be signed in to view this page
+<p><a href="/auth/signin">You must be signed in to view this page
   </a></p>`}`;
 });
 export {

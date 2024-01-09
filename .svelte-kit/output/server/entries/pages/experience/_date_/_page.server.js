@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import "../../../../chunks/index3.js";
 import { u as user } from "../../../../chunks/stores.js";
 const prisma = new PrismaClient();
 var foodNutrition = "wait for it...";

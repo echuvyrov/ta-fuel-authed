@@ -1,5 +1,5 @@
 import { proxied } from "svelte-proxied-store";
-import { d as derived } from "./index2.js";
+import { d as derived } from "./index3.js";
 const chains = [
   {
     name: "Ethereum Mainnet",

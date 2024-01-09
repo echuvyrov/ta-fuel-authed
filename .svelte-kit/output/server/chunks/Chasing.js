@@ -1,4 +1,4 @@
-import { c as create_ssr_component, e as escape, d as each } from "./index3.js";
+import { c as create_ssr_component, e as escape, d as each } from "./index2.js";
 /* empty css                                       */const durationUnitRegex = /[a-zA-Z]/;
 const range = (size, startAt = 0) => [...Array(size).keys()].map((i) => i + startAt);
 const css = {
@@ -24,7 +24,7 @@ const Chasing = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.pause === void 0 && $$bindings.pause && pause !== void 0)
     $$bindings.pause(pause);
   $$result.css.add(css);
-  return `<div class="${"wrapper svelte-1uhddr4"}" style="${"--size: " + escape(size, true) + escape(unit, true) + "; --color: " + escape(color, true) + "; --duration: " + escape(duration, true) + ";"}"><div class="${["spinner svelte-1uhddr4", pause ? "pause-animation" : ""].join(" ").trim()}">${each(range(2, 0), (version) => {
+  return `<div class="wrapper svelte-1uhddr4" style="${"--size: " + escape(size, true) + escape(unit, true) + "; --color: " + escape(color, true) + "; --duration: " + escape(duration, true) + ";"}"><div class="${["spinner svelte-1uhddr4", pause ? "pause-animation" : ""].join(" ").trim()}">${each(range(2, 0), (version) => {
     return `<div class="${["dot svelte-1uhddr4", pause ? "pause-animation" : ""].join(" ").trim()}" style="${"animation-delay: " + escape(
       version === 1 ? `${+durationNum / 2}${durationUnit}` : "0s",
       true
