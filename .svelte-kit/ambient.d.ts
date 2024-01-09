@@ -5,7 +5,7 @@
 /// <reference types="@sveltejs/kit" />
 
 /**
- * Environment variables [loaded by Vite](https://vitejs.dev/guide/env-and-mode.html#env-files) from `.env` files and `process.env`. Like [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), this module cannot be imported into client-side code. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env) _and do_ start with [`config.kit.env.privatePrefix`](https://kit.svelte.dev/docs/configuration#env) (if configured).
+ * Environment variables [loaded by Vite](https://vitejs.dev/guide/env-and-mode.html#env-files) from `.env` files and `process.env`. Like [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), this module cannot be imported into client-side code. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env).
  * 
  * _Unlike_ [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), the values exported from this module are statically injected into your bundle at build time, enabling optimisations like dead code elimination.
  * 
@@ -26,83 +26,126 @@
  * ```
  */
 declare module '$env/static/private' {
-	export const GITHUB_ID: string;
-	export const GITHUB_SECRET: string;
-	export const AUTH_SECRET: string;
-	export const AUTH0_CLIENT_ID: string;
-	export const AUTH0_CLIENT_SECRET: string;
-	export const AUTH0_DOMAIN: string;
-	export const AUTH0_BASE_URL: string;
-	export const AUTH0_ISSUER_BASE_URL: string;
-	export const TWITTER_KEY: string;
-	export const TWITTER_ID: string;
-	export const TWITTER_SECRET: string;
-	export const GOOGLE_ID: string;
-	export const GOOGLE_SECRET: string;
-	export const GPT3_API_KEY: string;
-	export const POSTGRES_URL: string;
-	export const POSTGRES_PRISMA_URL: string;
-	export const POSTGRES_URL_NON_POOLING: string;
-	export const DATABASE_URL: string;
 	export const TERM_PROGRAM: string;
+	export const npm_package_exports___vite_import: string;
+	export const npm_package_exports___hooks_import: string;
 	export const NODE: string;
+	export const npm_package_dependencies_sade: string;
 	export const INIT_CWD: string;
-	export const TERM: string;
+	export const npm_package_devDependencies_typescript: string;
+	export const npm_package_devDependencies__types_marked: string;
+	export const npm_package_homepage: string;
+	export const npm_config_version_git_tag: string;
 	export const SHELL: string;
-	export const npm_config_metrics_registry: string;
+	export const TERM: string;
+	export const npm_package_devDependencies_vite: string;
+	export const npm_package_dependencies_devalue: string;
 	export const TMPDIR: string;
-	export const npm_config_global_prefix: string;
 	export const CONDA_SHLVL: string;
-	export const TERM_PROGRAM_VERSION: string;
+	export const npm_package_scripts_lint: string;
+	export const npm_config_init_license: string;
 	export const CONDA_PROMPT_MODIFIER: string;
-	export const COLOR: string;
+	export const TERM_PROGRAM_VERSION: string;
+	export const npm_package_dependencies_set_cookie_parser: string;
+	export const npm_package_dependencies_cookie: string;
 	export const TERM_SESSION_ID: string;
-	export const npm_config_noproxy: string;
+	export const npm_package_devDependencies_svelte_preprocess: string;
 	export const npm_config_registry: string;
-	export const npm_config_local_prefix: string;
+	export const npm_package_repository_url: string;
+	export const npm_package_readmeFilename: string;
 	export const USER: string;
+	export const npm_package_description: string;
+	export const npm_package_exports___node_import: string;
+	export const npm_package_exports___package_json: string;
+	export const npm_package_dependencies_esm_env: string;
+	export const npm_package_license: string;
 	export const OPENAI_API_KEY: string;
-	export const npm_config_globalconfig: string;
-	export const HOMEBREW_NO_ANALYTICS: string;
 	export const CONDA_EXE: string;
+	export const HOMEBREW_NO_ANALYTICS: string;
+	export const npm_package_exports___import: string;
+	export const npm_package_repository_directory: string;
 	export const SSH_AUTH_SOCK: string;
 	export const __CF_USER_TEXT_ENCODING: string;
+	export const npm_package_bin_svelte_kit: string;
 	export const npm_execpath: string;
+	export const npm_package_devDependencies__types_sade: string;
+	export const npm_package_devDependencies_svelte: string;
+	export const npm_package_dependencies__sveltejs_vite_plugin_svelte: string;
 	export const MAVEN_OPTS: string;
 	export const _CE_CONDA: string;
 	export const PATH: string;
-	export const npm_package_json: string;
-	export const _: string;
+	export const npm_config_argv: string;
+	export const npm_package_scripts_postinstall: string;
+	export const npm_package_devDependencies_rollup: string;
+	export const npm_package_dependencies_magic_string: string;
 	export const LaunchInstanceID: string;
-	export const npm_config_userconfig: string;
-	export const npm_config_init_module: string;
-	export const __CFBundleIdentifier: string;
+	export const _: string;
 	export const CONDA_PREFIX: string;
-	export const npm_command: string;
-	export const PWD: string;
+	export const __CFBundleIdentifier: string;
 	export const HOMEBREW_HOME: string;
+	export const PWD: string;
+	export const npm_package_devDependencies__types_mime: string;
 	export const JAVA_HOME: string;
+	export const npm_package_devDependencies_uvu: string;
 	export const npm_lifecycle_event: string;
-	export const EDITOR: string;
 	export const LANG: string;
+	export const npm_package_types: string;
+	export const npm_package_devDependencies_marked: string;
+	export const npm_package_repository_type: string;
+	export const npm_package_name: string;
+	export const npm_package_scripts_test_integration: string;
+	export const npm_package_devDependencies__types_connect: string;
+	export const npm_package_dependencies_mime: string;
+	export const npm_package_exports___node_polyfills_import: string;
+	export const npm_package_exports___types: string;
+	export const npm_config_version_commit_hooks: string;
 	export const XPC_FLAGS: string;
-	export const npm_config_node_gyp: string;
-	export const XPC_SERVICE_NAME: string;
+	export const npm_package_dependencies_tiny_glob: string;
+	export const npm_config_bin_links: string;
+	export const npm_package_engines_node: string;
+	export const npm_package_dependencies_sirv: string;
 	export const _CE_M: string;
-	export const HOME: string;
+	export const XPC_SERVICE_NAME: string;
+	export const npm_package_version: string;
 	export const SHLVL: string;
+	export const HOME: string;
+	export const npm_package_dependencies_undici: string;
+	export const npm_package_type: string;
+	export const npm_package_scripts_test: string;
+	export const npm_package_scripts_check_all: string;
+	export const npm_config_save_prefix: string;
 	export const npm_config_strict_ssl: string;
-	export const npm_config_cache: string;
-	export const LOGNAME: string;
+	export const npm_config_version_git_message: string;
 	export const CONDA_PYTHON_EXE: string;
+	export const LOGNAME: string;
+	export const npm_package_scripts_format: string;
+	export const npm_package_peerDependencies_vite: string;
 	export const npm_lifecycle_script: string;
+	export const npm_package_peerDependencies_svelte: string;
+	export const npm_package_devDependencies__types_set_cookie_parser: string;
 	export const CONDA_DEFAULT_ENV: string;
-	export const npm_config_user_agent: string;
 	export const MYSQL_HOME: string;
+	export const npm_package_files_3: string;
+	export const npm_package_dependencies__types_cookie: string;
+	export const npm_config_version_git_sign: string;
+	export const npm_config_ignore_scripts: string;
+	export const npm_config_user_agent: string;
+	export const npm_package_files_2: string;
+	export const npm_package_devDependencies__types_node: string;
+	export const npm_package_devDependencies__playwright_test: string;
+	export const npm_package_files_1: string;
+	export const npm_package_files_0: string;
+	export const npm_package_dependencies_kleur: string;
+	export const npm_config_init_version: string;
+	export const npm_config_ignore_optional: string;
 	export const SECURITYSESSIONID: string;
+	export const npm_package_files_6: string;
+	export const npm_package_scripts_check: string;
+	export const npm_package_files_5: string;
 	export const npm_node_execpath: string;
-	export const npm_config_prefix: string;
-	export const NODE_ENV: string;
+	export const npm_package_scripts_test_unit: string;
+	export const npm_package_files_4: string;
+	export const npm_config_version_tag_prefix: string;
 }
 
 /**
@@ -115,11 +158,11 @@ declare module '$env/static/private' {
  * ```
  */
 declare module '$env/static/public' {
-	
+
 }
 
 /**
- * This module provides access to runtime environment variables, as defined by the platform you're running on. For example if you're using [`adapter-node`](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) (or running [`vite preview`](https://kit.svelte.dev/docs/cli)), this is equivalent to `process.env`. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env) _and do_ start with [`config.kit.env.privatePrefix`](https://kit.svelte.dev/docs/configuration#env) (if configured).
+ * This module provides access to runtime environment variables, as defined by the platform you're running on. For example if you're using [`adapter-node`](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) (or running [`vite preview`](https://kit.svelte.dev/docs/cli)), this is equivalent to `process.env`. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env).
  * 
  * This module cannot be imported into client-side code.
  * 
@@ -132,85 +175,128 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
-		GITHUB_ID: string;
-		GITHUB_SECRET: string;
-		AUTH_SECRET: string;
-		AUTH0_CLIENT_ID: string;
-		AUTH0_CLIENT_SECRET: string;
-		AUTH0_DOMAIN: string;
-		AUTH0_BASE_URL: string;
-		AUTH0_ISSUER_BASE_URL: string;
-		TWITTER_KEY: string;
-		TWITTER_ID: string;
-		TWITTER_SECRET: string;
-		GOOGLE_ID: string;
-		GOOGLE_SECRET: string;
-		GPT3_API_KEY: string;
-		POSTGRES_URL: string;
-		POSTGRES_PRISMA_URL: string;
-		POSTGRES_URL_NON_POOLING: string;
-		DATABASE_URL: string;
 		TERM_PROGRAM: string;
+		npm_package_exports___vite_import: string;
+		npm_package_exports___hooks_import: string;
 		NODE: string;
+		npm_package_dependencies_sade: string;
 		INIT_CWD: string;
-		TERM: string;
+		npm_package_devDependencies_typescript: string;
+		npm_package_devDependencies__types_marked: string;
+		npm_package_homepage: string;
+		npm_config_version_git_tag: string;
 		SHELL: string;
-		npm_config_metrics_registry: string;
+		TERM: string;
+		npm_package_devDependencies_vite: string;
+		npm_package_dependencies_devalue: string;
 		TMPDIR: string;
-		npm_config_global_prefix: string;
 		CONDA_SHLVL: string;
-		TERM_PROGRAM_VERSION: string;
+		npm_package_scripts_lint: string;
+		npm_config_init_license: string;
 		CONDA_PROMPT_MODIFIER: string;
-		COLOR: string;
+		TERM_PROGRAM_VERSION: string;
+		npm_package_dependencies_set_cookie_parser: string;
+		npm_package_dependencies_cookie: string;
 		TERM_SESSION_ID: string;
-		npm_config_noproxy: string;
+		npm_package_devDependencies_svelte_preprocess: string;
 		npm_config_registry: string;
-		npm_config_local_prefix: string;
+		npm_package_repository_url: string;
+		npm_package_readmeFilename: string;
 		USER: string;
+		npm_package_description: string;
+		npm_package_exports___node_import: string;
+		npm_package_exports___package_json: string;
+		npm_package_dependencies_esm_env: string;
+		npm_package_license: string;
 		OPENAI_API_KEY: string;
-		npm_config_globalconfig: string;
-		HOMEBREW_NO_ANALYTICS: string;
 		CONDA_EXE: string;
+		HOMEBREW_NO_ANALYTICS: string;
+		npm_package_exports___import: string;
+		npm_package_repository_directory: string;
 		SSH_AUTH_SOCK: string;
 		__CF_USER_TEXT_ENCODING: string;
+		npm_package_bin_svelte_kit: string;
 		npm_execpath: string;
+		npm_package_devDependencies__types_sade: string;
+		npm_package_devDependencies_svelte: string;
+		npm_package_dependencies__sveltejs_vite_plugin_svelte: string;
 		MAVEN_OPTS: string;
 		_CE_CONDA: string;
 		PATH: string;
-		npm_package_json: string;
-		_: string;
+		npm_config_argv: string;
+		npm_package_scripts_postinstall: string;
+		npm_package_devDependencies_rollup: string;
+		npm_package_dependencies_magic_string: string;
 		LaunchInstanceID: string;
-		npm_config_userconfig: string;
-		npm_config_init_module: string;
-		__CFBundleIdentifier: string;
+		_: string;
 		CONDA_PREFIX: string;
-		npm_command: string;
-		PWD: string;
+		__CFBundleIdentifier: string;
 		HOMEBREW_HOME: string;
+		PWD: string;
+		npm_package_devDependencies__types_mime: string;
 		JAVA_HOME: string;
+		npm_package_devDependencies_uvu: string;
 		npm_lifecycle_event: string;
-		EDITOR: string;
 		LANG: string;
+		npm_package_types: string;
+		npm_package_devDependencies_marked: string;
+		npm_package_repository_type: string;
+		npm_package_name: string;
+		npm_package_scripts_test_integration: string;
+		npm_package_devDependencies__types_connect: string;
+		npm_package_dependencies_mime: string;
+		npm_package_exports___node_polyfills_import: string;
+		npm_package_exports___types: string;
+		npm_config_version_commit_hooks: string;
 		XPC_FLAGS: string;
-		npm_config_node_gyp: string;
-		XPC_SERVICE_NAME: string;
+		npm_package_dependencies_tiny_glob: string;
+		npm_config_bin_links: string;
+		npm_package_engines_node: string;
+		npm_package_dependencies_sirv: string;
 		_CE_M: string;
-		HOME: string;
+		XPC_SERVICE_NAME: string;
+		npm_package_version: string;
 		SHLVL: string;
+		HOME: string;
+		npm_package_dependencies_undici: string;
+		npm_package_type: string;
+		npm_package_scripts_test: string;
+		npm_package_scripts_check_all: string;
+		npm_config_save_prefix: string;
 		npm_config_strict_ssl: string;
-		npm_config_cache: string;
-		LOGNAME: string;
+		npm_config_version_git_message: string;
 		CONDA_PYTHON_EXE: string;
+		LOGNAME: string;
+		npm_package_scripts_format: string;
+		npm_package_peerDependencies_vite: string;
 		npm_lifecycle_script: string;
+		npm_package_peerDependencies_svelte: string;
+		npm_package_devDependencies__types_set_cookie_parser: string;
 		CONDA_DEFAULT_ENV: string;
-		npm_config_user_agent: string;
 		MYSQL_HOME: string;
+		npm_package_files_3: string;
+		npm_package_dependencies__types_cookie: string;
+		npm_config_version_git_sign: string;
+		npm_config_ignore_scripts: string;
+		npm_config_user_agent: string;
+		npm_package_files_2: string;
+		npm_package_devDependencies__types_node: string;
+		npm_package_devDependencies__playwright_test: string;
+		npm_package_files_1: string;
+		npm_package_files_0: string;
+		npm_package_dependencies_kleur: string;
+		npm_config_init_version: string;
+		npm_config_ignore_optional: string;
 		SECURITYSESSIONID: string;
+		npm_package_files_6: string;
+		npm_package_scripts_check: string;
+		npm_package_files_5: string;
 		npm_node_execpath: string;
-		npm_config_prefix: string;
-		NODE_ENV: string;
+		npm_package_scripts_test_unit: string;
+		npm_package_files_4: string;
+		npm_config_version_tag_prefix: string;
 		[key: `PUBLIC_${string}`]: undefined;
-		[key: `${string}`]: string | undefined;
+		[key: string]: string | undefined;
 	}
 }
 

@@ -15,10 +15,11 @@
     "postinstall": "prisma generate"
   },
   "devDependencies": {
+    "@sveltejs/adapter-vercel": "latest",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
     "prisma": "^5.1.0",
-    "svelte": "3.55.0",
+    "svelte": "^3.55.0",
     "svelte-check": "2.10.2",
     "svelte-loading-spinners": "^0.3.4",
     "svelte-typeahead": "^4.4.1",
