@@ -1,22 +1,28 @@
 {
 	"/": [
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js",
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js"
 	],
 	"/@[nickname]/[[date]]/foodlog": [
 		"src/routes/@[nickname]/[[date]]/foodlog/+page.server.js",
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js"
 	],
 	"/@[nickname]/[[date]]/traininglog": [
 		"src/routes/@[nickname]/[[date]]/traininglog/+page.server.js",
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js"
 	],
 	"/@[nickname]/[[date]]": [
 		"src/routes/@[nickname]/[[date]]/+page.server.js",
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js"
 	],
 	"/about": [
 		"src/routes/about/+page.js",
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js"
 	],
 	"/experience/updaterecord": [
@@ -24,10 +30,12 @@
 	],
 	"/experience/[date]": [
 		"src/routes/experience/[date]/+page.server.js",
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js"
 	],
 	"/foodlog/[date]": [
 		"src/routes/foodlog/[date]/+page.server.js",
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js"
 	],
 	"/foodlog/[date]/generatefoodsuggestions": [
@@ -43,10 +51,12 @@
 		"src/routes/foodlog/[date]/veganizefood/+server.js"
 	],
 	"/protected": [
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js"
 	],
 	"/reference": [
 		"src/routes/reference/+page.server.js",
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js"
 	],
 	"/reference/updaterecord": [
@@ -54,6 +64,7 @@
 	],
 	"/traininglog/[date]": [
 		"src/routes/traininglog/[date]/+page.server.js",
+		"src/routes/+layout.js",
 		"src/routes/+layout.server.js"
 	],
 	"/traininglog/[date]/updaterecord": [
