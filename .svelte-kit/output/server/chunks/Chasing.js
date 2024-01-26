@@ -1,5 +1,6 @@
-import { c as create_ssr_component, e as escape, d as each } from "./index2.js";
-/* empty css                                       */const durationUnitRegex = /[a-zA-Z]/;
+import { c as create_ssr_component, e as escape, b as each } from "./ssr.js";
+/* empty css                                      */
+const durationUnitRegex = /[a-zA-Z]/;
 const range = (size, startAt = 0) => [...Array(size).keys()].map((i) => i + startAt);
 const css = {
   code: ".wrapper.svelte-1uhddr4{height:var(--size);width:var(--size);display:flex;justify-content:center;align-items:center}.spinner.svelte-1uhddr4{height:var(--size);width:var(--size);animation:svelte-1uhddr4-rotate var(--duration) infinite linear}.dot.svelte-1uhddr4{width:60%;height:60%;display:inline-block;position:absolute;top:0;background-color:var(--color);border-radius:100%;animation:svelte-1uhddr4-bounce var(--duration) infinite ease-in-out}.pause-animation.svelte-1uhddr4{animation-play-state:paused}@keyframes svelte-1uhddr4-rotate{100%{transform:rotate(360deg)}}@keyframes svelte-1uhddr4-bounce{0%,100%{transform:scale(0)}50%{transform:scale(1)}}",
@@ -29,8 +30,7 @@ const Chasing = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       version === 1 ? `${+durationNum / 2}${durationUnit}` : "0s",
       true
     ) + "; " + escape(version === 1 ? "bottom: 0;" : "", true) + " " + escape(version === 1 ? "top: auto;" : "", true)}"></div>`;
-  })}</div>
-</div>`;
+  })}</div> </div>`;
 });
 export {
   Chasing as C

@@ -33,6 +33,7 @@
     "@fontsource/fira-mono": "^4.5.0",
     "@prisma/client": "^5.1.0",
     "@sveltejs/adapter-node": "^2.0.0",
+    "@vercel/analytics": "^1.1.2",
     "ag-grid-community": "^28.2.1",
     "dotenv": "^16.1.4",
     "svelte-web3": "^4.0.0"

@@ -1,0 +1,450 @@
+{
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "imports": [
+      "_internal.js"
+    ],
+    "isEntry": true,
+    "src": ".svelte-kit/generated/server/internal.js"
+  },
+  "_ArrowUp.svelte_svelte_type_style_lang.js": {
+    "file": "_app/immutable/assets/ArrowUp.0wYF0huv.css",
+    "src": "_ArrowUp.svelte_svelte_type_style_lang.js"
+  },
+  "_Chasing.js": {
+    "css": [
+      "_app/immutable/assets/ArrowUp.0wYF0huv.css"
+    ],
+    "file": "chunks/Chasing.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_SmartAIThingie.js": {
+    "file": "chunks/SmartAIThingie.js",
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "_Typeahead.js": {
+    "css": [
+      "_app/immutable/assets/Typeahead.eocfUHgw.css"
+    ],
+    "file": "chunks/Typeahead.js",
+    "imports": [
+      "_utils.js",
+      "_ssr.js"
+    ]
+  },
+  "_ag-theme-alpine.js": {
+    "file": "_app/immutable/assets/ag-theme-alpine.X7IH5n54.css",
+    "src": "_ag-theme-alpine.js"
+  },
+  "_environment.js": {
+    "file": "chunks/environment.js",
+    "imports": [
+      "_prod-ssr.js"
+    ]
+  },
+  "_exports.js": {
+    "file": "chunks/exports.js"
+  },
+  "_index.js": {
+    "file": "chunks/index.js"
+  },
+  "_index2.js": {
+    "file": "chunks/index2.js",
+    "imports": [
+      "_utils.js"
+    ]
+  },
+  "_index3.js": {
+    "file": "chunks/index3.js",
+    "imports": [
+      "_index2.js"
+    ]
+  },
+  "_internal.js": {
+    "dynamicImports": [
+      "src/hooks.server.js"
+    ],
+    "file": "chunks/internal.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_prod-ssr.js": {
+    "file": "chunks/prod-ssr.js"
+  },
+  "_ssr.js": {
+    "file": "chunks/ssr.js",
+    "imports": [
+      "_utils.js"
+    ]
+  },
+  "_stores.js": {
+    "file": "chunks/stores.js",
+    "imports": [
+      "_index2.js"
+    ]
+  },
+  "_stores2.js": {
+    "file": "chunks/stores2.js",
+    "imports": [
+      "_ssr.js",
+      "_exports.js"
+    ]
+  },
+  "_ta-logo.js": {
+    "assets": [
+      "_app/immutable/assets/ta-logo.flW_1xdi.png"
+    ],
+    "file": "chunks/ta-logo.js"
+  },
+  "_utils.js": {
+    "file": "chunks/utils.js"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-all-400-normal.woff": {
+    "file": "_app/immutable/assets/fira-mono-all-400-normal.dpry7Ug7.woff",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-all-400-normal.woff"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-cyrillic-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-cyrillic-400-normal.N-vuOVMo.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-cyrillic-400-normal.woff2"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-cyrillic-ext-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-cyrillic-ext-400-normal.dOGCK5uJ.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-cyrillic-ext-400-normal.woff2"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-greek-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-greek-400-normal.At854Oju.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-greek-400-normal.woff2"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-greek-ext-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-greek-ext-400-normal.rKiNtwjr.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-greek-ext-400-normal.woff2"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-latin-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-latin-400-normal.yoy1YEIp.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-latin-400-normal.woff2"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-latin-ext-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-latin-ext-400-normal.-l34kfv6.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-latin-ext-400-normal.woff2"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "imports": [
+      "_utils.js",
+      "_ssr.js",
+      "_stores2.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/error.svelte"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "imports": [
+      "_prod-ssr.js",
+      "_internal.js",
+      "_index.js",
+      "_exports.js",
+      "_index2.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js"
+  },
+  "src/hooks.server.js": {
+    "file": "chunks/hooks.server.js",
+    "imports": [
+      "_environment.js",
+      "_internal.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/hooks.server.js"
+  },
+  "src/lib/images/ta-logo.png": {
+    "file": "_app/immutable/assets/ta-logo.flW_1xdi.png",
+    "src": "src/lib/images/ta-logo.png"
+  },
+  "src/routes/+layout.server.js": {
+    "file": "entries/pages/_layout.server.js",
+    "isEntry": true,
+    "src": "src/routes/+layout.server.js"
+  },
+  "src/routes/+layout.svelte": {
+    "assets": [
+      "_app/immutable/assets/fira-mono-cyrillic-ext-400-normal.dOGCK5uJ.woff2",
+      "_app/immutable/assets/fira-mono-all-400-normal.dpry7Ug7.woff",
+      "_app/immutable/assets/fira-mono-cyrillic-400-normal.N-vuOVMo.woff2",
+      "_app/immutable/assets/fira-mono-greek-ext-400-normal.rKiNtwjr.woff2",
+      "_app/immutable/assets/fira-mono-greek-400-normal.At854Oju.woff2",
+      "_app/immutable/assets/fira-mono-latin-ext-400-normal.-l34kfv6.woff2",
+      "_app/immutable/assets/fira-mono-latin-400-normal.yoy1YEIp.woff2"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout.O9WJjgPA.css"
+    ],
+    "file": "entries/pages/_layout.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_utils.js",
+      "_stores2.js",
+      "_stores.js",
+      "_ta-logo.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+layout.svelte"
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_ta-logo.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+page.svelte"
+  },
+  "src/routes/@[nickname]/[[date]]/+page.server.js": {
+    "file": "entries/pages/@_nickname_/__date__/_page.server.js",
+    "imports": [
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/@[nickname]/[[date]]/+page.server.js"
+  },
+  "src/routes/@[nickname]/[[date]]/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.ngpv3gBN.css"
+    ],
+    "file": "entries/pages/@_nickname_/__date__/_page.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/@[nickname]/[[date]]/+page.svelte"
+  },
+  "src/routes/@[nickname]/[[date]]/foodlog/+page.server.js": {
+    "file": "entries/pages/@_nickname_/__date__/foodlog/_page.server.js",
+    "imports": [
+      "_SmartAIThingie.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/@[nickname]/[[date]]/foodlog/+page.server.js"
+  },
+  "src/routes/@[nickname]/[[date]]/foodlog/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.YDHiM252.css",
+      "_app/immutable/assets/ag-theme-alpine.X7IH5n54.css",
+      "_app/immutable/assets/ArrowUp.0wYF0huv.css"
+    ],
+    "file": "entries/pages/@_nickname_/__date__/foodlog/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_index3.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/@[nickname]/[[date]]/foodlog/+page.svelte"
+  },
+  "src/routes/@[nickname]/[[date]]/traininglog/+page.server.js": {
+    "file": "entries/pages/@_nickname_/__date__/traininglog/_page.server.js",
+    "imports": [
+      "_stores.js",
+      "_SmartAIThingie.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/@[nickname]/[[date]]/traininglog/+page.server.js"
+  },
+  "src/routes/@[nickname]/[[date]]/traininglog/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.8yW9VKCj.css",
+      "_app/immutable/assets/ag-theme-alpine.X7IH5n54.css"
+    ],
+    "file": "entries/pages/@_nickname_/__date__/traininglog/_page.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/@[nickname]/[[date]]/traininglog/+page.svelte"
+  },
+  "src/routes/about/+page.js": {
+    "file": "entries/pages/about/_page.js",
+    "imports": [
+      "_environment.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/about/+page.js"
+  },
+  "src/routes/about/+page.svelte": {
+    "file": "entries/pages/about/_page.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/about/+page.svelte"
+  },
+  "src/routes/experience/[date]/+page.server.js": {
+    "file": "entries/pages/experience/_date_/_page.server.js",
+    "imports": [
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/experience/[date]/+page.server.js"
+  },
+  "src/routes/experience/[date]/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.ZHsc7Y_l.css"
+    ],
+    "file": "entries/pages/experience/_date_/_page.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/experience/[date]/+page.svelte"
+  },
+  "src/routes/experience/updaterecord/+server.js": {
+    "file": "entries/endpoints/experience/updaterecord/_server.js",
+    "imports": [
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/experience/updaterecord/+server.js"
+  },
+  "src/routes/foodlog/[date]/+page.server.js": {
+    "file": "entries/pages/foodlog/_date_/_page.server.js",
+    "imports": [
+      "_SmartAIThingie.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/foodlog/[date]/+page.server.js"
+  },
+  "src/routes/foodlog/[date]/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.xHIWgLSS.css",
+      "_app/immutable/assets/ArrowUp.0wYF0huv.css",
+      "_app/immutable/assets/ag-theme-alpine.X7IH5n54.css"
+    ],
+    "file": "entries/pages/foodlog/_date_/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_index3.js",
+      "_stores.js",
+      "_Typeahead.js",
+      "_Chasing.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/foodlog/[date]/+page.svelte"
+  },
+  "src/routes/foodlog/[date]/generatefoodsuggestions/+server.js": {
+    "file": "entries/endpoints/foodlog/_date_/generatefoodsuggestions/_server.js",
+    "imports": [
+      "_SmartAIThingie.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/foodlog/[date]/generatefoodsuggestions/+server.js"
+  },
+  "src/routes/foodlog/[date]/updaterecord/+server.js": {
+    "file": "entries/endpoints/foodlog/_date_/updaterecord/_server.js",
+    "imports": [
+      "_index.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/foodlog/[date]/updaterecord/+server.js"
+  },
+  "src/routes/foodlog/[date]/updatetargettotals/+server.js": {
+    "file": "entries/endpoints/foodlog/_date_/updatetargettotals/_server.js",
+    "imports": [
+      "_index.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/foodlog/[date]/updatetargettotals/+server.js"
+  },
+  "src/routes/foodlog/[date]/veganizefood/+server.js": {
+    "file": "entries/endpoints/foodlog/_date_/veganizefood/_server.js",
+    "imports": [
+      "_SmartAIThingie.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/foodlog/[date]/veganizefood/+server.js"
+  },
+  "src/routes/protected/+page.svelte": {
+    "file": "entries/pages/protected/_page.svelte.js",
+    "imports": [
+      "_utils.js",
+      "_ssr.js",
+      "_stores2.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/protected/+page.svelte"
+  },
+  "src/routes/reference/+page.server.js": {
+    "file": "entries/pages/reference/_page.server.js",
+    "imports": [
+      "_SmartAIThingie.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/reference/+page.server.js"
+  },
+  "src/routes/reference/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.E5fVtYnN.css",
+      "_app/immutable/assets/ArrowUp.0wYF0huv.css",
+      "_app/immutable/assets/ag-theme-alpine.X7IH5n54.css"
+    ],
+    "file": "entries/pages/reference/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Chasing.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/reference/+page.svelte"
+  },
+  "src/routes/reference/updaterecord/+server.js": {
+    "file": "entries/endpoints/reference/updaterecord/_server.js",
+    "imports": [
+      "_index.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/reference/updaterecord/+server.js"
+  },
+  "src/routes/traininglog/[date]/+page.server.js": {
+    "file": "entries/pages/traininglog/_date_/_page.server.js",
+    "imports": [
+      "_stores.js",
+      "_SmartAIThingie.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/traininglog/[date]/+page.server.js"
+  },
+  "src/routes/traininglog/[date]/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.TNW3Zjh6.css",
+      "_app/immutable/assets/ArrowUp.0wYF0huv.css",
+      "_app/immutable/assets/ag-theme-alpine.X7IH5n54.css"
+    ],
+    "file": "entries/pages/traininglog/_date_/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Chasing.js",
+      "_Typeahead.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/traininglog/[date]/+page.svelte"
+  },
+  "src/routes/traininglog/[date]/updaterecord/+server.js": {
+    "file": "entries/endpoints/traininglog/_date_/updaterecord/_server.js",
+    "imports": [
+      "_index.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/traininglog/[date]/updaterecord/+server.js"
+  }
+}

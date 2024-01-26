@@ -7,7 +7,7 @@ var top30MostCommonFoods = [];
 var currDate = "";
 const load = async ({ params }) => {
   if (!params.date) {
-    currDate = new Date().toString().split("T")[0];
+    currDate = (/* @__PURE__ */ new Date()).toString().split("T")[0];
   } else {
     currDate = params.date;
   }

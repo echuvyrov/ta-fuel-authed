@@ -1,5 +1,5 @@
-import { w as writable } from "./index3.js";
-const currentDate = writable(new Date().toString().split("T")[0]);
+import { w as writable } from "./index2.js";
+const currentDate = writable((/* @__PURE__ */ new Date()).toString().split("T")[0]);
 const user = writable({});
 export {
   currentDate as c,

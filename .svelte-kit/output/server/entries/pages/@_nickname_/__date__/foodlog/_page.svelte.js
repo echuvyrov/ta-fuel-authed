@@ -1,8 +1,9 @@
-import { c as create_ssr_component, o as onDestroy, e as escape, b as add_attribute } from "../../../../../chunks/index2.js";
-import "../../../../../chunks/index4.js";
+import { c as create_ssr_component, o as onDestroy, e as escape, a as add_attribute } from "../../../../../chunks/ssr.js";
+import "../../../../../chunks/index3.js";
 import "../../../../../chunks/stores.js";
 import "ag-grid-community";
-/* empty css                                     *//* empty css                                                           */const _page_svelte_svelte_type_style_lang = "";
+/* empty css                                    */
+/* empty css                                                          */
 const css = {
   code: "h3.svelte-1w4daxs{color:#d95753}",
   map: null
@@ -99,29 +100,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.data === void 0 && $$bindings.data && data !== void 0)
     $$bindings.data(data);
   $$result.css.add(css);
-  return `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-
-<div class="container"><h3 class="svelte-1w4daxs"><a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/"}">@${escape(data.nickname)} Food Porn</a> 
+  return `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  <div class="container"><h3 class="svelte-1w4daxs"><a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/"}">@${escape(data.nickname)} Food Porn</a> 
 		| <a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/traininglog"}">Training</a> 
-		| <a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/foodlog"}">Food Log</a></h3></div>
-
-
-
-<div style="text-align:center; margin:25px auto; width:85%; max-width:1200px;">
-	<div class="container"><div class="left-image"><a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/" + escape(yesterdayString, true) + "/foodlog/"}"><i class="fa fa-arrow-circle-left" style="font-size:36px; color:blue; padding:10px"></i></a></div>
-		<div class="foodheader">${escape(data.nickname)} Food Log for ${escape(todayString)}</div>
-		<div class="right-image"><a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/" + escape(tomorrowString, true) + "/foodlog/"}"><i class="fa fa-arrow-circle-right" style="font-size:36px; color:blue; padding:10px"></i></a></div></div>
-
-	<div class="grid" id="foodLog"></div>
-
-	
-	<div style="display: flex; justify-content: center; align-items: center;"><div id="totals" class="ag-theme-alpine" style="height: 22vh; width: 100%;"${add_attribute("this", domNodeTotals, 0)}></div></div>
-
-	
-	<div style="display: flex; justify-content: center; align-items: center;"><div id="datagrid" class="ag-theme-alpine" style="height: 170vh; width: 100%;"${add_attribute("this", domNode, 0)}></div></div>
-</div>`;
+		| <a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/foodlog"}">Food Log</a></h3></div>   <div style="text-align:center; margin:25px auto; width:85%; max-width:1200px;"> <div class="container"><div class="left-image"><a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/" + escape(yesterdayString, true) + "/foodlog/"}"><i class="fa fa-arrow-circle-left" style="font-size:36px; color:blue; padding:10px"></i></a></div> <div class="foodheader">${escape(data.nickname)} Food Log for ${escape(todayString)}</div> <div class="right-image"><a data-sveltekit-reload href="${"/@" + escape(data.nickname, true) + "/" + escape(tomorrowString, true) + "/foodlog/"}"><i class="fa fa-arrow-circle-right" style="font-size:36px; color:blue; padding:10px"></i></a></div></div> <div class="grid" id="foodLog" data-svelte-h="svelte-63uodu"></div>  <div style="display: flex; justify-content: center; align-items: center;"><div id="totals" class="ag-theme-alpine" style="height: 22vh; width: 100%;"${add_attribute("this", domNodeTotals, 0)}></div></div>  <div style="display: flex; justify-content: center; align-items: center;"><div id="datagrid" class="ag-theme-alpine" style="height: 170vh; width: 100%;"${add_attribute("this", domNode, 0)}></div></div> </div>`;
 });
 export {
   Page as default

@@ -1,3 +1,4 @@
+import "../../../../../chunks/index.js";
 import { PrismaClient } from "@prisma/client";
 import "../../../../../chunks/stores.js";
 const prisma = new PrismaClient();

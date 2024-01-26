@@ -1,6 +1,6 @@
-import { c as create_ssr_component, f as compute_rest_props, h as createEventDispatcher, b as add_attribute, e as escape, i as spread, j as escape_object, k as escape_attribute_value, v as validate_component, d as each, l as compute_slots } from "./index2.js";
+import { c as compute_rest_props, a as compute_slots } from "./utils.js";
+import { c as create_ssr_component, d as createEventDispatcher, a as add_attribute, e as escape, f as spread, h as escape_object, i as escape_attribute_value, v as validate_component, b as each } from "./ssr.js";
 import fuzzy from "fuzzy";
-const Search_svelte_svelte_type_style_lang = "";
 const css$1 = {
   code: ".hide-label.svelte-5m0wg6{position:absolute;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px, 1px, 1px, 1px);white-space:nowrap}",
   map: null
@@ -42,8 +42,7 @@ const Search = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.removeFormAriaAttributes === void 0 && $$bindings.removeFormAriaAttributes && removeFormAriaAttributes !== void 0)
     $$bindings.removeFormAriaAttributes(removeFormAriaAttributes);
   $$result.css.add(css$1);
-  return `<form data-svelte-search${add_attribute("role", removeFormAriaAttributes ? null : "search", 0)}${add_attribute("aria-labelledby", removeFormAriaAttributes ? null : id, 0)}><label id="${escape(id, true) + "-label"}"${add_attribute("for", id, 0)} class="${["svelte-5m0wg6", hideLabel ? "hide-label" : ""].join(" ").trim()}">${slots.label ? slots.label({}) : `${escape(label)}`}</label>
-  <input${spread(
+  return `<form data-svelte-search${add_attribute("role", removeFormAriaAttributes ? null : "search", 0)}${add_attribute("aria-labelledby", removeFormAriaAttributes ? null : id, 0)}><label id="${escape(id, true) + "-label"}"${add_attribute("for", id, 0)} class="${["svelte-5m0wg6", hideLabel ? "hide-label" : ""].join(" ").trim()}">${slots.label ? slots.label({}) : `${escape(label)}`}</label> <input${spread(
     [
       { name: "search" },
       { type: "search" },
@@ -54,11 +53,9 @@ const Search = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       { id: escape_attribute_value(id) }
     ],
     { classes: "svelte-5m0wg6" }
-  )}${add_attribute("this", ref, 0)}${add_attribute("value", value, 0)}>
-</form>`;
+  )}${add_attribute("this", ref, 0)}${add_attribute("value", value, 0)}> </form>`;
 });
 const Search$1 = Search;
-const Typeahead_svelte_svelte_type_style_lang = "";
 const css = {
   code: '[data-svelte-typeahead].svelte-1t4elht.svelte-1t4elht{position:relative;background-color:#fff}ul.svelte-1t4elht.svelte-1t4elht{position:absolute;top:100%;left:0;width:100%;margin:0;padding:0;list-style:none;background-color:inherit;box-shadow:0 4px 8px rgba(0, 0, 0, 0.1)}[aria-expanded="true"].svelte-1t4elht ul.svelte-1t4elht{z-index:1}li.svelte-1t4elht.svelte-1t4elht,.no-results.svelte-1t4elht.svelte-1t4elht{padding:0.25rem 1rem}li.svelte-1t4elht.svelte-1t4elht{cursor:pointer}li.svelte-1t4elht.svelte-1t4elht:not(:last-of-type){border-bottom:1px solid #e0e0e0}li.svelte-1t4elht.svelte-1t4elht:hover{background-color:#e5e5e5}.selected.svelte-1t4elht.svelte-1t4elht{background-color:#e5e5e5}.selected.svelte-1t4elht.svelte-1t4elht:hover{background-color:#cacaca}.disabled.svelte-1t4elht.svelte-1t4elht{opacity:0.4;cursor:not-allowed}[data-svelte-search] label{margin-bottom:0.25rem;display:inline-flex;font-size:0.875rem}[data-svelte-search] input{width:100%;padding:0.5rem 0.75rem;background:none;font-size:1rem;border:0;border-radius:0;border:1px solid #e5e5e5}[data-svelte-search] input:focus{outline-color:#0f62fe;outline-offset:2px;outline-width:1px}',
   map: null
@@ -130,23 +127,23 @@ const Typeahead = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$result.css.add(css);
   let $$settled;
   let $$rendered;
+  let previous_head = $$result.head;
   do {
     $$settled = true;
+    $$result.head = previous_head;
     options = { pre: "<mark>", post: "</mark>", extract };
-    results = fuzzy.filter(value, data, options).filter(({ score }) => score > 0).slice(0, limit).filter((result2) => !filter(result2.original)).map((result2) => ({
-      ...result2,
-      disabled: disable(result2.original)
+    results = fuzzy.filter(value, data, options).filter(({ score }) => score > 0).slice(0, limit).filter((result) => !filter(result.original)).map((result) => ({
+      ...result,
+      disabled: disable(result.original)
     }));
-    results.map((result2) => extract(result2.original)).join("");
+    results.map((result) => extract(result.original)).join("");
     showResults = results.length > 0;
     {
       if (showDropdownOnFocus) {
         showResults = showResults && isFocused;
       }
     }
-    $$rendered = `
-
-<div data-svelte-typeahead role="combobox" aria-haspopup="listbox" aria-controls="${escape(id, true) + "-listbox"}"${add_attribute("aria-expanded", showResults, 0)} id="${escape(id, true) + "-typeahead"}" class="${["svelte-1t4elht", results.length > 0 ? "dropdown" : ""].join(" ").trim()}"${add_attribute("this", comboboxRef, 0)}>${validate_component(Search$1, "Search").$$render(
+    $$rendered = ` <div data-svelte-typeahead role="combobox" aria-haspopup="listbox" aria-controls="${escape(id, true) + "-listbox"}"${add_attribute("aria-expanded", showResults, 0)} id="${escape(id, true) + "-typeahead"}" class="${["svelte-1t4elht", results.length > 0 ? "dropdown" : ""].join(" ").trim()}"${add_attribute("this", comboboxRef, 0)}>${validate_component(Search$1, "Search").$$render(
       $$result,
       Object.assign(
         {},
@@ -173,19 +170,12 @@ const Typeahead = create_ssr_component(($$result, $$props, $$bindings, slots) =>
         }
       },
       {}
-    )}
-  <ul role="listbox" aria-labelledby="${escape(id, true) + "-label"}" id="${escape(id, true) + "-listbox"}" class="${["svelte-1t4elht", "svelte-typeahead-list"].join(" ").trim()}">${showResults ? `${each(results, (result2, index2) => {
-      return `
-        <li role="option" id="${escape(id, true) + "-result-" + escape(index2, true)}"${add_attribute("aria-selected", selectedIndex === index2, 0)} class="${[
+    )} <ul role="listbox" aria-labelledby="${escape(id, true) + "-label"}" id="${escape(id, true) + "-listbox"}" class="${["svelte-1t4elht", "svelte-typeahead-list"].join(" ").trim()}">${showResults ? `${each(results, (result, index) => {
+      return ` <li role="option" id="${escape(id, true) + "-result-" + escape(index, true)}"${add_attribute("aria-selected", selectedIndex === index, 0)} class="${[
         "svelte-1t4elht",
-        (selectedIndex === index2 ? "selected" : "") + " " + (result2.disabled ? "disabled" : "")
-      ].join(" ").trim()}">${slots.default ? slots.default({ result: result2, index: index2, value }) : `
-            <!-- HTML_TAG_START -->${result2.string}<!-- HTML_TAG_END -->
-          `}
-        </li>`;
-    })}` : ``}
-    ${$$slots["no-results"] && !hideDropdown && value.length > 0 && results.length === 0 ? `<div class="${["svelte-1t4elht", "no-results"].join(" ").trim()}">${slots["no-results"] ? slots["no-results"]({ value, result, index }) : ``}</div>` : ``}</ul>
-</div>`;
+        (selectedIndex === index ? "selected" : "") + " " + (result.disabled ? "disabled" : "")
+      ].join(" ").trim()}">${slots.default ? slots.default({ result, index, value }) : ` <!-- HTML_TAG_START -->${result.string}<!-- HTML_TAG_END --> `} </li>`;
+    })}` : ``} ${$$slots["no-results"] && !hideDropdown && value.length > 0 && results.length === 0 ? `<div class="${["svelte-1t4elht", "no-results"].join(" ").trim()}">${slots["no-results"] ? slots["no-results"]({ value }) : ``}</div>` : ``}</ul> </div>`;
   } while (!$$settled);
   return $$rendered;
 });

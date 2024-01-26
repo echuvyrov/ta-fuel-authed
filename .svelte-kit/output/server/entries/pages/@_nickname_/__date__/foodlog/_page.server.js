@@ -101,7 +101,7 @@ async function loadData(date) {
   };
 }
 function getLocalDate() {
-  const currentDate2 = new Date();
+  const currentDate2 = /* @__PURE__ */ new Date();
   const year = currentDate2.getFullYear();
   const month = String(currentDate2.getMonth() + 1).padStart(2, "0");
   const day = String(currentDate2.getDate()).padStart(2, "0");

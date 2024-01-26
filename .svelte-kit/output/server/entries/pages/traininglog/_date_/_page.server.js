@@ -9,7 +9,7 @@ var selectedDayDescription = "";
 const load = async ({ params }) => {
   loadExercises();
   if (!params.date) {
-    forDate = new Date().toString().split("T")[0];
+    forDate = (/* @__PURE__ */ new Date()).toString().split("T")[0];
   } else {
     forDate = params.date;
   }
@@ -31,8 +31,8 @@ const actions = {
     const data = await request.formData();
     const trainingProgramRaw = data.get("trainingprogram");
     var trainingProgramDays = await TrainingSmartAIThingie.askForTrainingProgramJSON(trainingProgramRaw);
-    var trainingProgramName = "New Program " + new Date().toLocaleDateString();
-    var trainingProgramNameEndDate = new Date();
+    var trainingProgramName = "New Program " + (/* @__PURE__ */ new Date()).toLocaleDateString();
+    var trainingProgramNameEndDate = /* @__PURE__ */ new Date();
     trainingProgramNameEndDate.setFullYear(trainingProgramNameEndDate.getFullYear() + 7);
     const newTrainingProgram = await prisma.trainingProgram.create({
       data: {
@@ -100,13 +100,13 @@ const actions = {
       }
     }
     if (dayId == 0) {
-      var currentDate = new Date();
-      var endProgramDate = new Date();
+      var currentDate = /* @__PURE__ */ new Date();
+      var endProgramDate = /* @__PURE__ */ new Date();
       endProgramDate.setFullYear(currentDate.getFullYear() + 5);
       const newTrainingProgram = await prisma.trainingProgram.create({
         data: {
           user_id: user.name,
-          program_name: "Training kicked off " + new Date().toLocaleDateString(),
+          program_name: "Training kicked off " + (/* @__PURE__ */ new Date()).toLocaleDateString(),
           // set end date to be 5 years from now
           end_date: endProgramDate.toISOString()
         }

@@ -1,13 +1,13 @@
 import dotenv from "dotenv";
 import { d as dev } from "./environment.js";
-import { e as env, b as base } from "./index.js";
+import { i as private_env, b as base } from "./internal.js";
 import { Auth } from "@auth/core";
 import GitHub from "@auth/core/providers/github";
 import Twitter from "@auth/core/providers/twitter";
 import Google from "@auth/core/providers/google";
 import "@auth/core/providers/discord";
 async function getSession(req, config) {
-  config.secret ??= env.AUTH_SECRET;
+  config.secret ??= private_env.AUTH_SECRET;
   config.trustHost ??= true;
   const prefix = config.prefix ?? `${base}/auth`;
   const url = new URL(prefix + "/session", req.url);
@@ -46,8 +46,8 @@ function AuthHandle(svelteKitAuthOptions) {
 }
 function SvelteKitAuth(options) {
   if (typeof options === "object") {
-    options.secret ??= env.AUTH_SECRET;
-    options.trustHost ??= !!(env.AUTH_TRUST_HOST ?? env.VERCEL ?? dev);
+    options.secret ??= private_env.AUTH_SECRET;
+    options.trustHost ??= !!(private_env.AUTH_TRUST_HOST ?? private_env.VERCEL ?? dev);
     options.prefix ??= `${base}/auth`;
   }
   return AuthHandle(options);

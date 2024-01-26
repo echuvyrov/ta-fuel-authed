@@ -11,7 +11,7 @@ var calculatedTotals = {};
 var differenceTotals = {};
 const load = async ({ params }) => {
   if (!params.date) {
-    forDate = new Date().toString().split("T")[0];
+    forDate = (/* @__PURE__ */ new Date()).toString().split("T")[0];
   } else {
     forDate = params.date;
   }
