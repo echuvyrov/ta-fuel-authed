@@ -50,7 +50,7 @@ async function loadData(date) {
 	dbData = await prisma.foodLog.findMany({
 		where: {
 			feeding_date: date,
-			user_id: undefined
+			user_id: user.name,
 		},
 		orderBy: {
 			createdAt: 'asc'
