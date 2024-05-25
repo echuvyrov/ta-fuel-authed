@@ -13,10 +13,12 @@ export class SmartAIThingie {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': 'Bearer ' + process.env.GPT3_API_KEY
+				// 'Authorization': 'Bearer ' + process.env.GPT3_API_KEY
+                'Authorization': 'Bearer ' + process.env.GPT_4o_API_KEY
 			},
 			body: JSON.stringify({
-                model: 'gpt-3.5-turbo',
+                // model: 'gpt-3.5-turbo',
+                model: 'gpt-4o',
                 messages: [{"role":"user","content": prompt }],
 				max_tokens: 512,
 				temperature: 1.0
@@ -73,7 +75,7 @@ export class NutritionSmartAIThingie extends SmartAIThingie {
 
     static async askForJSON(prompt) {
         this.food_name = prompt;
-        var nutritionPrompt = "Show nutrition data for " + prompt + " and return it in the format: Food: Quantity: Calories: Fat: Carbs: Protein";
+        var nutritionPrompt = "Show nutrition data for " + prompt + " and return it in the format: Food: Quantity: Calories: Fat: Carbs: Protein. Do not use markdown or any other formatting.";
         var rawResponse = await super.askForJSON(nutritionPrompt);
         var parsedResponse = await this.parseResponse(rawResponse);
         var nutritionData = await this.parseNutrition(parsedResponse);

@@ -139,7 +139,7 @@ export const actions = {
 			// look up food on OpenAI
 			var nutritionData = await NutritionSmartAIThingie.askForJSON(food);
 			//add the food to the foodReference table if it doesn't exist
-			var imageBase64 = await NutritionSmartAIThingie.generateImage(food);
+			var imageBase64 = '' //await NutritionSmartAIThingie.generateImage(food);
 			const newFoodReferenceEntry = await prisma.foodReference.create({
 				data: {
 					user_id: user.name,
@@ -219,7 +219,7 @@ export const actions = {
 			nutritionData = foodReferenceEntry;
 		} else {
 			// generate an image for food
-			var imageBase64 = await NutritionSmartAIThingie.generateImage(food);
+			var imageBase64 = '' // await NutritionSmartAIThingie.generateImage(food);
 			// and write it to the foodReference table
 			const newFoodReferenceEntry = await prisma.foodReference.create({
 				data: {
