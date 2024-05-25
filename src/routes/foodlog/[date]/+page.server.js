@@ -1,4 +1,4 @@
-import {NutritionSmartAIThingie} from '../../SmartAIThingie.js';
+import { NutritionSmartAIThingie } from '../../SmartAIThingie.js';
 import { PrismaClient } from '@prisma/client'
 import { currentDate, user, isAuthenticated } from '$lib/stores/stores';
 
@@ -14,7 +14,7 @@ var differenceTotals = {};
 /** @type {import('../../../.svelte-kit/types/src/routes/foodlog/$types').PageServerLoad} */
 export const load = async ({ params }) => {
 
-	if(!params.date) {
+	if (!params.date) {
 		// set forDate to today's date
 		forDate = new Date().toString().split('T')[0];
 	} else {
@@ -24,7 +24,7 @@ export const load = async ({ params }) => {
 
 	// set session variable for date to be accessible throughout the application
 	currentDate.set(forDate);
-	
+
 	// load the data, but only if we have the user
 	await loadData(forDate);
 	return {
@@ -71,7 +71,7 @@ async function loadData(date) {
 			kkcals: true
 		},
 		where: {
-			user_id: {	not: null},
+			user_id: { not: null },
 			user_id: user.name,
 		}
 	});
@@ -79,13 +79,13 @@ async function loadData(date) {
 	targetTotals = await prisma.targetTotals.findFirst({
 		where: {
 			feeding_date: date,
-			user_id: {	not: null},
+			user_id: { not: null },
 			user_id: user.name
 		}
 	});
 
 	if (targetTotals == null) {
-		targetTotals = { label: "Target Totals"}
+		targetTotals = { label: "Target Totals" }
 	} else {
 		targetTotals.label = "Target Totals";
 	}
@@ -115,6 +115,19 @@ async function loadData(date) {
 	};
 }
 
+/* a function that calls DALL-E to generate an image and updates food log with that image async */
+async function generateAndUpdateImage(food, entryId) {
+	try {
+		const imageBase64 = await NutritionSmartAIThingie.generateImage(food);
+		await prisma.foodReference.update({
+			where: { id: entryId },
+			data: { imageBase64: imageBase64 }
+		});
+	} catch (error) {
+		console.error('Failed to generate or update image:', error);
+	}
+}
+
 /** @type {import('../../../.svelte-kit/types/src/routes/foodlog/$types').Actions} */
 export const actions = {
 	/**
@@ -122,7 +135,7 @@ export const actions = {
 	 */
 	addfood: async ({ request, cookies }) => {
 
-		const data = await request.formData();		
+		const data = await request.formData();
 		const food = data.get('food');
 		// check whether the food exists in the foodReference table
 		const foodReferenceEntry = await prisma.foodReference.findFirst({
@@ -152,8 +165,10 @@ export const actions = {
 					imageBase64: imageBase64
 				},
 			})
-		}
 
+			generateAndUpdateImage(food, newFoodReferenceEntry.id); 
+		}
+		
 		const newFoodLogEntry = await prisma.foodLog.create({
 			data: {
 				user_id: user.name,
@@ -177,7 +192,7 @@ export const actions = {
 				createdAt: 'asc'
 			}
 		});
-	
+
 		allFoods = await prisma.foodReference.findMany({
 			// select everything except the image
 			select: {
@@ -198,7 +213,7 @@ export const actions = {
 	 */
 	addsuggestedfood: async ({ request, cookies }) => {
 
-		const data = await request.formData();		
+		const data = await request.formData();
 		const food = data.get('food');
 		const food_qty = parseFloat(data.get('food_qty'));
 		const fat_grams = parseFloat(data.get('fat_grams'));
@@ -258,7 +273,7 @@ export const actions = {
 				createdAt: 'asc'
 			}
 		});
-	
+
 		allFoods = await prisma.foodReference.findMany({
 			// select everything except the image
 			select: {
