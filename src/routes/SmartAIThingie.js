@@ -1,3 +1,4 @@
+import { raw } from "@prisma/client/runtime/library";
 import { json } from "@sveltejs/kit";
 import dotenv from 'dotenv';
 dotenv.config();
@@ -160,7 +161,8 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
         var trainingProgramPrompt = "Return an array of JSON objects representing \
                 the following exercise program, removing all non-JSON characters. Each \
                 JSON objects should be in the format { day_name, day_description }. Do not\
-                confirm, do not output anything else other than JSON array." + prompt;
+                confirm, do not output anything else other than JSON array. \
+                Do not prefix JSON with backticks or json statement, this is NOT markdown." + prompt;
         var rawResponse = await super.askForJSON(trainingProgramPrompt);
         var trainingData = await this.parseTraining(rawResponse);
 
@@ -208,6 +210,7 @@ export class TrainingSmartAIThingie extends SmartAIThingie {
 
     /* a function to create an array from a string with line breaks as separators for different elements */
     static async parseTraining(rawResponse) {
+        console.log(rawResponse);
         var rawTrainingJSON = rawResponse.choices[0].message.content;
         /* this should no longer be needed since prompt engineering it into JSON
         var trainingDays = [];
